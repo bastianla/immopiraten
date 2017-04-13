@@ -16,6 +16,9 @@ public class Userprofile {
 	private String email;
 	private String password; // ggf. anderer typ?
 	
+	public Userprofile(){
+	}
+	
 	public Userprofile(String userName, String firstName, String lastName, String email, String password) {
 		super();
 		this.userName = userName;
