@@ -1,8 +1,14 @@
 package de.immoPiraten.userprofile;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import de.immoPiraten.favorite.Favorite;
+import de.immoPiraten.query.Query;
 
 @Entity
 public class Userprofile {
@@ -15,6 +21,10 @@ public class Userprofile {
 	private String lastName;
 	private String email;
 	private String password; // ggf. anderer typ?
+	@OneToMany
+	private List<Favorite> favorites;
+	@OneToMany
+	private List<Query> queries;	
 	
 	public Userprofile(){
 	}

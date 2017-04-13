@@ -37,6 +37,9 @@ public class Query {
 	private boolean garage;
 	private boolean commission;
 	
+	public Query(){
+	}
+	
 	public Query(String name, RealEstateType realEstateType, boolean notification, Date lastNotification,
 			PurchaseType purchaseType, double priceFrom, double priceTo, short roomsFrom, short roomsTo,
 			short livingAreaFrom, short livingAreaTo, short landAreaFrom, short landAreaTo, short constructionYearFrom,
