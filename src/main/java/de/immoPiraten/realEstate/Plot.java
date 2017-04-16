@@ -4,13 +4,13 @@ import javax.persistence.Entity;
 
 @Entity
 public class Plot extends RealEstate {
-	private int landArea;
+	private short landArea;
 
-	public int getLandArea() {
+	public short getLandArea() {
 		return landArea;
 	}
 
-	public void setLandArea(int landArea) {
+	public void setLandArea(short landArea) {
 		this.landArea = landArea;
 	}
 }

@@ -19,7 +19,7 @@ public abstract class RealEstate {
 	private String image;
 	private String link;
 	private Portal portal;
-	private double price;
+	private int price;
 	private boolean commission;
 	private Date availabilityDate;
 	private PurchaseType purchaseType;
@@ -73,11 +73,11 @@ public abstract class RealEstate {
 		this.portal = portal;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
