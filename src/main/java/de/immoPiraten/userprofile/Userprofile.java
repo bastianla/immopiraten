@@ -1,11 +1,16 @@
 package de.immoPiraten.userprofile;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import java.lang.annotation.Target;
 
 import de.immoPiraten.favorite.Favorite;
 import de.immoPiraten.query.Query;
@@ -15,13 +20,14 @@ public class Userprofile {
 
 	@Id
 	@GeneratedValue
+	@Column(name="USERPROFILE_ID", nullable=false)
 	private int id;
 	private String userName;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password; // ggf. anderer typ?
-	@OneToMany
+	@OneToMany(mappedBy="userprofile", targetEntity=Favorite.class, fetch=FetchType.EAGER)
 	private List<Favorite> favorites;
 	@OneToMany
 	private List<Query> queries;	
@@ -84,5 +90,10 @@ public class Userprofile {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Favorite> getFavorites()
+	{
+		return this.favorites;
 	}
 }
