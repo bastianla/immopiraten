@@ -8,10 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -26,9 +22,9 @@ public class HouseControllerTest {
 	@Test
 	public void getHouse() throws Exception {
 		mvc.perform(
-				MockMvcRequestBuilders.get("/")
+				get("/userprofiles")
 				.accept(MediaType.APPLICATION_JSON)
-				// .andExpect(status().isOk())
-				);
+			)
+			.andExpect(status().isOk());
 	}
 }

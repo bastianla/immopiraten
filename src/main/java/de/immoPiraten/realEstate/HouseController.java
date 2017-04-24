@@ -37,4 +37,10 @@ public class HouseController {
 				postCode, city, priceFrom, priceTill, livingAreaFrom, livingAreaTill, landAreaFrom, landAreaTill,
 				roomFrom, roomTill, constructionYearFrom, constructionYearTill, balcony, terrace, garden, garage, commission);
 	}
+	
+	@RequestMapping("/expose")
+	public String getApi(@RequestParam(value="id") int id)
+	{
+		return this.houseService.getExpose(id);
+	}
 }

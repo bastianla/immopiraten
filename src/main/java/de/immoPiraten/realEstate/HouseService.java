@@ -8,6 +8,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 
+import de.immoPiraten.ImmoScout24.Search;
+
 @Service
 public class HouseService {
 
@@ -17,7 +19,11 @@ public class HouseService {
 			boolean garage, boolean commission) {
 		return this.getExamples();
 	}
-
+	
+	public String getExpose(int id) {
+		return Search.getExpose(id).toString();
+	}
+	
 	private List<House> getExamples() {
 
 		List<House> examples = new ArrayList<House>();
