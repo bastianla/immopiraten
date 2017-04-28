@@ -1,21 +1,13 @@
 package de.immoPiraten.ImmoScout24;
 
-import java.io.IOException;
 import java.net.URISyntaxException;
 
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import de.immoPiraten.APIException;
 import de.immoPiraten.OAuth.OAuth;
 import de.immoPiraten.realEstate.PurchaseType;
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
 
 public class Search {
 	
@@ -50,8 +42,9 @@ public class Search {
 
 		return Request.getResponse(signedRequest, "getExpose");
 	}
-	/*
-	public static Object searchRegion(RealEstateType realEstateType, String geocodes)
+	
+	
+	public static Object searchRegion(RealEstateType realEstateType, String input)
 	{				
 		URIBuilder uriBuilder = null;
 		try {
@@ -62,11 +55,14 @@ public class Search {
 		}
 		
 		uriBuilder.addParameter("realestatetype", realEstateType.name());
-		uriBuilder.addParameter("geocodes", geocodes);
+		
+		Object matches = GeoAutoCompletion.getAll(input, 5);
+		
+		uriBuilder.addParameter("geocodes", "");
 		
 		HttpGet request = new HttpGet(uriBuilder.toString());
 		HttpGet signedRequest = OAuth.Sign(request, Credentials.CONSUMER_KEY, Credentials.CONSUMER_SECRET, "getExpose");
 
 		return Request.getResponse(signedRequest, "searchRegion");
-	}*/
+	}
 }

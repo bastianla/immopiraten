@@ -24,6 +24,17 @@ public class HouseService {
 		return Search.getExpose(id).toString();
 	}
 	
+	public List<House> Search(RealEstateType realEstateType, PurchaseType purchaseType, String city)
+	{
+		List<House> result = new ArrayList<House>();
+		
+		de.immoPiraten.ImmoScout24.RealEstateType immoScoutRealEstateType = Search.mapRealEstateType(realEstateType, purchaseType);
+								
+		Object response =  Search.searchRegion(immoScoutRealEstateType, city);
+		
+		return result;
+	}
+	
 	private List<House> getExamples() {
 
 		List<House> examples = new ArrayList<House>();

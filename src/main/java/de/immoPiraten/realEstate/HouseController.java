@@ -43,4 +43,12 @@ public class HouseController {
 	{
 		return this.houseService.getExpose(id);
 	}
+	
+	@RequestMapping("/search")
+	public String getResponse()
+	{
+		List<House> houses =  this.houseService.Search(RealEstateType.House, PurchaseType.Buy, "Aachen");
+		
+		return "works";
+	}
 }
