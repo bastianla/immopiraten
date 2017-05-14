@@ -1,0 +1,27 @@
+
+ <!DOCTYPE html>
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="ImmoPiratenApp.js"></script>
+	<script src="Controller.js"></script>
+
+
+<!-- <div ng-app="ImmoPiratenApp" ng-controller="immoCtrl">
+<p>Today's welcome message is:</p>
+<h1>{{myWelcome}}</h1>
+</div>-->
+
+
+<div ng-app="ImmoPiratenApp" ng-controller="customersCtrl">
+
+<ul>
+  <li ng-repeat="x in myData">
+    {{ x.Name + ', ' + x.Country }}
+  </li>
+</ul>
+
+</div>
+
+</body>
+</html> 
