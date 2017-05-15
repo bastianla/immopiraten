@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 @Entity
 public class House extends ResidentialRealEstate {
 
-	private int landArea;
+	private double landArea;
 
-	public int getLandArea() {
+	public double getLandArea() {
 		return landArea;
 	}
 
-	public void setLandArea(int landArea) {
+	public void setLandArea(double landArea) {
 		this.landArea = landArea;
 	}
 }

@@ -13,18 +13,24 @@ public class Site {
 	private String street;
 	private String city;
 	private String postCode;
-	private int houseNumber;
+	private String houseNumber;
 	private String country;
 	
-	public Site(String street, String city, String postCode, int houseNumber, String country) {
+	public Site(String street, String houseNumber, String postCode, String city, String country) {
 		super();
 		this.street = street;
-		this.city = city;
-		this.postCode = postCode;
 		this.houseNumber = houseNumber;
+		this.postCode = postCode;
+		this.city = city;
 		this.country = country;
 	}
 
+	public Site(String country)
+	{
+		super();
+		this.country = country;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -57,11 +63,11 @@ public class Site {
 		this.postCode = postCode;
 	}
 
-	public int getHouseNumber() {
+	public String getHouseNumber() {
 		return houseNumber;
 	}
 
-	public void setHouseNumber(int houseNumber) {
+	public void setHouseNumber(String houseNumber) {
 		this.houseNumber = houseNumber;
 	}
 

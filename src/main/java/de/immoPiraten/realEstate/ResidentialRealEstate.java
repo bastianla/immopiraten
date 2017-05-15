@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 @Entity
 public class ResidentialRealEstate extends RealEstate {
 
-	private short room;
-	private short livingArea;
+	private double room;
+	private double livingArea;
 	private HeaterType heater;
 	private boolean energyCertificate;
 	private double energyConsumption;
@@ -15,21 +15,21 @@ public class ResidentialRealEstate extends RealEstate {
 	private boolean terrace;
 	private boolean garden;
 	private boolean garage;
-	private short construction;
+	private int construction;
 	
-	public short getRoom() {
+	public double getRoom() {
 		return room;
 	}
 
-	public void setRoom(short room) {
+	public void setRoom(double room) {
 		this.room = room;
 	}
 
-	public short getLivingArea() {
+	public double getLivingArea() {
 		return livingArea;
 	}
 
-	public void setLivingArea(short livingArea) {
+	public void setLivingArea(double livingArea) {
 		this.livingArea = livingArea;
 	}
 
@@ -97,11 +97,11 @@ public class ResidentialRealEstate extends RealEstate {
 		this.garage = garage;
 	}
 
-	public short getConstruction() {
+	public int getConstruction() {
 		return construction;
 	}
 
-	public void setConstruction(short construction) {
+	public void setConstruction(int construction) {
 		this.construction = construction;
 	}
 }

@@ -39,16 +39,14 @@ public class HouseController {
 	}
 	
 	@RequestMapping("/expose")
-	public String getApi(@RequestParam(value="id") int id)
+	public House getHouse(@RequestParam(value="id") int id)
 	{
 		return this.houseService.getExpose(id);
 	}
 	
 	@RequestMapping("/search")
-	public String getResponse()
+	public List<House> getResponse(@RequestParam(value="city") String city, @RequestParam(value="radius") byte radius)
 	{
-		List<House> houses =  this.houseService.Search(RealEstateType.House, PurchaseType.Buy, "Aachen");
-		
-		return "works";
+		return this.houseService.Search(RealEstateType.House, PurchaseType.Buy, city, radius);
 	}
 }

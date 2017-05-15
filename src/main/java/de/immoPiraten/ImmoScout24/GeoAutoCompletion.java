@@ -47,7 +47,7 @@ public class GeoAutoCompletion {
 		String caption = "getRegion";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -64,7 +64,7 @@ public class GeoAutoCompletion {
 		String caption = "getCity";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -81,7 +81,7 @@ public class GeoAutoCompletion {
 		String caption = "getDistrict";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -98,7 +98,7 @@ public class GeoAutoCompletion {
 		String caption = "getQuarterOrTown";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -115,7 +115,7 @@ public class GeoAutoCompletion {
 		String caption = "getQuarterOrTown";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", Integer.toString(input));
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -132,7 +132,7 @@ public class GeoAutoCompletion {
 		String caption = "getStreet";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -149,7 +149,7 @@ public class GeoAutoCompletion {
 		String caption = "getPostCodeWithQuarter";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -166,7 +166,7 @@ public class GeoAutoCompletion {
 		String caption = "getTraiStation";
 
 		URIBuilder uriBuilder = GeoAutoCompletion.getUriBuilder(Request.BASE_URL, GeoAutoCompletion.CONTEXT,
-				Request.VERSION, "geoautocomplete/DEU");
+				GeoAutoCompletion.VERSION, "geoautocomplete/DEU");
 
 		uriBuilder.addParameter("i", input);
 		uriBuilder.addParameter("l", Integer.toString(limit));
@@ -176,6 +176,26 @@ public class GeoAutoCompletion {
 		HttpGet signedRequest = OAuth.Sign(request, Credentials.CONSUMER_KEY, Credentials.CONSUMER_SECRET, caption);
 
 		return Request.getResponse(signedRequest, caption);
+	}
+	
+	public static String getGeoCodes(String entityId)
+	{
+		URIBuilder uriBuilder = null;
+		try {
+			uriBuilder = new URIBuilder(Request.BASE_URL + GeoAutoCompletion.CONTEXT + GeoAutoCompletion.VERSION + "geoautocomplete/DEU/entity/" + entityId);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// GeoId, Lambert, WGS84
+		uriBuilder.addParameter("g", "WGS84");
+		
+		HttpGet request = new HttpGet(uriBuilder.toString());
+		request.addHeader("accept", "application/json");
+		HttpGet signedRequest = OAuth.Sign(request, Credentials.CONSUMER_KEY, Credentials.CONSUMER_SECRET, "getGeoCodes");
+
+		return Request.getResponse(signedRequest, "getGeoCodes");
 	}
 
 }
