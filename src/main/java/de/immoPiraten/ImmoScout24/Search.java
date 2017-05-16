@@ -1,8 +1,6 @@
 package de.immoPiraten.ImmoScout24;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 
@@ -75,38 +73,18 @@ public class Search {
 
 		return Request.getResponse(signedRequest, "getExpose").toString();
 	}
-	
-	
-	@SuppressWarnings("unchecked")
-	public static String searchRegion(RealEstateType realEstateType, String input, byte radius)
-	{		
-		String cityId = Search.getCityId(input);
 		
-		String geoCodeResponse = GeoAutoCompletion.getGeoCodes(cityId);
-		LinkedHashMap<String, Object> geoCodeMap = Request.getLinkedHashMap(geoCodeResponse);
-		LinkedHashMap<String, Object> geoData = (LinkedHashMap<String, Object>)geoCodeMap.get("geoData");
-		
-		String latitude = geoData.get("lat").toString();
-		String longitude = geoData.get("lon").toString();
+	public static String Execute(RealEstateType realEstateType, String entityType, String input, byte radius)
+	{				
+		GeoAutoCompletionService geoAutoCompletion = new GeoAutoCompletionService();
+	    
+		String entityId = geoAutoCompletion.getEntityId(entityType, input);
+		GeoCode geoCode = geoAutoCompletion.getGeoCode(entityId);	
 
-		return Search.getSearchResult(latitude, longitude, radius, realEstateType);
-	}
+		return Search.getSearchResult(realEstateType, geoCode, radius);
+	}	
 	
-	@SuppressWarnings("unchecked")
-	private static String getCityId(String city)
-	{
-		String getCityResponse = GeoAutoCompletion.getCity(city, 10).toString();
-		// String getCityResponse = "[{\"entity\":{\"type\":\"city\",\"id\":\"1276010001\",\"label\":\"Aachen\"},\"matches\":[{\"offset\":0,\"length\":6}]}]";
-				
-		ArrayList<Object> searchResults = Request.getArrayList(getCityResponse);		
-		
-		LinkedHashMap<String, Object> searchResult = (LinkedHashMap<String, Object>)searchResults.get(0);
-		LinkedHashMap<String, Object> entity = (LinkedHashMap<String, Object>)searchResult.get("entity");
-		
-		return entity.get("id").toString();
-	}
-	
-	private static String getSearchResult(String latitude, String longitude, byte radius, RealEstateType realEstateType)
+	private static String getSearchResult(RealEstateType realEstateType, GeoCode geoCode, byte radius)
 	{		
 		// example uri:
 		// https://rest.immobilienscout24.de/restapi/api/search/v1.0/search/region?realestatetype=apartmentrent&geocodes=1276003001046
@@ -122,7 +100,7 @@ public class Search {
 			e.printStackTrace();
 		}
 	
-		String geoCoordinates = latitude + ";" + longitude + ";" + radius;
+		String geoCoordinates = geoCode.getLatitude() + ";" + geoCode.getLongitude() + ";" + radius;
 		
 		uriBuilder.addParameter("realestatetype", realEstateType.name());
 		uriBuilder.addParameter("geocoordinates", geoCoordinates);
