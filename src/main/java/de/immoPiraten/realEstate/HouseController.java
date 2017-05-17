@@ -2,7 +2,10 @@ package de.immoPiraten.realEstate;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +46,21 @@ public class HouseController {
 	{
 		return this.houseService.getExpose(id);
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping("/exposeJson")
+	public String getApiJson(@RequestParam(value="id") int id)
+	{
+		String json = this.houseService.getExpose(id);
+		try {
+			json = XML.toJSONObject(json).toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(json);
+		return json;
+		}
 	
 	@RequestMapping("/search")
 	public String getResponse()
