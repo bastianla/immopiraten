@@ -47,8 +47,13 @@ public class HouseController {
 	}
 	
 	@RequestMapping("/search")
-	public List<House> getResponse(@RequestParam(value="input") String input, @RequestParam(value="radius") byte radius)
+	public List<House> getResponse(@RequestParam(value="realestatetype") int realEstateType, @RequestParam(value="purchasetype") int purchaseType, @RequestParam(value="input") String input, @RequestParam(value="radius") byte radius)
 	{
-		return this.houseService.Search(RealEstateType.House, PurchaseType.Buy, GeoAutoCompletionService.ENTITY_TYPE_CITY, input, radius);
+		return this.houseService.Search(
+				RealEstateType.values()[realEstateType], 
+				PurchaseType.values()[purchaseType], 
+				GeoAutoCompletionService.ENTITY_TYPE_CITY, 
+				input, 
+				radius);
 	}
 }
