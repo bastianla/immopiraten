@@ -1,17 +1,7 @@
 package de.immoPiraten.ImmoScout24;
 
-import java.io.IOException;
-
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
-
-import de.immoPiraten.APIException;
 import de.immoPiraten.OAuth.OAuth;
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
 
 public class Geohierarchy {
 

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.immoPiraten.ImmoScout24.GeoAutoCompletionService;
+
 @RestController
 public class HouseController {
 	
@@ -42,7 +44,7 @@ public class HouseController {
 	}
 	
 	@RequestMapping("/expose")
-	public String getApi(@RequestParam(value="id") int id)
+	public House getHouse(@RequestParam(value="id") int id)
 	{
 		return this.houseService.getExpose(id);
 	}
@@ -63,10 +65,8 @@ public class HouseController {
 		}
 	
 	@RequestMapping("/search")
-	public String getResponse()
+	public List<House> getResponse(@RequestParam(value="input") String input, @RequestParam(value="radius") byte radius)
 	{
-		List<House> houses =  this.houseService.Search(RealEstateType.House, PurchaseType.Buy, "Aachen");
-		
-		return "works";
+		return this.houseService.Search(RealEstateType.House, PurchaseType.Buy, GeoAutoCompletionService.ENTITY_TYPE_CITY, input, radius);
 	}
 }

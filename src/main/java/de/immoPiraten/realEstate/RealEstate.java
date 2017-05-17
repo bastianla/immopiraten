@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.OneToOne;
+
+import de.immoPiraten.site.Site;
 
 @Entity
 @Inheritance
@@ -21,6 +24,8 @@ public abstract class RealEstate {
 	private Portal portal;
 	private int price;
 	private boolean commission;
+	@OneToOne
+	private Site site;
 	private Date availabilityDate;
 	private PurchaseType purchaseType;
 	private Date publicationDate;
@@ -111,5 +116,13 @@ public abstract class RealEstate {
 
 	public void setPublicationDate(Date publicationDate) {
 		this.publicationDate = publicationDate;
+	}
+	
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
 	}
 }
