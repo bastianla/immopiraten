@@ -44,20 +44,44 @@ public class RealEstateService {
 	public List<RealEstate> getAllRealEstates(Query query) {
 
 		// Important: The name of the fields must be equal to the names of the properties in the class (CaseSensitive)
-		String searchTerm = 							   (((query.getCity() != null) && (!query.getCity().isEmpty())) ? "rs.city = '" + query.getCity() + "'" : "");
-		searchTerm += ((query.getConstructionYearFrom() > 0 && query.getConstructionYearTo() > 0) ? (searchTerm.isEmpty() ? "" : " and ") + "rs.constructionYear between " + query.getConstructionYearFrom() + " and " + query.getConstructionYearTo() : "");
-		searchTerm += (((query.getPostCode() != null) && (!query.getPostCode().isEmpty())) ? (searchTerm.isEmpty() ? "" : " and ") + "rs.postCode = '" + query.getPostCode() + "'" : ""); 
-		
+		String searchTerm = this.prepareStringValue("city", query.getCity());
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("constructionYear", query.getConstructionYearFrom())); 
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("constructionYear", query.getConstructionYearTo()));			
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareStringValue("postCode", query.getPostCode()));
+			
 		if (!searchTerm.trim().isEmpty())
 			searchTerm = "WHERE " + searchTerm;
 		
 		// Important: The name of the table must be equal to the class name (CaseSensitive)		
 		TypedQuery<RealEstate> q = this.getEntityManager().createQuery("SELECT rs "
 					+ "FROM RealEstate rs " + searchTerm,
-					// + "WHERE rs.city = '" + query.getCity() + "'",
 					RealEstate.class);
 		List<RealEstate> realEstates = new ArrayList<>();
 		realEstates = q.getResultList();
 		return realEstates;
-	}	
+	}
+	
+	private String prepareAndTerm(String searchTerm, String newSearchTerm){
+		return ((!this.isNullOrEmpty(searchTerm)) && (!this.isNullOrEmpty(newSearchTerm))) ? searchTerm + " AND " + newSearchTerm : ((!this.isNullOrEmpty(searchTerm)) ? searchTerm : newSearchTerm);
+	}
+	
+	private boolean isNullOrEmpty(String text){
+		return (text == null) || ((text != null) && (text.trim().isEmpty()));
+	}
+	
+	private String prepareStringValue(String nameOfParamter, String valueOfParameter){		
+		return ((!this.isNullOrEmpty(valueOfParameter)) ? "rs." + nameOfParamter + " = '" + valueOfParameter + "'" : "");
+	}
+		
+	private <T> String prepareGreaterValue(String nameOfParamter, T valueOfParameter){
+		return this.prepareCompare(nameOfParamter, valueOfParameter, ">=");
+	}
+	
+	private <T> String prepareLessValue(String nameOfParamter, T valueOfParameter){
+		return this.prepareCompare(nameOfParamter, valueOfParameter, "<=");
+	}
+	
+	private <T> String prepareCompare(String nameOfParamter, T valueOfParameter, String operator){
+		return ((valueOfParameter != null) ? "rs." + nameOfParamter + " " + operator + " " + valueOfParameter.toString() : "");
+	} 
 }

@@ -9,25 +9,25 @@ public class Query {
 
 	private String name;
 	private RealEstateType realEstateType;
-	private boolean notification;
+	private Boolean notification;
 	private Date lastNotification;
 	private PurchaseType purchaseType;
-	private double priceFrom;
-	private double priceTo;
-	private short roomsFrom;
-	private short roomsTo;
-	private short livingAreaFrom;
-	private short livingAreaTo;
-	private short landAreaFrom;
-	private short landAreaTo;
-	private short constructionYearFrom;
-	private short constructionYearTo;
-	private short radius;
-	private boolean balcony;
-	private boolean terrace;
-	private boolean garden;
-	private boolean garage;
-	private boolean commission;
+	private Double priceFrom;
+	private Double priceTo;
+	private Short roomsFrom;
+	private Short roomsTo;
+	private Short livingAreaFrom;
+	private Short livingAreaTo;
+	private Short landAreaFrom;
+	private Short landAreaTo;
+	private Short constructionYearFrom;
+	private Short constructionYearTo;
+	private Short radius;
+	private Boolean balcony;
+	private Boolean terrace;
+	private Boolean garden;
+	private Boolean garage;
+	private Boolean commission;
 	private String city;
 	private String postCode;
 	
@@ -47,7 +47,7 @@ public class Query {
 		this.realEstateType = realEstateType;
 	}
 
-	public boolean isNotification() {
+	public Boolean isNotification() {
 		return notification;
 	}
 
@@ -71,7 +71,7 @@ public class Query {
 		this.purchaseType = purchaseType;
 	}
 
-	public double getPriceFrom() {
+	public Double getPriceFrom() {
 		return priceFrom;
 	}
 
@@ -79,7 +79,7 @@ public class Query {
 		this.priceFrom = priceFrom;
 	}
 
-	public double getPriceTo() {
+	public Double getPriceTo() {
 		return priceTo;
 	}
 
@@ -87,7 +87,7 @@ public class Query {
 		this.priceTo = priceTo;
 	}
 
-	public short getRoomsFrom() {
+	public Short getRoomsFrom() {
 		return roomsFrom;
 	}
 
@@ -95,7 +95,7 @@ public class Query {
 		this.roomsFrom = roomsFrom;
 	}
 
-	public short getRoomsTo() {
+	public Short getRoomsTo() {
 		return roomsTo;
 	}
 
@@ -103,7 +103,7 @@ public class Query {
 		this.roomsTo = roomsTo;
 	}
 
-	public short getLivingAreaFrom() {
+	public Short getLivingAreaFrom() {
 		return livingAreaFrom;
 	}
 
@@ -111,7 +111,7 @@ public class Query {
 		this.livingAreaFrom = livingAreaFrom;
 	}
 
-	public short getLivingAreaTo() {
+	public Short getLivingAreaTo() {
 		return livingAreaTo;
 	}
 
@@ -119,7 +119,7 @@ public class Query {
 		this.livingAreaTo = livingAreaTo;
 	}
 
-	public short getLandAreaFrom() {
+	public Short getLandAreaFrom() {
 		return landAreaFrom;
 	}
 
@@ -127,7 +127,7 @@ public class Query {
 		this.landAreaFrom = landAreaFrom;
 	}
 
-	public short getLandAreaTo() {
+	public Short getLandAreaTo() {
 		return landAreaTo;
 	}
 
@@ -135,7 +135,7 @@ public class Query {
 		this.landAreaTo = landAreaTo;
 	}
 
-	public short getConstructionYearFrom() {
+	public Short getConstructionYearFrom() {
 		return constructionYearFrom;
 	}
 
@@ -143,7 +143,7 @@ public class Query {
 		this.constructionYearFrom = constructionYearFrom;
 	}
 
-	public short getConstructionYearTo() {
+	public Short getConstructionYearTo() {
 		return constructionYearTo;
 	}
 
@@ -151,7 +151,7 @@ public class Query {
 		this.constructionYearTo = constructionYearTo;
 	}
 
-	public short getRadius() {
+	public Short getRadius() {
 		return radius;
 	}
 
@@ -159,7 +159,7 @@ public class Query {
 		this.radius = radius;
 	}
 
-	public boolean isBalcony() {
+	public Boolean isBalcony() {
 		return balcony;
 	}
 
@@ -167,7 +167,7 @@ public class Query {
 		this.balcony = balcony;
 	}
 
-	public boolean isTerrace() {
+	public Boolean isTerrace() {
 		return terrace;
 	}
 
@@ -175,7 +175,7 @@ public class Query {
 		this.terrace = terrace;
 	}
 
-	public boolean isGarden() {
+	public Boolean isGarden() {
 		return garden;
 	}
 
@@ -183,7 +183,7 @@ public class Query {
 		this.garden = garden;
 	}
 
-	public boolean isGarage() {
+	public Boolean isGarage() {
 		return garage;
 	}
 
@@ -191,7 +191,7 @@ public class Query {
 		this.garage = garage;
 	}
 
-	public boolean isCommission() {
+	public Boolean isCommission() {
 		return commission;
 	}
 
