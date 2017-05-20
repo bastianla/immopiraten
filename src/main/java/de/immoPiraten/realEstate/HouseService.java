@@ -64,12 +64,16 @@ public class HouseService {
 		
 		LinkedHashMap<String, Object> result = Request.getLinkedHashMap(response);
 		LinkedHashMap<String, Object> resultList = (LinkedHashMap<String, Object>)result.get("resultlist.resultlist");
+		
 		ArrayList<Object> resultListEntries = (ArrayList<Object>)resultList.get("resultlistEntries");
+			
 		LinkedHashMap<String, Object> entry = (LinkedHashMap<String, Object>)resultListEntries.get(0);
+		int numberOfHits = Integer.parseInt(entry.get("@numberOfHits").toString());
 		
 		ArrayList<Object> exposes = (ArrayList<Object>)entry.get("resultlistEntry");
 		
-		for (int index = 0; index <= 19; index++)
+		int max = numberOfHits < 20 ? numberOfHits : 20;
+		for (int index = 0; index < max; index++)
 			try {
 				results.add(this.getHouse(exposes.get(index)));
 			} catch (ParseException e) {
@@ -180,11 +184,13 @@ public class HouseService {
 		
 		// sets a value indicating whether a commission has to be paid by the customer
 		LinkedHashMap<String, Object> courtage = (LinkedHashMap<String, Object>)realEstate.get("courtage");
-		house.setCommission(Boolean.parseBoolean(this.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
+		
+		if (courtage != null)
+			house.setCommission(Boolean.parseBoolean(this.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
 		
 		return house;
 	}
-	
+
 	
 	private Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue)
 	{
