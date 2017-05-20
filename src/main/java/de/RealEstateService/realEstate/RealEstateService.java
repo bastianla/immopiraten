@@ -45,9 +45,27 @@ public class RealEstateService {
 
 		// Important: The name of the fields must be equal to the names of the properties in the class (CaseSensitive)
 		String searchTerm = this.prepareStringValue("city", query.getCity());
-		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("constructionYear", query.getConstructionYearFrom())); 
-		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("constructionYear", query.getConstructionYearTo()));			
 		searchTerm = this.prepareAndTerm(searchTerm, this.prepareStringValue("postCode", query.getPostCode()));
+		
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareEqualValue("realEstateType", query.getRealEstateType()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareEqualValue("purchaseType", query.getPurchaseType()));
+		
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("priceFrom", query.getPriceFrom()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("priceTo", query.getPriceTo()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("roomsFrom", query.getRoomsFrom()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("roomsTo", query.getRoomsTo()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("livingAreaFrom", query.getLivingAreaFrom()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("livingAreaTo", query.getLivingAreaTo()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("landAreaFrom", query.getLandAreaFrom()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("landAreaTo", query.getLandAreaTo()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("constructionYear", query.getConstructionYearFrom())); 
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("constructionYear", query.getConstructionYearTo()));
+		
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("balcony", query.isBalcony()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("terrace", query.isTerrace()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("garden", query.isGarden()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("garage", query.isGarage()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("commission", query.isCommission()));
 			
 		if (!searchTerm.trim().isEmpty())
 			searchTerm = "WHERE " + searchTerm;
@@ -81,7 +99,16 @@ public class RealEstateService {
 		return this.prepareCompare(nameOfParamter, valueOfParameter, "<=");
 	}
 	
+	private <E extends Enum<E>> String prepareEqualValue(String nameOfParamter, Enum<E> valueOfEnum){
+		Integer valueOfParameter = (valueOfEnum != null) ? valueOfEnum.ordinal() : null;
+		return this.prepareCompare(nameOfParamter, valueOfParameter, "=");
+	}
+	
 	private <T> String prepareCompare(String nameOfParamter, T valueOfParameter, String operator){
 		return ((valueOfParameter != null) ? "rs." + nameOfParamter + " " + operator + " " + valueOfParameter.toString() : "");
 	} 
+		
+	private String prepareBooleanValue(String nameOfParameter, Boolean valueOfParameter){
+		return ((valueOfParameter != null) ? "rs." + nameOfParameter + " = " + valueOfParameter.toString() : "");
+	}
 }

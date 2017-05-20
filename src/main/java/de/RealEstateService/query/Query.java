@@ -1,16 +1,11 @@
 package de.RealEstateService.query;
 
-import java.util.Date;
-
 import de.RealEstateService.realEstate.PurchaseType;
 import de.RealEstateService.realEstate.RealEstateType;
 
 public class Query {
 
-	private String name;
 	private RealEstateType realEstateType;
-	private Boolean notification;
-	private Date lastNotification;
 	private PurchaseType purchaseType;
 	private Double priceFrom;
 	private Double priceTo;
@@ -31,36 +26,12 @@ public class Query {
 	private String city;
 	private String postCode;
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public RealEstateType getRealEstateType() {
 		return realEstateType;
 	}
 
 	public void setRealEstateType(RealEstateType realEstateType) {
 		this.realEstateType = realEstateType;
-	}
-
-	public Boolean isNotification() {
-		return notification;
-	}
-
-	public void setNotification(boolean notification) {
-		this.notification = notification;
-	}
-
-	public Date getLastNotification() {
-		return lastNotification;
-	}
-
-	public void setLastNotification(Date lastNotification) {
-		this.lastNotification = lastNotification;
 	}
 
 	public PurchaseType getPurchaseType() {

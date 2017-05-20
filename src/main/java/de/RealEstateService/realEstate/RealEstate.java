@@ -29,6 +29,8 @@ public class RealEstate {
 	private String postCode;
 	private int houseNumber;
 	private String country;
+	@Enumerated(EnumType.ORDINAL)
+	private RealEstateType realEstateType;	
 	
 	// residential real estate
 	private short room;
@@ -168,6 +170,14 @@ public class RealEstate {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	public RealEstateType getRealEstateType() {
+		return realEstateType;
+	}
+
+	public void setRealEstateType(RealEstateType realEstateType) {
+		this.realEstateType = realEstateType;
+	}	
 	
 	public short getRoom() {
 		return room;
