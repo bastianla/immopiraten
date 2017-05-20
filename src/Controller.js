@@ -22,8 +22,8 @@ app.controller('exposeCtrl', function($scope, $http) {
 	
 	$scope.doSearch = function() {
 	    $http.get("http://localhost:8080/houses?postcode="+$scope.postcode+"&city=Essen&pricefrom=0&pricetill=1000&livingareafrom=0&livingareatill=1000&landareafrom=0&landareatill=10000&roomfrom=1&roomtill=5&constructionyearfrom=0&constructionyeartill=1000&balcony=1&terrace=0&garden=0&garage=0&commission=0").then(function(response) {
-	    	$rootScope.exposedata = response.data;  
-	    	$rootScope.exposedata.title = response.data[0].title; 
+	    	$scope.exposedata = response.data;  
+	    	$scope.exposedata.title = response.data[0].title; 
 	    });
     }
         	
