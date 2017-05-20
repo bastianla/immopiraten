@@ -113,6 +113,9 @@ public class HouseService {
 		// sets the house properties
 		LinkedHashMap<String, Object> realEstate = (LinkedHashMap<String, Object>)properties.get("resultlist.realEstate");
 		
+		if (realEstate == null)
+			realEstate = (LinkedHashMap<String, Object>)properties.get("realEstate");
+		
 		// sets the purchase type
 		String rawPurchaseType = realEstate.get("@xsi.type").toString();
 		String purchaseType = rawPurchaseType.substring(rawPurchaseType.indexOf(':') + 1);				
