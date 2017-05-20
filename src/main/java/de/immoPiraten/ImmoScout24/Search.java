@@ -74,17 +74,17 @@ public class Search {
 		return Request.getResponse(signedRequest, "getExpose").toString();
 	}
 		
-	public static String Execute(RealEstateType realEstateType, String entityType, String input, byte radius)
+	public static String Execute(RealEstateType realEstateType, String entityType, String input, byte radius, boolean freeOfCourtageOnly, String livingSpace, String price)
 	{				
 		GeoAutoCompletionService geoAutoCompletion = new GeoAutoCompletionService();
 	    
 		String entityId = geoAutoCompletion.getEntityId(entityType, input);
-		GeoCode geoCode = geoAutoCompletion.getGeoCode(entityId);	
-
-		return Search.getSearchResult(realEstateType, geoCode, radius);
-	}	
+		GeoCode geoCode = geoAutoCompletion.getGeoCode(entityId);
+		
+		return Search.getSearchResult(realEstateType, geoCode, radius, freeOfCourtageOnly, livingSpace, price);
+	}
 	
-	private static String getSearchResult(RealEstateType realEstateType, GeoCode geoCode, byte radius)
+	private static String getSearchResult(RealEstateType realEstateType, GeoCode geoCode, byte radius, boolean freeOfCourtageOnly, String livingSpace, String price)
 	{		
 		// example uri:
 		// https://rest.immobilienscout24.de/restapi/api/search/v1.0/search/region?realestatetype=apartmentrent&geocodes=1276003001046
@@ -102,9 +102,20 @@ public class Search {
 	
 		String geoCoordinates = geoCode.getLatitude() + ";" + geoCode.getLongitude() + ";" + radius;
 		
+		// adds required parameters
 		uriBuilder.addParameter("realestatetype", realEstateType.name());
 		uriBuilder.addParameter("geocoordinates", geoCoordinates);
-		uriBuilder.addParameter("pagesize", "20");
+		
+		// adds the optional page size, default is 20
+		uriBuilder.addParameter("pagesize", "50");
+		
+		// adds optional query parameters
+		if (livingSpace != null)
+			uriBuilder.addParameter("livingSpace", livingSpace);
+		if (price != null)
+			uriBuilder.addParameter("price", price);
+		if (freeOfCourtageOnly)
+			uriBuilder.addParameter("freeofcourtageonly", "true");
 		
 		HttpGet request = new HttpGet(uriBuilder.toString());
 		request.addHeader("accept", "application/json");

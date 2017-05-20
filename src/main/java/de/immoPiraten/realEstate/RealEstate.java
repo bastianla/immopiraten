@@ -22,7 +22,7 @@ public abstract class RealEstate {
 	private String image;
 	private String link;
 	private Portal portal;
-	private int price;
+	private double price;
 	private boolean commission;
 	@OneToOne
 	private Site site;
@@ -78,11 +78,11 @@ public abstract class RealEstate {
 		this.portal = portal;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
