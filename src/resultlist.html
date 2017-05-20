@@ -6,21 +6,28 @@
 	<!-- script src="ImmoPiratenApp.js"></script-->
 	
 </head>
-<body ng-app="ImmoPiratenApp" ng-controller="exposeCtrl">
+<body ng-app="ImmoPiratenApp">
 
 
 
-<div>
-
-<input type="text" name="postcode" ng-model="postcode"
-       ng-minlength="5" ng-maxlength="5"/>
-       
-<button ng-click="doSearch()">Suche</button>
-
-
+<!-- <div ng-app="ImmoPiratenApp" ng-controller="immoCtrl">
+<p>Today's welcome message is:</p>
+<h1>{{myWelcome}}</h1>
 </div>
-<div >
-{{debug}}
+
+
+<div  ng-controller="customersCtrl">
+
+<ul>
+  <li ng-repeat="x in myData">
+    {{ x.Name + ', ' + x.Country }}
+  </li>
+</ul>-->
+
+
+
+<div ng-controller="exposeCtrl">
+{{params}}
 <ul>
   <li ng-repeat="x in exposedata">
     Titel: {{ x.title }}<br>
