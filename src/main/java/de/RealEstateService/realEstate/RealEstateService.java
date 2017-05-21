@@ -58,8 +58,8 @@ public class RealEstateService {
 		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("livingAreaTo", query.getLivingAreaTo()));
 		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("landAreaFrom", query.getLandAreaFrom()));
 		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("landAreaTo", query.getLandAreaTo()));
-		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("constructionYear", query.getConstructionYearFrom())); 
-		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("constructionYear", query.getConstructionYearTo()));
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareGreaterValue("constructionYearFrom", query.getConstructionYearFrom())); 
+		searchTerm = this.prepareAndTerm(searchTerm, this.prepareLessValue("constructionYearTo", query.getConstructionYearTo()));
 		
 		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("balcony", query.isBalcony()));
 		searchTerm = this.prepareAndTerm(searchTerm, this.prepareBooleanValue("terrace", query.isTerrace()));

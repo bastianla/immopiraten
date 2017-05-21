@@ -46,7 +46,7 @@ public class Query {
 		return priceFrom;
 	}
 
-	public void setPriceFrom(double priceFrom) {
+	public void setPriceFrom(Double priceFrom) {
 		this.priceFrom = priceFrom;
 	}
 
@@ -54,7 +54,7 @@ public class Query {
 		return priceTo;
 	}
 
-	public void setPriceTo(double priceTo) {
+	public void setPriceTo(Double priceTo) {
 		this.priceTo = priceTo;
 	}
 
@@ -62,7 +62,7 @@ public class Query {
 		return roomsFrom;
 	}
 
-	public void setRoomsFrom(short roomsFrom) {
+	public void setRoomsFrom(Short roomsFrom) {
 		this.roomsFrom = roomsFrom;
 	}
 
@@ -70,7 +70,7 @@ public class Query {
 		return roomsTo;
 	}
 
-	public void setRoomsTo(short roomsTo) {
+	public void setRoomsTo(Short roomsTo) {
 		this.roomsTo = roomsTo;
 	}
 
@@ -78,7 +78,7 @@ public class Query {
 		return livingAreaFrom;
 	}
 
-	public void setLivingAreaFrom(short livingAreaFrom) {
+	public void setLivingAreaFrom(Short livingAreaFrom) {
 		this.livingAreaFrom = livingAreaFrom;
 	}
 
@@ -86,7 +86,7 @@ public class Query {
 		return livingAreaTo;
 	}
 
-	public void setLivingAreaTo(short livingAreaTo) {
+	public void setLivingAreaTo(Short livingAreaTo) {
 		this.livingAreaTo = livingAreaTo;
 	}
 
@@ -94,7 +94,7 @@ public class Query {
 		return landAreaFrom;
 	}
 
-	public void setLandAreaFrom(short landAreaFrom) {
+	public void setLandAreaFrom(Short landAreaFrom) {
 		this.landAreaFrom = landAreaFrom;
 	}
 
@@ -102,7 +102,7 @@ public class Query {
 		return landAreaTo;
 	}
 
-	public void setLandAreaTo(short landAreaTo) {
+	public void setLandAreaTo(Short landAreaTo) {
 		this.landAreaTo = landAreaTo;
 	}
 
@@ -110,7 +110,7 @@ public class Query {
 		return constructionYearFrom;
 	}
 
-	public void setConstructionYearFrom(short constructionYearFrom) {
+	public void setConstructionYearFrom(Short constructionYearFrom) {
 		this.constructionYearFrom = constructionYearFrom;
 	}
 
@@ -118,7 +118,7 @@ public class Query {
 		return constructionYearTo;
 	}
 
-	public void setConstructionYearTo(short constructionYearTo) {
+	public void setConstructionYearTo(Short constructionYearTo) {
 		this.constructionYearTo = constructionYearTo;
 	}
 
@@ -126,7 +126,7 @@ public class Query {
 		return radius;
 	}
 
-	public void setRadius(short radius) {
+	public void setRadius(Short radius) {
 		this.radius = radius;
 	}
 
@@ -134,7 +134,7 @@ public class Query {
 		return balcony;
 	}
 
-	public void setBalcony(boolean balcony) {
+	public void setBalcony(Boolean balcony) {
 		this.balcony = balcony;
 	}
 
@@ -142,7 +142,7 @@ public class Query {
 		return terrace;
 	}
 
-	public void setTerrace(boolean terrace) {
+	public void setTerrace(Boolean terrace) {
 		this.terrace = terrace;
 	}
 
@@ -150,7 +150,7 @@ public class Query {
 		return garden;
 	}
 
-	public void setGarden(boolean garden) {
+	public void setGarden(Boolean garden) {
 		this.garden = garden;
 	}
 
@@ -158,7 +158,7 @@ public class Query {
 		return garage;
 	}
 
-	public void setGarage(boolean garage) {
+	public void setGarage(Boolean garage) {
 		this.garage = garage;
 	}
 
@@ -166,7 +166,7 @@ public class Query {
 		return commission;
 	}
 
-	public void setCommission(boolean commission) {
+	public void setCommission(Boolean commission) {
 		this.commission = commission;
 	}
 	

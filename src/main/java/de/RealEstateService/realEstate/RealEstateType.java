@@ -1,5 +1,15 @@
 package de.RealEstateService.realEstate;
 
 public enum RealEstateType {
-	Flat, House, Plot
+	Flat(0), House(1), Plot(2);
+	
+	private final int id;
+	
+	RealEstateType(int id) { 
+		this.id = id; 
+	}
+    
+	public int getValue() { 
+		return id; 
+	}	
 }
