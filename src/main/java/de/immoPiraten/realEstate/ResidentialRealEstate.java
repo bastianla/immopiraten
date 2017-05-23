@@ -10,7 +10,7 @@ public class ResidentialRealEstate extends RealEstate {
 	private HeaterType heater;
 	private boolean energyCertificate;
 	private double energyConsumption;
-	private float additionalCosts;
+	private double additionalCosts;
 	private boolean balcony;
 	private boolean terrace;
 	private boolean garden;
@@ -57,11 +57,11 @@ public class ResidentialRealEstate extends RealEstate {
 		this.energyConsumption = energyConsumption;
 	}
 
-	public float getAdditionalCosts() {
+	public double getAdditionalCosts() {
 		return additionalCosts;
 	}
 
-	public void setAdditionalCosts(float additionalCosts) {
+	public void setAdditionalCosts(double additionalCosts) {
 		this.additionalCosts = additionalCosts;
 	}
 

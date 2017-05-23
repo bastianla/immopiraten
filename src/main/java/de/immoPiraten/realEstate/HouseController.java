@@ -2,7 +2,10 @@ package de.immoPiraten.realEstate;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +18,7 @@ public class HouseController {
 	@Autowired
 	private HouseService houseService;
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/houses")
 	public List<House> getHouses(@RequestParam(value = "postcode") String postCode,
 			@RequestParam(value = "city") String city, @RequestParam(value = "pricefrom") int priceFrom,
@@ -39,6 +43,7 @@ public class HouseController {
 		return this.houseService.getExpose(id);
 	}
 
+	
 	@RequestMapping("/search")
 	public List<House> getResponse(@RequestParam(value = "realestatetype") int realEstateType,
 			@RequestParam(value = "purchasetype") int purchaseType, @RequestParam(value = "input") String input,
