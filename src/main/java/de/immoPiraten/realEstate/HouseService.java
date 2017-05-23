@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.ImmoScout24.Request;
@@ -172,7 +171,13 @@ public class HouseService {
 				}
 			}
 		}
-
+	
+		try {
+		results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
+			radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
+		} catch(Exception e)
+		{};
+		
 		return results;
 	}
 
