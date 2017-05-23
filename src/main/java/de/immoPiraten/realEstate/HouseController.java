@@ -18,6 +18,7 @@ public class HouseController {
 	@Autowired
 	private HouseService houseService;
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/houses")
 	public List<House> getHouses(
 			@RequestParam(value="postcode") String postCode,
@@ -49,20 +50,6 @@ public class HouseController {
 		return this.houseService.getExpose(id);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping("/exposeJson")
-	public String getApiJson(@RequestParam(value="id") int id)
-	{
-		String json = this.houseService.getExpose(id);
-		try {
-			json = XML.toJSONObject(json).toString();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(json);
-		return json;
-		}
 	
 	@RequestMapping("/search")
 	public List<House> getResponse(@RequestParam(value="realestatetype") int realEstateType, @RequestParam(value="purchasetype") int purchaseType, @RequestParam(value="input") String input, @RequestParam(value="radius") byte radius)
