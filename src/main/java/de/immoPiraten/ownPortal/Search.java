@@ -2,11 +2,7 @@ package de.immoPiraten.ownPortal;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -23,7 +19,6 @@ import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.Portal;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
-import de.immoPiraten.site.Site;
 
 public class Search {
 	
@@ -136,13 +131,11 @@ public class Search {
 		
 		String title = jsonHouseElement.get("title").toString();
 		if (title != null)
-			newHouse.setTitle(title);
-		// newHouse.setTitle(jsonHouseElement.get("title").toString());		
+			newHouse.setTitle(title);		
 		
 		String description = jsonHouseElement.get("description").toString();
 		if (description != null)
 			newHouse.setDescription(description);
-		// newHouse.setDescription(jsonHouseElement.get("description").toString());
 		
 		String additionalCosts = jsonHouseElement.get("additionalCosts").toString();
 		if (additionalCosts != null)

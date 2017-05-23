@@ -121,8 +121,8 @@ public class HouseService {
 		}
 	
 		try {
-		results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
-			radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
+			results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
+							radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
 		} catch(Exception e)
 		{};
 		
