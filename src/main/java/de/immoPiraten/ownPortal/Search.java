@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.function.Function;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -20,6 +19,7 @@ import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.Portal;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
+import de.immoPiraten.utility.Parser;
 
 public class Search {
 	
@@ -130,60 +130,59 @@ public class Search {
 		newHouse.setId(Integer.parseInt(jsonHouseElement.get("id").toString()));
 		newHouse.setPortal(Portal.Immowelt);
 		
-		String title = Search.parseString(jsonHouseElement.get("title"));
+		String title = Parser.parseString(jsonHouseElement.get("title"));
 		if (title != null)
 			newHouse.setTitle(title);		
 		
-		String description = Search.parseString(jsonHouseElement.get("description"));
+		String description = Parser.parseString(jsonHouseElement.get("description"));
 		if (description != null)
 			newHouse.setDescription(description);
 		
-		Float additionalCosts = Search.parseFloat(jsonHouseElement.get("additionalCosts"));
+		Float additionalCosts = Parser.parseFloat(jsonHouseElement.get("additionalCosts"));
 		if (additionalCosts != null)
 			newHouse.setAdditionalCosts(additionalCosts);
 		
-		// ?
-		Integer construction = Search.parseInteger(jsonHouseElement.get("construction"));
+		Integer construction = Parser.parseInteger(jsonHouseElement.get("constructionYear"));
 		if (construction != null)
 			newHouse.setConstruction(construction);
 		
-		Boolean energyCertificate = Search.parseBoolean(jsonHouseElement.get("energyCertificate"));
+		Boolean energyCertificate = Parser.parseBoolean(jsonHouseElement.get("energyCertificate"));
 		if (energyCertificate != null)
 			newHouse.setEnergyCertificate(energyCertificate);
 		
-		Double energyConsumption = Search.parseDouble(jsonHouseElement.get("energyConsumption"));
+		Double energyConsumption = Parser.parseDouble(jsonHouseElement.get("energyConsumption"));
 		if (energyConsumption != null)
 			newHouse.setEnergyConsumption(energyConsumption);
 		
-		Boolean garage = Search.parseBoolean(jsonHouseElement.get("garage"));
+		Boolean garage = Parser.parseBoolean(jsonHouseElement.get("garage"));
 		if (garage != null)
 			newHouse.setGarage(garage);		
 
-		Boolean garden = Search.parseBoolean(jsonHouseElement.get("garden"));
+		Boolean garden = Parser.parseBoolean(jsonHouseElement.get("garden"));
 		if (garden != null)
-			newHouse.setGarage(garden);		
+			newHouse.setGarden(garden);		
 
-		Double landArea = Search.parseDouble(jsonHouseElement.get("landArea"));
+		Double landArea = Parser.parseDouble(jsonHouseElement.get("landArea"));
 		if (landArea != null)
 			newHouse.setEnergyConsumption(landArea);	
 		
-		String link = Search.parseString(jsonHouseElement.get("link"));
+		String link = Parser.parseString(jsonHouseElement.get("link"));
 		if (link != null)
 			newHouse.setLink(link);		
 		
-		Double livingArea = Search.parseDouble(jsonHouseElement.get("livingArea"));
+		Double livingArea = Parser.parseDouble(jsonHouseElement.get("livingArea"));
 		if (livingArea != null)
 			newHouse.setLivingArea(livingArea);
 		
-		Double price = Search.parseDouble(jsonHouseElement.get("price"));
+		Double price = Parser.parseDouble(jsonHouseElement.get("price"));
 		if (price != null)
 			newHouse.setPrice(price);		
 		
-		Double room = Search.parseDouble(jsonHouseElement.get("room"));
+		Double room = Parser.parseDouble(jsonHouseElement.get("room"));
 		if (room != null)
 			newHouse.setRoom(room);			
 		
-		Boolean terrace = Search.parseBoolean(jsonHouseElement.get("terrace"));
+		Boolean terrace = Parser.parseBoolean(jsonHouseElement.get("terrace"));
 		if (terrace != null)
 			newHouse.setTerrace(terrace);
 		
@@ -214,41 +213,4 @@ public class Search {
 		
 		return newHouse;
 	}
-	
-	private static String parseString(Object value){
-		return (value != null) ? value.toString() : null;
-	}
-
-	private static Float parseFloat(Object value){
-		return Search.parseValue(value, valueToConvert -> Float.parseFloat(value.toString()));
-	}
-	
-	private static Double parseDouble(Object value){
-		return Search.parseValue(value, valueToConvert -> Double.parseDouble(valueToConvert.toString()));
-	}	
-	
-	private static Integer parseInteger(Object value){
-		return Search.parseValue(value, valueToConvert -> Integer.parseInt(valueToConvert.toString()));
-	}		
-	
-	private static Boolean parseBoolean(Object value){
-		return Search.parseValue(value, valueToConvert -> Boolean.parseBoolean(valueToConvert.toString()));
-	}		
-	
-	private static <T> T parseValue(Object value, Function<Object, T> parseFunction){
-		T convertedValue = null;		
-		
-		if (value != null)
-		{		
-			try{
-				convertedValue = parseFunction.apply(value);
-			}
-			catch(Exception e)
-			{
-				convertedValue = null;
-			}
-		}		
-		
-		return convertedValue;
-	}	
 }
