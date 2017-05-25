@@ -1,0 +1,17 @@
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (1, 150, now(), true, "Aachen", false, 2001, "Deutschland", "Beschreibung der Immobilie", false, 250, true, true, 1, 22, null, 800, null, 145, 52066, 356000, now(), 0, 0, 2, "Oppenhofalle", false, "Schöne Wohnung im grünen Viertel");
+
+
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (2, 150, now(), false, "Köln", false, 2001, "Deutschland", "Beschreibung der Immobilie", false, 250, true, true, 1, 22, null, 800, null, 145, 54321, 356000, now(), 0, 1, 6, "Oppenhofalle", true, "Schöne Wohnung im grünen Viertel");
+
+
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (3, 150, now(), false, "Essen", false, 2001, "Deutschland", "Beschreibung der Immobilie", false, 250, true, true, 1, 22, null, 800, null, 145, 78901, 356000, now(), 0, 2, 7, "Oppenhofalle", true, "Schöne Wohnung im grünen Viertel");
+
+
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (4, 150, now(), true, "Aachen", false, 2001, "Deutschland", "Beschreibung der Immobilie", false, 250, true, true, 1, 22, null, 800, null, 145, 52067, 356000, now(), 0, 1, 10, "Oppenhofalle", false, "Wunderschöne Wohnung");
