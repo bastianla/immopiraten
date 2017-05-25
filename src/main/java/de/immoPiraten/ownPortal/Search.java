@@ -128,7 +128,10 @@ public class Search {
 	private static House getHouse(LinkedHashMap<String, Object> jsonHouseElement){
 		House newHouse = new House();
 		
-		newHouse.setId(Integer.parseInt(jsonHouseElement.get("id").toString()));
+		Integer id = Parser.parseInteger(jsonHouseElement.get("id"));
+		if (id != null)
+			newHouse.setId(id);				
+		
 		newHouse.setPortal(Portal.Immowelt);
 		
 		String title = Parser.parseString(jsonHouseElement.get("title"));
