@@ -15,6 +15,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.APIException;
+import de.immoPiraten.realEstate.HeaterType;
 import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.Portal;
 import de.immoPiraten.realEstate.PurchaseType;
@@ -189,12 +190,18 @@ public class Search {
 		Boolean terrace = Parser.parseBoolean(jsonHouseElement.get("terrace"));
 		if (terrace != null)
 			newHouse.setTerrace(terrace);
-		
+				
 		// newHouse.setAvailabilityDate(availabilityDate);
-		// newHouse.setHeater(heater);
 		// newHouse.setPublicationDate(publicationDate);
-		// newHouse.setPurchaseType(purchaseType);
 		
+		HeaterType heater = Parser.parseEnum(jsonHouseElement.get("heater"), HeaterType.class);
+		if (heater != null)
+			newHouse.setHeater(heater);
+		
+		PurchaseType purchaseType = Parser.parseEnum(jsonHouseElement.get("purchaseType"), PurchaseType.class);
+		if (purchaseType != null)
+			newHouse.setPurchaseType(purchaseType);
+			
 		Site newSite = new Site(null);
 		
 		String country = Parser.parseString(jsonHouseElement.get("country"));
