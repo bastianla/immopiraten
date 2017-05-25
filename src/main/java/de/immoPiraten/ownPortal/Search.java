@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.function.Function;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -129,29 +130,62 @@ public class Search {
 		newHouse.setId(Integer.parseInt(jsonHouseElement.get("id").toString()));
 		newHouse.setPortal(Portal.Immowelt);
 		
-		String title = jsonHouseElement.get("title").toString();
+		String title = Search.parseString(jsonHouseElement.get("title"));
 		if (title != null)
 			newHouse.setTitle(title);		
 		
-		String description = jsonHouseElement.get("description").toString();
+		String description = Search.parseString(jsonHouseElement.get("description"));
 		if (description != null)
 			newHouse.setDescription(description);
 		
-		String additionalCosts = jsonHouseElement.get("additionalCosts").toString();
+		Float additionalCosts = Search.parseFloat(jsonHouseElement.get("additionalCosts"));
 		if (additionalCosts != null)
-		{
-			Float aCosts = null;
-			try{
-				aCosts = Float.parseFloat(additionalCosts);
-			}
-			catch(Exception e)
-			{
-				aCosts = null;
-			}
-			
-			if (aCosts != null)
-				newHouse.setAdditionalCosts(aCosts);
-		}
+			newHouse.setAdditionalCosts(additionalCosts);
+		
+		// ?
+		Integer construction = Search.parseInteger(jsonHouseElement.get("construction"));
+		if (construction != null)
+			newHouse.setConstruction(construction);
+		
+		Boolean energyCertificate = Search.parseBoolean(jsonHouseElement.get("energyCertificate"));
+		if (energyCertificate != null)
+			newHouse.setEnergyCertificate(energyCertificate);
+		
+		Double energyConsumption = Search.parseDouble(jsonHouseElement.get("energyConsumption"));
+		if (energyConsumption != null)
+			newHouse.setEnergyConsumption(energyConsumption);
+		
+		Boolean garage = Search.parseBoolean(jsonHouseElement.get("garage"));
+		if (garage != null)
+			newHouse.setGarage(garage);		
+
+		Boolean garden = Search.parseBoolean(jsonHouseElement.get("garden"));
+		if (garden != null)
+			newHouse.setGarage(garden);		
+
+		Double landArea = Search.parseDouble(jsonHouseElement.get("landArea"));
+		if (landArea != null)
+			newHouse.setEnergyConsumption(landArea);	
+		
+		String link = Search.parseString(jsonHouseElement.get("link"));
+		if (link != null)
+			newHouse.setLink(link);		
+		
+		Double livingArea = Search.parseDouble(jsonHouseElement.get("livingArea"));
+		if (livingArea != null)
+			newHouse.setLivingArea(livingArea);
+		
+		Double price = Search.parseDouble(jsonHouseElement.get("price"));
+		if (price != null)
+			newHouse.setPrice(price);		
+		
+		Double room = Search.parseDouble(jsonHouseElement.get("room"));
+		if (room != null)
+			newHouse.setRoom(room);			
+		
+		Boolean terrace = Search.parseBoolean(jsonHouseElement.get("terrace"));
+		if (terrace != null)
+			newHouse.setTerrace(terrace);
 		
 		/*newHouse.setAdditionalCosts(Float.parseFloat(jsonHouseElement.get("additionalCosts").toString()));
 		newHouse.setConstruction(Integer.parseInt(jsonHouseElement.get("construction").toString()));
@@ -181,4 +215,40 @@ public class Search {
 		return newHouse;
 	}
 	
+	private static String parseString(Object value){
+		return (value != null) ? value.toString() : null;
+	}
+
+	private static Float parseFloat(Object value){
+		return Search.parseValue(value, valueToConvert -> Float.parseFloat(value.toString()));
+	}
+	
+	private static Double parseDouble(Object value){
+		return Search.parseValue(value, valueToConvert -> Double.parseDouble(valueToConvert.toString()));
+	}	
+	
+	private static Integer parseInteger(Object value){
+		return Search.parseValue(value, valueToConvert -> Integer.parseInt(valueToConvert.toString()));
+	}		
+	
+	private static Boolean parseBoolean(Object value){
+		return Search.parseValue(value, valueToConvert -> Boolean.parseBoolean(valueToConvert.toString()));
+	}		
+	
+	private static <T> T parseValue(Object value, Function<Object, T> parseFunction){
+		T convertedValue = null;		
+		
+		if (value != null)
+		{		
+			try{
+				convertedValue = parseFunction.apply(value);
+			}
+			catch(Exception e)
+			{
+				convertedValue = null;
+			}
+		}		
+		
+		return convertedValue;
+	}	
 }
