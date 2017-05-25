@@ -19,6 +19,7 @@ import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.Portal;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
+import de.immoPiraten.site.Site;
 import de.immoPiraten.utility.Parser;
 
 public class Search {
@@ -186,30 +187,34 @@ public class Search {
 		if (terrace != null)
 			newHouse.setTerrace(terrace);
 		
-		/*newHouse.setAdditionalCosts(Float.parseFloat(jsonHouseElement.get("additionalCosts").toString()));
-		newHouse.setConstruction(Integer.parseInt(jsonHouseElement.get("construction").toString()));
-		newHouse.setEnergyCertificate(Boolean.parseBoolean(jsonHouseElement.get("energyCertificate").toString()));
-		newHouse.setEnergyConsumption(Double.parseDouble(jsonHouseElement.get("energyConsumption").toString()));
-		newHouse.setGarage(Boolean.parseBoolean(jsonHouseElement.get("garage").toString()));
-		newHouse.setGarden(Boolean.parseBoolean(jsonHouseElement.get("garden").toString()));
-		newHouse.setLandArea(Double.parseDouble(jsonHouseElement.get("landArea").toString()));
-		newHouse.setLink(jsonHouseElement.get("link").toString());
-		newHouse.setLivingArea(Double.parseDouble(jsonHouseElement.get("livingArea").toString()));
-		newHouse.setPrice(Double.parseDouble(jsonHouseElement.get("price").toString()));
-		newHouse.setRoom(Double.parseDouble(jsonHouseElement.get("room").toString()));
-		newHouse.setTerrace(Boolean.parseBoolean(jsonHouseElement.get("terrace").toString()));*/
-		
 		// newHouse.setAvailabilityDate(availabilityDate);
 		// newHouse.setHeater(heater);
 		// newHouse.setPublicationDate(publicationDate);
 		// newHouse.setPurchaseType(purchaseType);
 		
-		/*Site newSite = new Site(jsonHouseElement.get("country").toString());
-		newSite.setCity(jsonHouseElement.get("city").toString());
-		newSite.setHouseNumber(jsonHouseElement.get("houseNumber").toString());
-		newSite.setPostCode(jsonHouseElement.get("postCode").toString());
-		newSite.setStreet(jsonHouseElement.get("street").toString());		
-		newHouse.setSite(newSite);*/
+		Site newSite = new Site(null);
+		
+		String country = Parser.parseString(jsonHouseElement.get("country"));
+		if (country != null)
+			newSite.setCountry(country);		
+		
+		String city = Parser.parseString(jsonHouseElement.get("city"));
+		if (city != null)
+			newSite.setCity(city);		
+		
+		String houseNumber = Parser.parseString(jsonHouseElement.get("houseNumber"));
+		if (houseNumber != null)
+			newSite.setHouseNumber(houseNumber);			
+
+		String postCode = Parser.parseString(jsonHouseElement.get("postCode"));
+		if (postCode != null)
+			newSite.setPostCode(postCode);			
+		
+		String street = Parser.parseString(jsonHouseElement.get("street"));
+		if (street != null)
+			newSite.setStreet(street);			
+	
+		newHouse.setSite(newSite);
 		
 		return newHouse;
 	}
