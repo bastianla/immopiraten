@@ -18,8 +18,8 @@ public class RealEstate {
 	private String description;
 	private String image;
 	private String link;
-	private int price;
-	private boolean commission;
+	private Integer price;
+	private Boolean commission;
 	private Date availabilityDate;
 	@Enumerated(EnumType.ORDINAL)
 	private PurchaseType purchaseType;
@@ -27,28 +27,28 @@ public class RealEstate {
 	private String street;
 	private String city;
 	private String postCode;
-	private int houseNumber;
+	private Integer houseNumber;
 	private String country;
 	@Enumerated(EnumType.ORDINAL)
 	private RealEstateType realEstateType;	
 	
 	// residential real estate
-	private short room;
-	private short livingArea;
+	private Short room;
+	private Short livingArea;
 	// ordinal means that the number will be persist in the database
 	@Enumerated(EnumType.ORDINAL)
 	private HeaterType heater;
-	private boolean energyCertificate;
-	private double energyConsumption;
-	private float additionalCosts;
-	private boolean balcony;
-	private boolean terrace;
-	private boolean garden;
-	private boolean garage;
-	private short constructionYear;
+	private Boolean energyCertificate;
+	private Double energyConsumption;
+	private Float additionalCosts;
+	private Boolean balcony;
+	private Boolean terrace;
+	private Boolean garden;
+	private Boolean garage;
+	private Short constructionYear;
 	
 	// house
-	private int landArea;	
+	private Integer landArea;	
 	
 
 	public int getId() {
@@ -91,11 +91,11 @@ public class RealEstate {
 		this.link = link;
 	}
 
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -103,7 +103,7 @@ public class RealEstate {
 		return commission;
 	}
 
-	public void setCommission(boolean commission) {
+	public void setCommission(Boolean commission) {
 		this.commission = commission;
 	}
 
@@ -155,11 +155,11 @@ public class RealEstate {
 		this.postCode = postCode;
 	}
 
-	public int getHouseNumber() {
+	public Integer getHouseNumber() {
 		return houseNumber;
 	}
 
-	public void setHouseNumber(int houseNumber) {
+	public void setHouseNumber(Integer houseNumber) {
 		this.houseNumber = houseNumber;
 	}
 
@@ -179,19 +179,19 @@ public class RealEstate {
 		this.realEstateType = realEstateType;
 	}	
 	
-	public short getRoom() {
+	public Short getRoom() {
 		return room;
 	}
 
-	public void setRoom(short room) {
+	public void setRoom(Short room) {
 		this.room = room;
 	}
 
-	public short getLivingArea() {
+	public Short getLivingArea() {
 		return livingArea;
 	}
 
-	public void setLivingArea(short livingArea) {
+	public void setLivingArea(Short livingArea) {
 		this.livingArea = livingArea;
 	}
 
@@ -203,75 +203,75 @@ public class RealEstate {
 		this.heater = heater;
 	}
 
-	public boolean isEnergyCertificate() {
+	public Boolean isEnergyCertificate() {
 		return energyCertificate;
 	}
 
-	public void setEnergyCertificate(boolean energyCertificate) {
+	public void setEnergyCertificate(Boolean energyCertificate) {
 		this.energyCertificate = energyCertificate;
 	}
 
-	public double getEnergyConsumption() {
+	public Double getEnergyConsumption() {
 		return energyConsumption;
 	}
 
-	public void setEnergyConsumption(double energyConsumption) {
+	public void setEnergyConsumption(Double energyConsumption) {
 		this.energyConsumption = energyConsumption;
 	}
 
-	public float getAdditionalCosts() {
+	public Float getAdditionalCosts() {
 		return additionalCosts;
 	}
 
-	public void setAdditionalCosts(float additionalCosts) {
+	public void setAdditionalCosts(Float additionalCosts) {
 		this.additionalCosts = additionalCosts;
 	}
 
-	public boolean isBalcony() {
+	public Boolean isBalcony() {
 		return balcony;
 	}
 
-	public void setBalcony(boolean balcony) {
+	public void setBalcony(Boolean balcony) {
 		this.balcony = balcony;
 	}
 
-	public boolean isTerrace() {
+	public Boolean isTerrace() {
 		return terrace;
 	}
 
-	public void setTerrace(boolean terrace) {
+	public void setTerrace(Boolean terrace) {
 		this.terrace = terrace;
 	}
 
-	public boolean isGarden() {
+	public Boolean isGarden() {
 		return garden;
 	}
 
-	public void setGarden(boolean garden) {
+	public void setGarden(Boolean garden) {
 		this.garden = garden;
 	}
 
-	public boolean isGarage() {
+	public Boolean isGarage() {
 		return garage;
 	}
 
-	public void setGarage(boolean garage) {
+	public void setGarage(Boolean garage) {
 		this.garage = garage;
 	}
 
-	public short getConstructionYear() {
+	public Short getConstructionYear() {
 		return constructionYear;
 	}
 
-	public void setConstructionYear(short constructionYear) {
+	public void setConstructionYear(Short constructionYear) {
 		this.constructionYear = constructionYear;
 	}
 	
-	public int getLandArea() {
+	public Integer getLandArea() {
 		return landArea;
 	}
 
-	public void setLandArea(int landArea) {
+	public void setLandArea(Integer landArea) {
 		this.landArea = landArea;
 	}	
 }
