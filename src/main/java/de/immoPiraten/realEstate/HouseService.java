@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.ImmoScout24.Request;
 import de.immoPiraten.ImmoScout24.Search;
+import de.immoPiraten.query.ResultsSorting;
 import de.immoPiraten.site.Site;
 import de.immoPiraten.utility.Parser;
 
@@ -75,7 +78,7 @@ public class HouseService {
 	@SuppressWarnings("unchecked")
 	public List<House> Search(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
 			byte radius, boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
-			Integer priceTill) {
+			Integer priceTill, ResultsSorting sorting) {
 		List<House> results = new ArrayList<House>();
 
 		// maps the real estate type on the immoScout24 real estate type
@@ -129,10 +132,36 @@ public class HouseService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		};
-
+				
+		results.sort(this.getRealEstateComparator(sorting));
+		
 		return results;
 	}
 
+	private Comparator<RealEstate> getRealEstateComparator(ResultsSorting sorting)
+	{
+		if (sorting == null)
+			sorting = ResultsSorting.PublicationDateDESC;
+					
+		switch (sorting)
+		{
+			case PublicationDateDESC:
+				return Collections.reverseOrder(RealEstate.REAL_ESTATE_PUBLICATION_DATE_COMPARATOR);
+				
+			case PublicationDateASC:
+				return RealEstate.REAL_ESTATE_PUBLICATION_DATE_COMPARATOR;
+				
+			case PriceDESC:
+				return Collections.reverseOrder(RealEstate.REAL_ESTATE_PRICE_COMPARATOR);
+				
+			case PriceASC:
+				return RealEstate.REAL_ESTATE_PRICE_COMPARATOR;
+				
+			default:
+				return Collections.reverseOrder(RealEstate.REAL_ESTATE_PUBLICATION_DATE_COMPARATOR);
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	private House getHouse(Object json) throws ParseException {
 		House house = new House();

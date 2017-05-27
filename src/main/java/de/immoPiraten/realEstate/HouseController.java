@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.immoPiraten.ImmoScout24.GeoAutoCompletionService;
+import de.immoPiraten.query.ResultsSorting;
 
 @RestController
 public class HouseController {
@@ -46,15 +47,21 @@ public class HouseController {
 	
 	@RequestMapping("/search")
 	public List<House> getResponse(@RequestParam(value = "realestatetype") int realEstateType,
-			@RequestParam(value = "purchasetype") int purchaseType, @RequestParam(value = "input") String input,
+			@RequestParam(value = "purchasetype") int purchaseType, 
+			@RequestParam(value = "input") String input,
 			@RequestParam(value = "radius") byte radius,
 			@RequestParam(value = "freeofcommission") boolean freeOfCommission,
 			@RequestParam(value = "livingareafrom", required = false) Double livingAreaFrom,
 			@RequestParam(value = "livingareatill", required = false) Double livingAreaTill,
 			@RequestParam(value = "pricefrom", required = false) Integer priceFrom,
-			@RequestParam(value = "pricetill", required = false) Integer priceTill) {
+			@RequestParam(value = "pricetill", required = false) Integer priceTill,
+			@RequestParam(value = "sorting", required = false) Integer sorting) {
+		
+		if (sorting == null)
+			sorting = ResultsSorting.PublicationDateDESC.getValue();
+		
 		return this.houseService.Search(RealEstateType.values()[realEstateType], PurchaseType.values()[purchaseType],
 				GeoAutoCompletionService.ENTITY_TYPE_CITY, input, radius, freeOfCommission, livingAreaFrom,
-				livingAreaTill, priceFrom, priceTill);
+				livingAreaTill, priceFrom, priceTill, ResultsSorting.values()[sorting]);
 	}
 }

@@ -1,5 +1,6 @@
 package de.immoPiraten.realEstate;
 
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -34,6 +35,9 @@ public abstract class RealEstate {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
 	private Date publicationDate;
 
+	public static final Comparator<RealEstate> REAL_ESTATE_PUBLICATION_DATE_COMPARATOR = new RealEstatePublicationDateComparator();
+	public static final Comparator<RealEstate> REAL_ESTATE_PRICE_COMPARATOR = new RealEstatePriceComparator();
+		
 	public int getId() {
 		return id;
 	}
