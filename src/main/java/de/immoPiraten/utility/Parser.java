@@ -1,5 +1,6 @@
 package de.immoPiraten.utility;
 
+import java.util.Date;
 import java.util.function.Function;
 
 import javax.persistence.EnumType;
@@ -24,6 +25,10 @@ public class Parser {
 	
 	public static Boolean parseBoolean(Object value){
 		return Parser.parseValue(value, valueToConvert -> Boolean.parseBoolean(valueToConvert.toString()));
+	}
+	
+	public static Date parseDate(Object value){
+		return Parser.parseValue(value, valueToConvert -> new Date(Long.parseLong(valueToConvert.toString())));	
 	}
 	
 	public static <E extends Enum<E>> E parseEnum(Object value, Class<E> enumType){

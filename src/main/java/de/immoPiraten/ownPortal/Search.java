@@ -3,6 +3,7 @@ package de.immoPiraten.ownPortal;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -191,9 +192,14 @@ public class Search {
 		if (terrace != null)
 			newHouse.setTerrace(terrace);
 				
-		// newHouse.setAvailabilityDate(availabilityDate);
-		// newHouse.setPublicationDate(publicationDate);
+		Date publicationDate = Parser.parseDate(jsonHouseElement.get("publicationDate"));		
+		if (publicationDate != null)
+			newHouse.setPublicationDate(publicationDate);
 		
+		Date availabilityDate = Parser.parseDate(jsonHouseElement.get("availabilityDate"));		
+		if (availabilityDate != null)
+			newHouse.setAvailabilityDate(availabilityDate);		
+				
 		HeaterType heater = Parser.parseEnum(jsonHouseElement.get("heater"), HeaterType.class);
 		if (heater != null)
 			newHouse.setHeater(heater);
