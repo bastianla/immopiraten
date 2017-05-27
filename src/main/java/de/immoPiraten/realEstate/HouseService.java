@@ -11,18 +11,21 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.ImmoScout24.Request;
 import de.immoPiraten.ImmoScout24.Search;
 import de.immoPiraten.site.Site;
+import de.immoPiraten.utility.Parser;
 
 @Service
 public class HouseService {
 
 	private static final String IMMOSCOUT_EXPOSE_BASE_URL = "https://www.immobilienscout24.de/expose/";
-	
+
 	public List<House> getItems(String postCode, String city, int priceFrom, int priceTill, double livingAreaFrom,
 			double livingAreaTill, double landAreaFrom, double landAreaTill, short roomFrom, short roomTill,
 			short constructionYearFrom, short constructionYearTill, boolean balcony, boolean terrace, boolean garden,
@@ -54,8 +57,8 @@ public class HouseService {
 	// returns an immoScout24 range, if a from or a till value is specified,
 	// otherwise null
 	private String getRange(Object from, Object till) {
-		StringBuilder rangeBuilder = new StringBuilder();	
-		
+		StringBuilder rangeBuilder = new StringBuilder();
+
 		if (from != null)
 			rangeBuilder.append(String.valueOf(from));
 
@@ -88,7 +91,7 @@ public class HouseService {
 
 		String response = Search.Execute(immoScoutRealEstateType, entityType, input, radius, freeOfCommission,
 				livingSpace, price);
-		
+
 		LinkedHashMap<String, Object> result = Request.getLinkedHashMap(response);
 		LinkedHashMap<String, Object> resultList = (LinkedHashMap<String, Object>) result.get("resultlist.resultlist");
 
@@ -119,13 +122,14 @@ public class HouseService {
 				}
 			}
 		}
-	
+
 		try {
 			results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
-							radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
-		} catch(Exception e)
-		{};
-		
+					radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
+		} catch (Exception e) {
+			e.printStackTrace();
+		};
+
 		return results;
 	}
 
@@ -133,21 +137,14 @@ public class HouseService {
 	private House getHouse(Object json) throws ParseException {
 		House house = new House();
 		LinkedHashMap<String, Object> properties = (LinkedHashMap<String, Object>) json;
-				
+
 		// sets the publication date
 		String rawDate = properties.get("@publishDate").toString();
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+hh:mm");
-		Date parsedDate = null;
-		try {
-			parsedDate = df.parse(rawDate);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-		
-		house.setPublicationDate(parsedDate);
-				
+
+		DateTimeZone zone = DateTimeZone.UTC;
+		DateTime dt = new DateTime(rawDate, zone);
+		house.setPublicationDate(dt.toDate());
+
 		// sets the id
 		String exposeId = properties.get("@id").toString();
 		house.setId(Integer.parseInt(exposeId));
@@ -172,80 +169,12 @@ public class HouseService {
 
 		// a real estate has always a title
 		house.setTitle(realEstate.get("title").toString());
-
-		// sets the description
-		Object description = realEstate.get("descriptionNote");
-		if (description != null)
-			house.setDescription(description.toString());
-		
-		// sets the living area
-		Object value = this.getJsonValueOrDefault(realEstate, "livingSpace", 0);
-		if (value instanceof Integer) {
-			int intValue = ((Integer) value).intValue();
-			house.setLivingArea((double) intValue);
-		} else {
-			house.setLivingArea((double) value);
-		}
-
-		// sets the land area
-		value = this.getJsonValueOrDefault(realEstate, "plotArea", 0);
-		if (value instanceof Integer) {
-			int intValue = ((Integer) value).intValue();
-			house.setLandArea((double) intValue);
-		} else {
-			house.setLandArea((double) value);
-		}
-
-		// sets the number of rooms
-		Object numberOfRooms = this.getJsonValueOrDefault(realEstate, "numberOfRooms", 0);
-		if (numberOfRooms instanceof Integer)
-			house.setRoom((double) ((int) numberOfRooms));
-		else
-			house.setRoom((double) numberOfRooms);
-
-		// sets the site
-		LinkedHashMap<String, Object> address = (LinkedHashMap<String, Object>) realEstate.get("address");
-
-		Site site = new Site("Deutschland");
-
-		value = address.get("street");
-		if (value != null)
-			site.setStreet(value.toString());
-
-		value = address.get("houseNumber");
-		if (value != null)
-			site.setHouseNumber(value.toString());
-
-		value = address.get("postcode");
-		if (value != null)
-			site.setPostCode(value.toString());
-
-		value = address.get("city");
-		if (value != null)
-			site.setCity(value.toString());
-
-		house.setSite(site);
-
+				
 		// sets the price
 		LinkedHashMap<String, Object> price = (LinkedHashMap<String, Object>) realEstate.get("price");
 		if (price != null)
-		{
-			Object priceValue = this.getJsonValueOrDefault(price, "value", 0.0);
-			if (priceValue instanceof Integer)
-				house.setPrice((double) ((int) priceValue));
-			else
-				house.setPrice((double) priceValue);
-		}
-		
-		// sets the additional costs
-		value = this.getJsonValueOrDefault(realEstate, "serviceCharge", 0);
-		if (value instanceof Integer) {
-			int intValue = ((Integer) value).intValue();
-			house.setAdditionalCosts((double) intValue);
-		} else {
-			house.setAdditionalCosts((double) value);
-		}
-		
+			house.setPrice(this.parseDouble(price, "value", 0));
+
 		// sets a value indicating whether a energy certificate is available
 		house.setEnergyCertificate(Boolean.parseBoolean(
 				this.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
@@ -258,45 +187,55 @@ public class HouseService {
 			house.setCommission(
 					Boolean.parseBoolean(this.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
 
-		// sets a value indicating whether an energy performance certificate is available
-		house.setEnergyCertificate(Boolean.parseBoolean(this.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
+		// sets a value indicating whether an energy performance certificate is
+		// available
+		house.setEnergyCertificate(Boolean.parseBoolean(
+				this.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
 
 		// sets the availability date
 		Object freeFrom = realEstate.get("freeFrom");
-		
-		if (freeFrom != null)
-		{
-			rawDate = freeFrom.toString();
-			df = new SimpleDateFormat("dd.MM.yyyy");
-			parsedDate = null;
+
+		if (freeFrom != null) {
+			// house.setAvailabilityDate(this.parseDate(X, ));
+			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 			try {
-				parsedDate = df.parse(rawDate);
+				house.setAvailabilityDate(df.parse(freeFrom.toString()));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw e;
 			}
-			house.setAvailabilityDate(parsedDate);
-		}
+		}		
+
+		house.setDescription(Parser.parseString(realEstate.get("descriptionNote")));
+		house.setLivingArea(this.parseDouble(realEstate, "livingSpace", 0));
+		house.setLandArea(this.parseDouble(realEstate, "plotArea", 0));
+		house.setRoom(this.parseDouble(realEstate, "numberOfRooms", 0));
+		house.setSite(this.getSite(realEstate));
+		house.setAdditionalCosts(this.parseDouble(realEstate, "ServiceCharge", 0));
+		house.setImage(this.getImageUrl(realEstate));
 				
-		// sets the image		
-		LinkedHashMap<String, Object> titlePicture = (LinkedHashMap<String, Object>) realEstate.get("titlePicture");		
-		if (titlePicture != null)
-		{
+		return house;
+	}
+
+	@SuppressWarnings("unchecked")
+	private String getImageUrl(LinkedHashMap<String, Object> realEstate) {
+		LinkedHashMap<String, Object> titlePicture = (LinkedHashMap<String, Object>) realEstate.get("titlePicture");
+
+		if (titlePicture != null) {
 			Object href = titlePicture.get("@xlink.href");
-			if (href != null)
-			{
-				house.setImage(titlePicture.get("@xlink.href").toString());
-			}
-			else
-			{
-				ArrayList<LinkedHashMap<String, Object>> pictureUrlsContainer = (ArrayList<LinkedHashMap<String, Object>>)titlePicture.get("urls");
-				ArrayList<LinkedHashMap<String, Object>> pictureUrls = (ArrayList<LinkedHashMap<String, Object>>)pictureUrlsContainer.get(0).get("url");
-				house.setImage(pictureUrls.get(0).get("@href").toString());				
+			if (href != null) {
+				return titlePicture.get("@xlink.href").toString();
+			} else {
+				ArrayList<LinkedHashMap<String, Object>> pictureUrlsContainer = (ArrayList<LinkedHashMap<String, Object>>) titlePicture
+						.get("urls");
+				ArrayList<LinkedHashMap<String, Object>> pictureUrls = (ArrayList<LinkedHashMap<String, Object>>) pictureUrlsContainer
+						.get(0).get("url");
+				return pictureUrls.get(0).get("@href").toString();
 			}
 		}
-		
-		return house;
+
+		return null;
 	}
 
 	private Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue) {
@@ -305,6 +244,51 @@ public class HouseService {
 			if (property instanceof Integer)
 				return ((Integer) property).intValue();
 			return property;
+		}
+
+		return defaultValue;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Site getSite(LinkedHashMap<String, Object> realEstate) {
+
+		Object address = realEstate.get("address");
+
+		if (address != null) {
+			LinkedHashMap<String, Object> addressMap = (LinkedHashMap<String, Object>) address;
+
+			Site site = new Site("Deutschland");
+			site.setStreet(Parser.parseString(addressMap.get("street")));
+			site.setHouseNumber(Parser.parseString(addressMap.get("houseNumber")));
+			site.setPostCode(Parser.parseString(addressMap.get("postcode")));
+			site.setCity(Parser.parseString(addressMap.get("city")));
+			return site;
+		}
+		return null;
+	}
+
+	private Date parseDate(String value, String dateFormat) throws ParseException {
+		DateFormat df = new SimpleDateFormat(dateFormat);
+		try {
+			return df.parse(value);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	private double parseDouble(LinkedHashMap<String, Object> map, String key, double defaultValue) {
+		Object value = this.getJsonValueOrDefault(map, key, defaultValue);
+
+		Object property = map.get(key);
+		if (property != null) {
+			if (value instanceof Integer) {
+				int intValue = ((Integer) value).intValue();
+				return (double) intValue;
+			} else {
+				return (double) value;
+			}
 		}
 
 		return defaultValue;

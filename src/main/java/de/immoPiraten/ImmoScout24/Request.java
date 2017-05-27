@@ -1,6 +1,8 @@
 package de.immoPiraten.ImmoScout24;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -57,7 +59,10 @@ public class Request {
 	{
 		LinkedHashMap<String, Object> result = null;		
 		try {
-			result = new ObjectMapper().readValue(json, LinkedHashMap.class);
+			ObjectMapper mapper = new ObjectMapper();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			mapper.setDateFormat(df);
+			result = mapper.readValue(json, LinkedHashMap.class);
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

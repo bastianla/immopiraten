@@ -55,17 +55,23 @@
 			<artifactId>signpost-commonshttp4</artifactId>
 			<version>1.2.1.2</version>
 		</dependency>
-	
+
 		<!-- Converter XML to Json, only for testing with Angular -->
 		<dependency>
-		    <groupId>org.json</groupId>
-		    <artifactId>json</artifactId>
-		    <version>20160810</version>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.6</version>
 		</dependency>
 	</dependencies>
 

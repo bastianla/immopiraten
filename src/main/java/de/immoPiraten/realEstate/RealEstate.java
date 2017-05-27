@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import de.immoPiraten.site.Site;
 
 @Entity
@@ -26,8 +28,10 @@ public abstract class RealEstate {
 	private boolean commission;
 	@OneToOne
 	private Site site;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="GMT")
 	private Date availabilityDate;
 	private PurchaseType purchaseType;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
 	private Date publicationDate;
 
 	public int getId() {
