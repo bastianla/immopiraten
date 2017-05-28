@@ -1,0 +1,110 @@
+
+ <!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/trefferliste/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/axure/axQuery.js"></script>
+    <script src="resources/scripts/axure/globals.js"></script>
+    <script src="resources/scripts/axutils.js"></script>
+    <script src="resources/scripts/axure/annotation.js"></script>
+    <script src="resources/scripts/axure/axQuery.std.js"></script>
+    <script src="resources/scripts/axure/doc.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/messagecenter.js"></script>
+    <script src="resources/scripts/axure/events.js"></script>
+    <script src="resources/scripts/axure/recording.js"></script>
+    <script src="resources/scripts/axure/action.js"></script>
+    <script src="resources/scripts/axure/expr.js"></script>
+    <script src="resources/scripts/axure/geometry.js"></script>
+    <script src="resources/scripts/axure/flyout.js"></script>
+    <script src="resources/scripts/axure/ie.js"></script>
+    <script src="resources/scripts/axure/model.js"></script>
+    <script src="resources/scripts/axure/repeater.js"></script>
+    <script src="resources/scripts/axure/sto.js"></script>
+    <script src="resources/scripts/axure/utils.temp.js"></script>
+    <script src="resources/scripts/axure/variables.js"></script>
+    <script src="resources/scripts/axure/drag.js"></script>
+    <script src="resources/scripts/axure/move.js"></script>
+    <script src="resources/scripts/axure/visibility.js"></script>
+    <script src="resources/scripts/axure/style.js"></script>
+    <script src="resources/scripts/axure/adaptive.js"></script>
+    <script src="resources/scripts/axure/tree.js"></script>
+    <script src="resources/scripts/axure/init.temp.js"></script>
+    <script src="files/trefferliste/data.js"></script>
+    <script src="resources/scripts/axure/legacy.js"></script>
+    <script src="resources/scripts/axure/viewer.js"></script>
+    <script src="resources/scripts/axure/math.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<!-- script src="ImmoPiratenApp.js"></script-->
+	
+</head>
+<body ng-app="ImmoPiratenApp" ng-controller="exposeCtrl">
+
+
+
+<div>
+
+<input type="text" name="postcode" ng-model="postcode"
+       ng-minlength="5" ng-maxlength="5"/>
+       
+<button ng-click="doSearch()">Suche</button>
+
+
+</div>
+<div >
+{{debug}}
+
+
+</div>
+<div id="loop" ng-repeat="x in exposedata">
+	<div id="looper" style="position: relative;margin-top:35px;">
+		<div id="box" style="position: absolute; margin-left:320px;margin-top: 0px;">	
+			<div id="ueberschrift" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #FF9400;font-size: 24px;">
+			{{ x.title }}
+			</div>
+			<div id="untertext" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #333333;font-size: 18px;">
+			{{ x.description }}
+			</div>
+			<div id="logozeile" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #333333;font-size: 18px;">
+			gefunden bei <img style="padding-left:30px; padding-top:10px; width:96px; heigt: 50px;" src="images/erweiterte_suche/u206.png" />
+			</div>
+		</div>
+		<div id="boxgrau" style="position: absolute; margin-left:320px; bottom: 0px;padding-bottom: 0px">
+				<div style="position: absolute; left:5px;top:5px;">
+					<div class="miete" style="font-size: 13px;width:100px;color: #FFFFFF;">Kaltmiete   </div>
+					<div class="miete2" style="font-size: 25px;color: #FF9400;">{{ x.price }} €</div>
+				</div>
+				<div style="position: absolute; left:150px;top:5px;">
+					<div class="flaeche" style="font-size: 13px;width:100px;color: #FFFFFF;">Wohnfläche</div>
+					<div class="flaeche2" style="font-size: 25px;color: #FF9400;">{{ x.livingArea }} m²</div>
+				</div>
+				<div style="position: absolute; left:300px;top:5px;">
+					<div class="zimmer" style="font-size: 13px;width:100px;color: #FFFFFF;">Zimmer</div>
+					<div class="zimmer2" style="font-size: 25px;color: #FF9400;">{{ x.room }}</div>
+				</div>
+			<img style="width: 866px; height: 65px;"src="images/trefferliste/u638.png"/>
+			</div>
+		<div id="bild">
+				<img style="left 0px; top 0px;"src="images/trefferliste/u632.png"/>
+		</div>
+		
+	</div>
+</div>
+
+
+
+<script src="Controller.js" defer></script>
+</body>
+</html> 
