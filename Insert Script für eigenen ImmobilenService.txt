@@ -238,3 +238,58 @@ Die Wohnung verfügt über einen großen Balkon und Kabelanschluss sowie einen Kell
 
 Die Wärmeversorgung erfolgt über Gas-Zentralheizung.", true, 142, true, false, 1, 12, null, null, "https://www.immonet.de/angebot/30900274?drop=sel&related=false", 70.69, 45329, 98000, now(), 0, 0, 2, "Spakenbroich", false, "Großzügige 2 bis 3-Raum-ETW in Ruhiger Lage Essen-Karnap !");
 
+--------------------------------------------------------------------------
+-- Stadt Essen (Haus kaufen)
+--------------------------------------------------------------------------
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (26, null, null, false, "Essen", false, 1999, "Deutschland", "Wohnfläche:
+UG: 13,21 m2
+EG: 56,36 m2
+OG1: 43,39 m2
+OG2: 14,32 m2
+Insgesamt: 127,28 m2
+
+Nutzfläche (UG, Kellergeschoss):
+Grage: 15,10 m2
+Waschen/trocknen: 18,29 m2
+Insgesamt: 33,39 m2", true, 55.4, true, false, 0, null, null, 244, "https://www.immonet.de/angebot/31068420", 127, 45279, 350000, now(), 0, 1, 5, null, true, "Reihenhaus mit Garten und Garage in Ruhrnähe, provisionsfrei");
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (27, null, null, false, "Essen", false, 1930, "Deutschland", "Bei diesem Objekt handelt es sich um eine Doppelhaushälfte (rechte Seite) mit 2 Wohneinheiten, die 1930 errichtet und Mitte der 1990er Jahre renoviert wurde.
+
+Die Wohnung im EG ist frei. Ca. 53 m², 2 Zimmer, Küche-Diele-Bad.
+
+Die Wohnung im OG ist vermietet. Für die Mieter besteht ein 10 jähriger Kündigungsschutz (auch auf Eigenbedarf). Die Grundmiete beträgt 262,44 € pro. Monat. Ca. 54 m², 2 Zimmer, Küche-Diele-Bad.
+
+Das Haus wurde in massiver Bauweise errichtet und ist unterkellert.", true, 351, false, true, 0, 1, null, 342, "https://www.immonet.de/angebot/29859180", 107, 45329, 155000, now(), 0, 1, 2, "Beisekampsfurth", false, "RRI +++ Das muss ich haben, Liebling. Bekommst Du, Schatz +++ RRI");
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (28, null, null, false, "Essen", true, 1920, "Deutschland", "Geräumiges Einfamilienhaus - sechs Zimmer!
+***** Weitere Bilder finden Sie auf unserer Homepage www.remax-premium-immobilien.de *****
+Den Link zu unserer Seite finden Sie weiter unten im Exposé. 
+
+Das im Jahr 1920 ursprünglich erbaute Reihenmittelhaus ist ein wahres Raumwunder. Es bietet eine Wohnfläche von ca. 180m² mit insgesamt sechs Zimmern und einen ausbaufähigen Spitzboden. Die Grundstücksgröße beträgt ca. 308m², mit schönem Garten und einer an das Wohnzimmer angrenzenden Terrasse. Die Raumaufteilung ist gut durchdacht und lässt vielfältige Gestaltungsmöglichkeiten zu. Das Erdgeschoss teilt sich auf in einen großzügigen Wohn-/Essbereich mit direktem Zugang zur Küche, Gäste-WC und Diele. Im Obergeschoss sind das Elternschlafzimmer, ein Bad mit Dusche und zwei Räume angeordnet. Ferner befinden sich im Dachgeschoss zwei weitere Zimmer sowie ein zusätzliches Badezimmer mit Wanne und Dusche.", true, 83.68, false, true, 0, 5, null, 308, "https://www.immonet.de/angebot/30558806", 180, 45145, 282000, now(), 0, 1, 6, "Am Richtenberg", true, "Das Raumwunder für Ihre Familie!");
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (29, null, null, false, "Essen", true, 1991, "Deutschland", "Unser komplettes Exposé können Sie sich als PDF-Datei ansehen. 
+
+Der Link befindet sich einige Zeilen höher, unter Immobilie > Dokumente > Bild 3.", true, 60, false, false, 0, null, null, 141, "https://www.immonet.de/angebot/29147918", 108, 45143, 310000, now(), 0, 1, 3.5, null, true, "Landhausstil + Süd-Ausrichtung + Sonnenterrasse + bodentiefe Fenster + Kaminofen");
+
+INSERT INTO `realestate`.`real_estate` (`id`, `additional_costs`, `availability_date`, `balcony`, `city`, `commission`, `construction_year`, `country`, `description`, `energy_certificate`, `energy_consumption`, `garage`, `garden`, `heater`, `house_number`, `image`, `land_area`, `link`, `living_area`, `post_code`, `price`, `publication_date`, `purchase_type`, `real_estate_type`, `room`, `street`, `terrace`, `title`)
+VALUES (30, null, null, true, "Essen", true, 2003, "Deutschland", "Liebe Interessenten, 
+
+das hier vorgestellte Eigenheim liegt im schicken Wohngebiet im Herzen von Essen-Heidhausen!
+
+Das in konventioneller Bauweise erstellte Eigenheim, welches 1995 kernsaniert und umfassend mit einem großem Anbau erweitert wurde, verfügt über 173,55 m² Wohnfläche und zwei Bäder, sowie ein Gäste-WC mit Dusche. 
+Das Haus bietet mit mindestens 6 Zimmern (Die Wohnfläche ist durch Nutzflächen-Zimmer einfach erweiterbar, bis dato wurden knapp 190m² als Wohnfläche von den Eigentümer ausgenutzt) genug Platz für eine junge Familie. 
+
+Tipp: Bilder/Idee zur Einrichtung finden Sie hier:
+
+https://media-files1.immowelt.de/upload/9b3d70b0f78f4c2993cac0a0d46c9293/doc_d376e7970cfc4a0e957595b1de62b42d.pdf
+
+Das Haus zeigt sich hell, freundlich und absolut zeitlos. Die stilvolle Galerie im 1. OG, verbunden mit zwei großen Balkonen mit Weitblick ins Grüne, vermitteln einen Erholungsfaktor. 
+Sobald Sie das Haus betreten, erschließt es sich Ihnen sofort, das Raumgefühl einer offenen Küche und einem großen abgetrennten Wohn- und Esszimmerbereich.
+
+Unseren 3 D Rundgang finden Sie unter www.spillheide.de
+
+Ein Kurz-Exposé können Sie gerne per Mail erhalten.", true, 169.4, true, true, 0, null, null, 556, "https://www.immonet.de/angebot/30865114?drop=sel&related=false", 173.55, 45239, 390000, now(), 0, 1, 10, null, true, "Familienhaus, großer Garten, 2 Balkonen & Grill-Terrasse, 3 Bäder");
