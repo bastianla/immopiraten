@@ -77,7 +77,7 @@ public class HouseService {
 
 	@SuppressWarnings("unchecked")
 	public List<House> Search(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
-			byte radius, boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
+			byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
 			Integer priceTill, ResultsSorting sorting) {
 		List<House> results = new ArrayList<House>();
 

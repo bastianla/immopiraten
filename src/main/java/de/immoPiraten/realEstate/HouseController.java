@@ -50,7 +50,7 @@ public class HouseController {
 			@RequestParam(value = "purchasetype") int purchaseType, 
 			@RequestParam(value = "input") String input,
 			@RequestParam(value = "radius") byte radius,
-			@RequestParam(value = "freeofcommission") boolean freeOfCommission,
+			@RequestParam(value = "freeofcommission", required = false) Boolean freeOfCommission,
 			@RequestParam(value = "livingareafrom", required = false) Double livingAreaFrom,
 			@RequestParam(value = "livingareatill", required = false) Double livingAreaTill,
 			@RequestParam(value = "pricefrom", required = false) Integer priceFrom,

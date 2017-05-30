@@ -74,7 +74,7 @@ public class Search {
 		return Request.getResponse(signedRequest, "getExpose").toString();
 	}
 		
-	public static String Execute(RealEstateType realEstateType, String entityType, String input, byte radius, boolean freeOfCourtageOnly, String livingSpace, String price)
+	public static String Execute(RealEstateType realEstateType, String entityType, String input, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
 	{				
 		GeoAutoCompletionService geoAutoCompletion = new GeoAutoCompletionService();
 	    
@@ -84,7 +84,7 @@ public class Search {
 		return Search.getSearchResult(realEstateType, geoCode, radius, freeOfCourtageOnly, livingSpace, price);
 	}
 	
-	private static String getSearchResult(RealEstateType realEstateType, GeoCode geoCode, byte radius, boolean freeOfCourtageOnly, String livingSpace, String price)
+	private static String getSearchResult(RealEstateType realEstateType, GeoCode geoCode, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
 	{		
 		// example uri:
 		// https://rest.immobilienscout24.de/restapi/api/search/v1.0/search/region?realestatetype=apartmentrent&geocodes=1276003001046
@@ -116,8 +116,8 @@ public class Search {
 			uriBuilder.addParameter("livingSpace", livingSpace);
 		if (price != null)
 			uriBuilder.addParameter("price", price);
-		if (freeOfCourtageOnly)
-			uriBuilder.addParameter("freeofcourtageonly", "true");
+		if (freeOfCourtageOnly != null)
+			uriBuilder.addParameter("freeofcourtageonly", freeOfCourtageOnly.toString());
 		
 		// gets the signed request
 		HttpGet request = new HttpGet(uriBuilder.toString());
