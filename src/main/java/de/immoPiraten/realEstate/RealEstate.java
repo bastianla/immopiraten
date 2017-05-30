@@ -3,6 +3,7 @@ package de.immoPiraten.realEstate;
 import java.util.Comparator;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ public abstract class RealEstate {
 	@GeneratedValue
 	private int id;
 	private String title;
+	@Column(length=2000)	
 	private String description;
 	private String image;
 	private String link;
