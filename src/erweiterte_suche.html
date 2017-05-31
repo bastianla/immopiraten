@@ -4,7 +4,6 @@
     <title>erweiterte Suche</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/erweiterte_suche/styles.css" type="text/css" rel="stylesheet"/>
     <script src="data/document.js"></script>
@@ -12,18 +11,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     
   </head>
-  <body ng-app="ImmoPiratenApp" ng-controller="searchCtrl">
+  <body >
     <div id="base" class="">
 
       <!-- Unnamed (Rectangle) -->
 
       <!-- Logo (Image) -->
       <div id="u61" class="ax_default image" data-label="Logo">
-        <img id="u61_img" class="img " src="images/startseite/logo_u3.png"/>
+        <a href="#!startseite"><img id="u61_img" class="img " src="images/startseite/logo_u3.png"/>
         <!-- Unnamed () -->
         <div id="u62" class="text" style="display:none; visibility: hidden">
           <p><span></span></p>
-        </div>
+        </div></a>
       </div>
 
       <!-- Login -->
@@ -185,19 +184,20 @@
 
             <!-- Unnamed (Rectangle) -->
             <div id="u114" class="ax_default primary_text_dark">
-              <div id="u114_div" class=""></div>
-              <!-- Unnamed () -->
               <div id="u115" class="text">
-                <p><span>Garten</span></p>
+              <label>Garten:</label>
+              <input style="float: right;" type="checkbox" name="garden" ng-init="garden='0'" ng-model="garden" ng-true-value="'1'" ng-false-value="'0'">
+   
               </div>
             </div>
 
             <!-- Unnamed (Rectangle) -->
             <div id="u116" class="ax_default primary_text_dark">
-              <div id="u116_div" class=""></div>
               <!-- Unnamed () -->
               <div id="u117" class="text">
-                <p><span>Balkon</span></p>
+                 <label>Balkon:</label>
+              <input style="float: right;" type="checkbox" name="balcony" ng-init="balcony='0'" ng-model="balcony" ng-true-value="'1'" ng-false-value="'0'">
+   
               </div>
             </div>
 
@@ -206,97 +206,9 @@
               <div id="u118_div" class=""></div>
               <!-- Unnamed () -->
               <div id="u119" class="text">
-                <p><span>Terasse</span></p>
-              </div>
-            </div>
-
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u120" class="ax_default" data-label="Checkbox">
-              <div id="u120_state0" class="panel_state" data-label="Unchecked">
-                <div id="u120_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u121" class="ax_default image1">
-                    <img id="u121_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u122" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u120_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u120_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u123" class="ax_default image1">
-                    <img id="u123_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u124" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u125" class="ax_default" data-label="Checkbox">
-              <div id="u125_state0" class="panel_state" data-label="Unchecked">
-                <div id="u125_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u126" class="ax_default image1">
-                    <img id="u126_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u127" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u125_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u125_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u128" class="ax_default image1">
-                    <img id="u128_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u129" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u130" class="ax_default" data-label="Checkbox">
-              <div id="u130_state0" class="panel_state" data-label="Unchecked">
-                <div id="u130_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u131" class="ax_default image1">
-                    <img id="u131_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u132" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u130_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u130_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u133" class="ax_default image1">
-                    <img id="u133_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u134" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
+                 <label>Terasse:</label>
+              <input style="float: right;" type="checkbox" name="terasse" ng-init="terasse='0'" ng-model="terasse" ng-true-value="'1'" ng-false-value="'0'">
+   
               </div>
             </div>
 
@@ -419,120 +331,34 @@
 
             <!-- Unnamed (Rectangle) -->
             <div id="u161" class="ax_default primary_text_dark">
-              <div id="u161_div" class=""></div>
               <!-- Unnamed () -->
               <div id="u162" class="text">
-                <p><span>zentral</span></p>
+                   <label>zentral:</label>
+              <input style="float: right;" type="checkbox" name="heating1" ng-init="heating1='0'" ng-model="heating1" ng-true-value="'1'" ng-false-value="'0'">
+   
               </div>
             </div>
 
             <!-- Unnamed (Rectangle) -->
             <div id="u163" class="ax_default primary_text_dark">
-              <div id="u163_div" class=""></div>
               <!-- Unnamed () -->
               <div id="u164" class="text">
-                <p><span>Gas</span></p>
+                   <label>Gas:</label>
+              <input style="float: right;" type="checkbox" name="heating2" ng-init="heating2='0'" ng-model="heating2" ng-true-value="'1'" ng-false-value="'0'">
+   
               </div>
             </div>
 
             <!-- Unnamed (Rectangle) -->
             <div id="u165" class="ax_default primary_text_dark">
-              <div id="u165_div" class=""></div>
               <!-- Unnamed () -->
               <div id="u166" class="text">
-                <p><span>Öl</span></p>
-              </div>
+   				<label>Öl:</label>
+             	 <input style="float: right;" type="checkbox" name="heating3" ng-init="heating3='0'" ng-model="heating3" ng-true-value="'1'" ng-false-value="'0'">
+                 </div>
             </div>
 
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u167" class="ax_default" data-label="Checkbox">
-              <div id="u167_state0" class="panel_state" data-label="Unchecked">
-                <div id="u167_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u168" class="ax_default image1">
-                    <img id="u168_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u169" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u167_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u167_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u170" class="ax_default image1">
-                    <img id="u170_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u171" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u172" class="ax_default" data-label="Checkbox">
-              <div id="u172_state0" class="panel_state" data-label="Unchecked">
-                <div id="u172_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u173" class="ax_default image1">
-                    <img id="u173_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u174" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u172_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u172_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u175" class="ax_default image1">
-                    <img id="u175_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u176" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u177" class="ax_default" data-label="Checkbox">
-              <div id="u177_state0" class="panel_state" data-label="Unchecked">
-                <div id="u177_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u178" class="ax_default image1">
-                    <img id="u178_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u179" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u177_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u177_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u180" class="ax_default image1">
-                    <img id="u180_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u181" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
 
             <!-- Unnamed (Rectangle) -->
             <div id="u182" class="ax_default shape">
@@ -545,42 +371,15 @@
 
             <!-- Unnamed (Rectangle) -->
             <div id="u184" class="ax_default primary_text_dark">
-              <div id="u184_div" class=""></div>
+
               <!-- Unnamed () -->
               <div id="u185" class="text">
-                <p><span>Garage</span></p>
+              <label>Garage:</label>
+              <input style="float: right;" type="checkbox" name="garage" ng-init="garage='0'" ng-model="garage" ng-true-value="'1'" ng-false-value="'0'">
+   
               </div>
             </div>
 
-            <!-- Checkbox (Dynamic Panel) -->
-            <div id="u186" class="ax_default" data-label="Checkbox">
-              <div id="u186_state0" class="panel_state" data-label="Unchecked">
-                <div id="u186_state0_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u187" class="ax_default image1">
-                    <img id="u187_img" class="img " src="images/erweiterte_suche/u121.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u188" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="u186_state1" class="panel_state" data-label="Checked" style="display:none; visibility: hidden;">
-                <div id="u186_state1_content" class="panel_state_content">
-
-                  <!-- Unnamed (Image) -->
-                  <div id="u189" class="ax_default image1">
-                    <img id="u189_img" class="img " src="images/erweiterte_suche/u123.svg"/>
-                    <!-- Unnamed () -->
-                    <div id="u190" class="text" style="display:none; visibility: hidden">
-                      <p><span></span></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <!-- Unnamed (Rectangle) -->
             <div id="u191" class="ax_default shape">
@@ -596,7 +395,7 @@
               <!-- Unnamed () -->
               <div id="u194" class="text">
               <label>Provision:</label>
-              <input type="checkbox" name="freeofcommission" ng-checked="1" ng-init="freeofcommission='1'" ng-model="freeofcommission" ng-true-value="'false'" ng-false-value="'true'">
+              <input style="float: right;" type="checkbox" name="freeofcommission" ng-checked="1" ng-init="freeofcommission='1'" ng-model="freeofcommission" ng-true-value="'false'" ng-false-value="'true'">
    
               </div>
             </div>
@@ -639,20 +438,12 @@
               </div>
             </div>
 
-            <!-- Unnamed (Image) -->
-            <div id="u208" class="ax_default image">
-              <img id="u208_img" class="img " src="images/erweiterte_suche/u208.png"/>
-              <!-- Unnamed () -->
-              <div id="u209" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
+           
             <!-- Unnamed (Shape) -->
             <div id="u210" class="ax_default icon">
-              <img id="u210_img" class="img " src="images/erweiterte_suche/u210.png"/>
+              <img id="u211_img" class="img " src="images/erweiterte_suche/u210.png"/>
               <!-- Unnamed () -->
-              <div id="u211" class="text" style="display:none; visibility: hidden">
+              <div id="u213" class="text" style="display:none; visibility: hidden">
                 <p><span></span></p>
               </div>
             </div>
@@ -666,14 +457,6 @@
               </div>
             </div>
 
-            <!-- Unnamed (Shape) -->
-            <div id="u214" class="ax_default icon">
-              <img id="u214_img" class="img " src="images/erweiterte_suche/u210.png"/>
-              <!-- Unnamed () -->
-              <div id="u215" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
 
             <!-- Ort (Text Field) -->
             <div id="u216" class="ax_default text_field" data-label="Ort">
@@ -732,7 +515,6 @@
 
         <!-- Impressum (Rectangle) -->
         <div id="u340" class="ax_default heading_3" data-label="Impressum" selectiongroup="u336Footer">
-          <div id="u340_div" class=""></div>
           <!-- Unnamed () -->
           <div id="u341" class="text">
             <p><span>Impressum</span></p>
@@ -741,7 +523,6 @@
 
         <!-- Kontakt (Rectangle) -->
         <div id="u342" class="ax_default heading_3" data-label="Kontakt" selectiongroup="u336Footer">
-          <div id="u342_div" class=""></div>
           <!-- Unnamed () -->
           <div id="u343" class="text">
             <p><span>Kontakt</span></p>
@@ -750,7 +531,6 @@
 
         <!-- Über uns (Rectangle) -->
         <div id="u344" class="ax_default heading_3" data-label="Über uns" selectiongroup="u336Footer">
-          <div id="u344_div" class=""></div>
           <!-- Unnamed () -->
           <div id="u345" class="text">
             <p><span>Über uns</span></p>
@@ -759,7 +539,6 @@
 
         <!-- Hilfe (Rectangle) -->
         <div id="u346" class="ax_default heading_3" data-label="Hilfe" selectiongroup="u336Footer">
-          <div id="u346_div" class=""></div>
           <!-- Unnamed () -->
           <div id="u347" class="text">
             <p><span>Hilfe</span></p>
@@ -768,7 +547,6 @@
 
         <!-- Datenschutz (Rectangle) -->
         <div id="u348" class="ax_default heading_3" data-label="Datenschutz" selectiongroup="u336Footer">
-          <div id="u348_div" class=""></div>
           <!-- Unnamed () -->
           <div id="u349" class="text">
             <p><span>Datenschutz</span></p>
@@ -777,7 +555,6 @@
 
         <!-- Werbung (Rectangle) -->
         <div id="u350" class="ax_default heading_3" data-label="Werbung" selectiongroup="u336Footer">
-          <div id="u350_div" class=""></div>
           <!-- Unnamed () -->
           <div id="u351" class="text">
             <p><span>Werbung</span></p>

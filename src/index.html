@@ -1,36 +1,13 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<!-- script src="ImmoPiratenApp.js"></script-->
-	
-</head>
-<body ng-app="ImmoPiratenApp" ng-controller="searchCtrl">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
 
+<body ng-app="ImmoPiratenApp">
 
-<div>
+<div ng-view></div>
 
-<input type="text" name="city" ng-model="city"
-       />
-       
-<button ng-click="doSearch()">Suche</button>
-
-
-</div>
-<div >
-{{debug}}
-<ul>
-  <li ng-repeat="x in exposedata">
-    Titel: {{ x.title }}<br>
-    ID: {{x.id}}
-  </li>
-  
-</ul>
-
-
-</div>
 <script src="Controller.js" defer></script>
 </body>
-</html> 
+</html>
