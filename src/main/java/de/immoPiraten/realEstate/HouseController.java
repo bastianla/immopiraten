@@ -2,8 +2,6 @@ package de.immoPiraten.realEstate;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,11 +38,11 @@ public class HouseController {
 	}
 
 	@RequestMapping("/expose")
-	public House getHouse(@RequestParam(value = "id") int id) {
-		return this.houseService.getExpose(id);
+	public House getHouse(@RequestParam(value = "portalType") int portalType,
+			@RequestParam(value = "id") int id) {
+		return this.houseService.getExpose(Portal.values()[portalType], id);
 	}
 
-	
 	@RequestMapping("/search")
 	public List<House> getResponse(@RequestParam(value = "realestatetype") int realEstateType,
 			@RequestParam(value = "purchasetype") int purchaseType, 

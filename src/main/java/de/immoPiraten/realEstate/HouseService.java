@@ -37,23 +37,29 @@ public class HouseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public House getExpose(int id) {
-		String response = Search.getExpose(id).toString();
-
-		try {
-			LinkedHashMap<String, Object> result = new ObjectMapper().readValue(response, LinkedHashMap.class);
-
-			LinkedHashMap<String, Object> expose = (LinkedHashMap<String, Object>) result.get("expose.expose");
-			return this.getHouse(expose);
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+	public House getExpose(Portal portal, int id) {
+		
+		if (portal == Portal.Immonet){
+			return de.immoPiraten.ownPortal.Search.getExpose(id);
+		}
+		else{		
+			String response = Search.getExpose(id).toString();
+	
+			try {
+				LinkedHashMap<String, Object> result = new ObjectMapper().readValue(response, LinkedHashMap.class);
+	
+				LinkedHashMap<String, Object> expose = (LinkedHashMap<String, Object>) result.get("expose.expose");
+				return this.getHouse(expose);
+	
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 		}
 	}
 

@@ -29,6 +29,37 @@ public class Search {
 	protected final static String URLOwnPortal = "http://localhost:8081/realestates";
 	
 	@SuppressWarnings("unchecked")
+	public static House getExpose(int id){
+		String url = Search.URLOwnPortal + "/" + Integer.toString(id);
+		
+		String jsonResult;
+		try {
+			jsonResult = Search.sendRequest(url);
+		} catch(Exception e){
+			jsonResult = null;
+		}		 
+		
+		House newHouse = null;
+		
+		if (jsonResult != null)
+		{		
+			LinkedHashMap<String, Object> result = null;
+			try {
+				result = new ObjectMapper().readValue(jsonResult.toString(), LinkedHashMap.class);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if (result != null && result.size() > 0){
+				newHouse = Search.getHouse(result);				
+			}
+		}
+		
+		return newHouse;
+	}
+	
+	@SuppressWarnings("unchecked")
 	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
 			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTo, Integer priceFrom,
 			Integer priceTo){
