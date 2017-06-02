@@ -16,6 +16,8 @@ app.config(function($routeProvider) {
     });
 });
 
+
+
 app.controller('searchCtrl', function($rootScope, $scope, $http, $location) {
     /*$http.get("http://localhost:8080/exposeJson?id=92756718").then(function(response) {
     	$scope.exposedata = response.data['expose:expose'];  
@@ -23,12 +25,14 @@ app.controller('searchCtrl', function($rootScope, $scope, $http, $location) {
     });	*/
 
 	$scope.doeasySearch = function() {
-        $location.path( '/erweitert' );
+
+
+	    $location.path("/erweitert/");
         $scope.doSearch();
     }
 	
 	$scope.doSearch = function() {
-			    
+		
 		if (typeof $scope.radius === 'undefined') {
 				$scope.radius = '100';
 		    } 
@@ -46,7 +50,9 @@ app.controller('searchCtrl', function($rootScope, $scope, $http, $location) {
 	    	$scope.exposedata = response.data;  
 	    	$scope.exposedata.title = response.data[0].title; 
 	    });
-    }
+    
+	
+	}
 	
         	
 });
