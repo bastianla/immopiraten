@@ -165,7 +165,7 @@ public class Search {
 		if (id != null)
 			newHouse.setId(id);				
 		
-		newHouse.setPortal(Portal.Immowelt);
+		newHouse.setPortal(Portal.Immonet);
 		
 		String title = Parser.parseString(jsonHouseElement.get("title"));
 		if (title != null)
