@@ -52,6 +52,11 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	        }
 	    }
 	
+	$scope.markField = function(fieldname) {
+		angular.element( document.querySelector( fieldname ) ).addClass('ng-touched');
+		angular.element( document.querySelector( fieldname ) ).removeClass('ng-untouched');
+	}
+	
 	
 	
     $scope.getDetail = function() {	
@@ -68,45 +73,61 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		$scope.city= $location.search()['city'];				
 		if (typeof $scope.city !== 'undefined') {
 			$scope.doSearch();
-		}
-		
+		}		
 	}    	
-    
+       
     $scope.doSearch = function() {	
     	
-		var searchparams="realestatetype="+$scope.realestatetype+"&purchasetype="+$scope.purchasetype+"&input="+$scope.city;
-		
-		//hier fehlt noch die Einbindung der Parameter immoscout und immonet um die ausgewählten Services anzufragen
-		
-		if (typeof $scope.radius === 'undefined') {
-			$scope.radius = '100';
-	    } 
-		searchparams+="&radius="+$scope.radius;
+    	//wenn Feld Ort leer ist, keine Suche durchführen und rot markieren
+    	if (typeof $scope.city === 'undefined') {
+    		$scope.markField('#u97_input');    		
 
-		if (typeof $scope.freeofcommission === 'undefined') {
-			$scope.freeofcommission = '1';
-	    }
-		searchparams+="&freeofcommission="+$scope.freeofcommission;
-
-		if (typeof $scope.pricetill !== 'undefined') {
-			searchparams+="&pricetill="+$scope.pricetill;
-		}
-		if (typeof $scope.pricefrom !== 'undefined') {
-			searchparams+="&pricefrom="+$scope.pricefrom;
-		}
-		if (typeof $scope.livingareatill !== 'undefined') {
-			searchparams+="&livingareatill="+$scope.livingareatill;
-		}
-		if (typeof $scope.livingareafrom !== 'undefined') {
-			searchparams+="&livingareafrom="+$scope.livingareafrom;
-		}
-		
-		
+    	} else {
+    		    	
+			var searchparams="realestatetype="+$scope.realestatetype+"&purchasetype="+$scope.purchasetype+"&input="+$scope.city;
+			
+			//Default alle Portale (4)
+			$scope.portal='4';
+			//nur immoScout
+			if ($scope.immoScout=='1' && $scope.immoNet=='0') {
+				$scope.portal='1';
+			//nur immonet
+			} else if ($scope.immoScout=='0' && $scope.immoNet=='1'){
+				$scope.portal='2';
+			} //immowelt (3) nicht angebunden, (0) none nicht möglich
 	    
-		$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
-	    	$scope.exposedata = response.data;  
-	    	$scope.exposedata.title = response.data[0].title; 
-	    });	    
+			searchparams+="&portal="+$scope.portal;
+			
+			if (typeof $scope.radius === 'undefined') {
+				$scope.radius = '100';
+		    } 
+			searchparams+="&radius="+$scope.radius;
+	
+			if (typeof $scope.freeofcommission === 'undefined') {
+				$scope.freeofcommission = '1';
+		    }
+			searchparams+="&freeofcommission="+$scope.freeofcommission;
+	
+			if (typeof $scope.pricetill !== 'undefined') {
+				searchparams+="&pricetill="+$scope.pricetill;
+			}
+			if (typeof $scope.pricefrom !== 'undefined') {
+				searchparams+="&pricefrom="+$scope.pricefrom;
+			}
+			if (typeof $scope.livingareatill !== 'undefined') {
+				searchparams+="&livingareatill="+$scope.livingareatill;
+			}
+			if (typeof $scope.livingareafrom !== 'undefined') {
+				searchparams+="&livingareafrom="+$scope.livingareafrom;
+			}
+			
+			
+		    
+			$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
+		    	$scope.exposedata = response.data;  
+		    	$scope.exposedata.title = response.data[0].title; 
+		    });	    
+    	}
     }
 });
     

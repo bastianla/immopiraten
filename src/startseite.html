@@ -6,18 +6,10 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <link href="data/styles.css" type="text/css" rel="stylesheet"/>
     <link href="files/startseite/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="resources/scripts/axure/axQuery.js"></script>
-    <script src="resources/scripts/axure/globals.js"></script>
-    <script src="resources/scripts/axutils.js"></script>
-    <script src="resources/scripts/axure/annotation.js"></script>
-    <script src="resources/scripts/axure/axQuery.std.js"></script>
-    <script src="resources/scripts/axure/doc.js"></script>
-    <script src="data/document.js"></script>
     <script src="files/startseite/data.js"></script>
-    <script src="resources/scripts/axure/legacy.js"></script>
-    <script src="resources/scripts/axure/viewer.js"></script>
-    <script src="resources/scripts/axure/math.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
 
   </head>
   <body ng-app="ImmoPiratenApp" ng-controller="searchCtrl">
@@ -213,12 +205,18 @@
 
       <!-- Unnamed (Rectangle) -->
       <!-- div id="u37" class="ax_default primary_button" ng-click="doeasySearch()">-->
-      <div id="u37" class="ax_default primary_button" >
+      <div id="u37" class="ax_default primary_button" ng-if="!city">
+        <div id="u37_disabled_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u38" class="text">
+          <p><span>Finden</span></p>
+        </div>
+      </div>
+      <div id="u37" class="ax_default primary_button" ng-if="city">
         <div id="u37_div" class=""></div>
         <!-- Unnamed () -->
         <div id="u38" class="text">
-          <p ng-if="!city"><span>Finden</span></p>
-          <p ng-if="city"><a href="erweiterte_suche.html#?city={{city}}&purchasetype={{purchasetype}}&realestatetype={{realestatetype}}"><span>Finden</span></a></p>
+          <p ng-if="city"><a href="erweiterte_suche.html#?city={{city}}&purchasetype={{purchasetype}}&realestatetype={{realestatetype}}">Finden</a></p>
         </div>
       </div>
       
@@ -228,79 +226,14 @@
         <div id="u39_div" class=""></div>
         <!-- Unnamed () -->
         <div id="u40" class="text">
-          <p><span style="text-decoration:underline;"><a href="erweiterte_suche.html#?purchasetype=0&realestatetype=0"" style="color:#FF9409;">zur erweiterten Suche</a></span></p>
+          <p><span style="text-decoration:underline;"><a href="erweiterte_suche.html#?purchasetype={{purchasetype}}&realestatetype={{realestatetype}}"" style="color:#FF9409;">zur erweiterten Suche</a></span></p>
           
         </div>
       </div>
+</div>
+      
+<div ng-include="'footer.html'"></div>
 
-      <!-- Unnamed (Footer) -->
-
-      <!-- Footer (Group) -->
-      <div id="u42" class="ax_default" data-label="Footer" data-width="1366" data-height="93">
-
-        <!-- Footer grau (Rectangle) -->
-        <div id="u43" class="ax_default box_1" data-label="Footer grau" selectiongroup="u41Footer">
-          <div id="u43_div" class=""></div>
-          <!-- Unnamed () -->
-          <div id="u44" class="text" style="display:none; visibility: hidden">
-            <p><span></span></p>
-          </div>
-        </div>
-
-        <!-- Impressum (Rectangle) -->
-        <div id="u45" class="ax_default heading_3" data-label="Impressum" selectiongroup="u41Footer">
-          <!-- Unnamed () -->
-          <div id="u46" class="text">
-            <p><span>Impressum</span></p>
-          </div>
-        </div>
-
-        <!-- Kontakt (Rectangle) -->
-        <div id="u47" class="ax_default heading_3" data-label="Kontakt" selectiongroup="u41Footer">
-          <!-- Unnamed () -->
-          <div id="u48" class="text">
-            <p><span>Kontakt</span></p>
-          </div>
-        </div>
-
-        <!-- Über uns (Rectangle) -->
-        <div id="u49" class="ax_default heading_3" data-label="Über uns" selectiongroup="u41Footer">
-          <!-- Unnamed () -->
-          <div id="u50" class="text">
-            <p><span>Über uns</span></p>
-          </div>
-        </div>
-
-        <!-- Hilfe (Rectangle) -->
-        <div id="u51" class="ax_default heading_3" data-label="Hilfe" selectiongroup="u41Footer">
-          <!-- Unnamed () -->
-          <div id="u52" class="text">
-            <p><span>Hilfe</span></p>
-          </div>
-        </div>
-
-        <!-- Datenschutz (Rectangle) -->
-        <div id="u53" class="ax_default heading_3" data-label="Datenschutz" selectiongroup="u41Footer">
-          <!-- Unnamed () -->
-          <div id="u54" class="text">
-            <p><span>Datenschutz</span></p>
-          </div>
-        </div>
-
-        <!-- Werbung (Rectangle) -->
-        <div id="u55" class="ax_default heading_3" data-label="Werbung" selectiongroup="u41Footer">
-          <!-- Unnamed () -->
-          <div id="u56" class="text">
-            <p><span>Werbung</span></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ort (Text Field) -->
-      <div id="u57" class="ax_default text_field" data-label="Ort" style="display:none; visibility: hidden">
-        <input id="u57_input" type="text" value="Preis bis"/>
-      </div>
-    </div>
     <script src="Controller.js" defer></script>
   </body>
 </html>
