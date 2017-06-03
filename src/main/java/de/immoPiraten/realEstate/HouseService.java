@@ -82,62 +82,66 @@ public class HouseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<House> Search(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
+	public List<House> Search(Portal portal, RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
 			byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
 			Integer priceTill, ResultsSorting sorting) {
 		List<House> results = new ArrayList<House>();
 
-		// maps the real estate type on the immoScout24 real estate type
-		de.immoPiraten.ImmoScout24.RealEstateType immoScoutRealEstateType = Search.mapRealEstateType(realEstateType,
-				purchaseType);
-
-		// converts the living area for the immoScout24 requirements, they call
-		// it living space
-		String livingSpace = this.getRange(livingAreaFrom, livingAreaTill);
-
-		// converts the price for the immoScout24 requirements
-		String price = this.getRange(priceFrom, priceTill);
-
-		String response = Search.Execute(immoScoutRealEstateType, entityType, input, radius, freeOfCommission,
-				livingSpace, price);
-
-		LinkedHashMap<String, Object> result = Request.getLinkedHashMap(response);
-		LinkedHashMap<String, Object> resultList = (LinkedHashMap<String, Object>) result.get("resultlist.resultlist");
-
-		ArrayList<Object> resultListEntries = (ArrayList<Object>) resultList.get("resultlistEntries");
-
-		LinkedHashMap<String, Object> entry = (LinkedHashMap<String, Object>) resultListEntries.get(0);
-		int numberOfHits = Integer.parseInt(entry.get("@numberOfHits").toString());
-
-		if (numberOfHits > 1) {
-			ArrayList<Object> exposes = (ArrayList<Object>) entry.get("resultlistEntry");
-
-			// the result list is restricted to 20 entries
-			int max = numberOfHits < 50 ? numberOfHits : 50;
-			for (int index = 0; index < max; index++)
-				try {
-					results.add(this.getHouse(exposes.get(index)));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		} else {
-			if (numberOfHits == 1) {
-				try {
-					results.add(this.getHouse(entry.get("resultlistEntry")));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		if (portal == Portal.ImmobilienScout24 || portal == Portal.All){		
+			// maps the real estate type on the immoScout24 real estate type
+			de.immoPiraten.ImmoScout24.RealEstateType immoScoutRealEstateType = Search.mapRealEstateType(realEstateType,
+					purchaseType);
+	
+			// converts the living area for the immoScout24 requirements, they call
+			// it living space
+			String livingSpace = this.getRange(livingAreaFrom, livingAreaTill);
+	
+			// converts the price for the immoScout24 requirements
+			String price = this.getRange(priceFrom, priceTill);
+	
+			String response = Search.Execute(immoScoutRealEstateType, entityType, input, radius, freeOfCommission,
+					livingSpace, price);
+	
+			LinkedHashMap<String, Object> result = Request.getLinkedHashMap(response);
+			LinkedHashMap<String, Object> resultList = (LinkedHashMap<String, Object>) result.get("resultlist.resultlist");
+	
+			ArrayList<Object> resultListEntries = (ArrayList<Object>) resultList.get("resultlistEntries");
+	
+			LinkedHashMap<String, Object> entry = (LinkedHashMap<String, Object>) resultListEntries.get(0);
+			int numberOfHits = Integer.parseInt(entry.get("@numberOfHits").toString());
+	
+			if (numberOfHits > 1) {
+				ArrayList<Object> exposes = (ArrayList<Object>) entry.get("resultlistEntry");
+	
+				// the result list is restricted to 20 entries
+				int max = numberOfHits < 50 ? numberOfHits : 50;
+				for (int index = 0; index < max; index++)
+					try {
+						results.add(this.getHouse(exposes.get(index)));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} else {
+				if (numberOfHits == 1) {
+					try {
+						results.add(this.getHouse(entry.get("resultlistEntry")));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
-
-		try {
-			results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
-					radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
-		} catch (Exception e) {
-			e.printStackTrace();
-		};
+		
+		if (portal == Portal.Immonet || portal == Portal.All){
+			try {
+				results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
+						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
+			} catch (Exception e) {
+				e.printStackTrace();
+			};
+		}
 				
 		results.sort(this.getRealEstateComparator(sorting));
 		

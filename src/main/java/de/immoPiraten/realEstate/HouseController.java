@@ -38,13 +38,15 @@ public class HouseController {
 	}
 
 	@RequestMapping("/expose")
-	public House getHouse(@RequestParam(value = "portalType") int portalType,
+	public House getHouse(@RequestParam(value = "portal") int portal,
 			@RequestParam(value = "id") int id) {
-		return this.houseService.getExpose(Portal.values()[portalType], id);
+		
+		return this.houseService.getExpose(Portal.values()[portal], id);
 	}
 
 	@RequestMapping("/search")
-	public List<House> getResponse(@RequestParam(value = "realestatetype") int realEstateType,
+	public List<House> getResponse(@RequestParam(value = "portal", required = false) Integer portal,
+			@RequestParam(value = "realestatetype") int realEstateType,
 			@RequestParam(value = "purchasetype") int purchaseType, 
 			@RequestParam(value = "input") String input,
 			@RequestParam(value = "radius") byte radius,
@@ -54,11 +56,14 @@ public class HouseController {
 			@RequestParam(value = "pricefrom", required = false) Integer priceFrom,
 			@RequestParam(value = "pricetill", required = false) Integer priceTill,
 			@RequestParam(value = "sorting", required = false) Integer sorting) {
+	
+		if (portal == null)
+			portal = Portal.All.getValue();
 		
 		if (sorting == null)
 			sorting = ResultsSorting.PublicationDateDESC.getValue();
 		
-		return this.houseService.Search(RealEstateType.values()[realEstateType], PurchaseType.values()[purchaseType],
+		return this.houseService.Search(Portal.values()[portal], RealEstateType.values()[realEstateType], PurchaseType.values()[purchaseType],
 				GeoAutoCompletionService.ENTITY_TYPE_CITY, input, radius, freeOfCommission, livingAreaFrom,
 				livingAreaTill, priceFrom, priceTill, ResultsSorting.values()[sorting]);
 	}
