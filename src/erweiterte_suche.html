@@ -12,6 +12,7 @@
     
   </head>
   <body ng-app="ImmoPiratenApp" ng-controller="searchCtrl" data-ng-init="getDetail()">
+ 
     <div id="base" class=""  >
 
       <!-- Unnamed (Rectangle) -->
@@ -420,7 +421,7 @@
 
             <!-- Unnamed (Image) -->
             <div id="u204" class="ax_default image">
-              <img id="u204_img" class="img " src="images/erweiterte_suche/u204.png"/>
+              <img id="u204_img" class="img " src="images/erweiterte_suche/u208.png"/>
               <!-- Unnamed () -->
               <div id="u205" class="text" style="display:none; visibility: hidden">
                 <p><span></span></p>
@@ -439,20 +440,14 @@
            
             <!-- Unnamed (Shape) -->
             <div id="u210" class="ax_default icon">
-              <img id="u211_img" class="img " src="images/erweiterte_suche/u210.png"/>
-              <!-- Unnamed () -->
-              <div id="u213" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
+              <input type="checkbox" name="immoScout" ng-init="immoScout='1'" ng-model="immoScout" ng-true-value="'1'" ng-false-value="'0'" style="display:none; visibility: hidden">
+              <a ng-click="toggleImageImmoScout()"><img id="followbuttonImmoScout" ng-src="{{followBtnImgUrlImmoScout}}"  /></a>            
             </div>
 
             <!-- Unnamed (Shape) -->
             <div id="u212" class="ax_default icon">
-              <img id="u212_img" class="img " src="images/erweiterte_suche/u210.png"/>
-              <!-- Unnamed () -->
-              <div id="u213" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
+              <input type="checkbox" name="immoNet" ng-init="immoNet='1'" ng-model="immoNet" ng-true-value="'1'" ng-false-value="'0'" style="display:none; visibility: hidden">
+              <a ng-click="toggleImageImmoNet()"><img id="followbuttonImmoNet" ng-src="{{followBtnImgUrlImmoNet}}"  /></a>    
             </div>
 
 
