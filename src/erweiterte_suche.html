@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     
   </head>
-  <body >
+  <body ng-app="ImmoPiratenApp" ng-controller="searchCtrl" data-ng-init="getDetail()">
     <div id="base" class=""  >
 
       <!-- Unnamed (Rectangle) -->
@@ -71,7 +71,7 @@
 
             <!-- Art (Droplist) -->
             <div id="u94" class="ax_default droplist" data-label="Art" >
-              <select id="u94_input" name="realestatetype" ng-model="realestatetype" ng-init="realestatetype='0'">
+              <select id="u94_input" name="realestatetype" ng-model="realestatetype">
                 <option value="0" >Wohnung</option>
                 <option value="1">Haus</option>
                 <option value="2">Grundstück</option>
@@ -80,7 +80,7 @@
 
             <!-- Typ (Droplist) -->
             <div id="u95" class="ax_default droplist" data-label="Typ">
-              <select id="u95_input" name="purchasetype" ng-model="purchasetype" ng-init="purchasetype='0'">
+              <select id="u95_input" name="purchasetype" ng-model="purchasetype">
                 <option value="0">Kauf</option>
                 <option value="1">Miete</option>
               </select>
@@ -115,42 +115,42 @@
 
             <!-- Ort (Text Field) -->
             <div id="u100" class="ax_default text_field" data-label="Ort">
-              <input id="u100_input" type="text" value="Preis von"/>
+              <input id="u100_input" type="text" placeholder="Preis von"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u101" class="ax_default text_field" data-label="Ort">
-              <input id="u101_input" type="text" value="Preis bis"/>
+              <input id="u101_input" type="text" placeholder="Preis bis"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u102" class="ax_default text_field" data-label="Ort">
-              <input id="u102_input" type="text" value="Anzahl Zimmer ab"/>
+              <input id="u102_input" type="text" placeholder="Anzahl Zimmer ab"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u103" class="ax_default text_field" data-label="Ort">
-              <input id="u103_input" type="text" value="Anzahl Zimmer bis"/>
+              <input id="u103_input" type="text" placeholder="Anzahl Zimmer bis"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u104" class="ax_default text_field" data-label="Ort">
-              <input id="u104_input" type="text" value="Fläche von"/>
+              <input id="u104_input" type="text" placeholder="Fläche von"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u105" class="ax_default text_field" data-label="Ort">
-              <input id="u105_input" type="text" value="Fläche bis"/>
+              <input id="u105_input" type="text" placeholder="Fläche bis"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u106" class="ax_default text_field" data-label="Ort">
-              <input id="u106_input" type="text" value="Baujahr von"/>
+              <input id="u106_input" type="text" placeholder="Baujahr von"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u107" class="ax_default text_field" data-label="Ort">
-              <input id="u107_input" type="text" value="Baujahr bis"/>
+              <input id="u107_input" type="text" placeholder="Baujahr bis"/>
             </div>
 
             <!-- Unnamed (Rectangle) -->
@@ -458,12 +458,12 @@
 
             <!-- Ort (Text Field) -->
             <div id="u216" class="ax_default text_field" data-label="Ort">
-              <input id="u216_input" type="text" value="Fläche von"/>
+              <input id="u216_input" type="text" placeholder="Fläche von"/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u217" class="ax_default text_field" data-label="Ort">
-              <input id="u217_input" type="text" value="Fläche bis"/>
+              <input id="u217_input" type="text" placeholder="Fläche bis"/>
             </div>
 
             <!-- Unnamed (Rectangle) -->
@@ -489,6 +489,7 @@
 <div >
 <div>
 <ul>
+
   <li ng-repeat="x in exposedata">
     Titel: {{ x.title }}<br>
     ID: {{x.id}}

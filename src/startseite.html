@@ -17,10 +17,13 @@
     <script src="resources/scripts/axure/legacy.js"></script>
     <script src="resources/scripts/axure/viewer.js"></script>
     <script src="resources/scripts/axure/math.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
   </head>
-  <body>
+  <body ng-app="ImmoPiratenApp" ng-controller="searchCtrl">
+  test: {{debug}}
     <div id="base" class="">
+    
 
       <!-- Unnamed (Piraten Master) -->
 
@@ -210,11 +213,13 @@
       </div>
 
       <!-- Unnamed (Rectangle) -->
-      <div id="u37" class="ax_default primary_button" ng-click="doeasySearch()">
+      <!-- div id="u37" class="ax_default primary_button" ng-click="doeasySearch()">-->
+      <div id="u37" class="ax_default primary_button" >
         <div id="u37_div" class=""></div>
         <!-- Unnamed () -->
         <div id="u38" class="text">
-          <p><span>Finden</span></p>
+          <p ng-if="!city"><span>Finden</span></p>
+          <p ng-if="city"><a href="erweiterte_suche.html#?city={{city}}&purchasetype={{purchasetype}}&realestatetype={{realestatetype}}"><span>Finden</span></a></p>
         </div>
       </div>
       
@@ -224,7 +229,7 @@
         <div id="u39_div" class=""></div>
         <!-- Unnamed () -->
         <div id="u40" class="text">
-          <p><span style="text-decoration:underline;"><a href="#!erweitert" style="color:#FF9409;">zur erweiterten Suche</a></span></p>
+          <p><span style="text-decoration:underline;"><a href="erweiterte_suche.html#?purchasetype=0&realestatetype=0"" style="color:#FF9409;">zur erweiterten Suche</a></span></p>
           
         </div>
       </div>
@@ -297,5 +302,6 @@
         <input id="u57_input" type="text" value="Preis bis"/>
       </div>
     </div>
+    <script src="Controller.js" defer></script>
   </body>
 </html>

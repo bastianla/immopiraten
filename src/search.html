@@ -1,26 +1,13 @@
-
- <!DOCTYPE html>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<!-- script src="ImmoPiratenApp.js"></script-->
-	
-</head>
-<body ng-app="ImmoPiratenApp">
-
-
-
-
 <div ng-controller="searchCtrl">
 
 <input type="text" name="postcode" ng-model="search.postcode"
-       ng-minlength="5" ng-maxlength="5"/>
+       ng-minlength="5" ng-maxlength="5" required/>
+       <div role="alert">
+      <span class="error" ng-show="search.postcode.$error.required&&search.postcode.$touched">nötig</span>
+    </div>
        
 <button ng-click="doSearch()">Suche</button>
 <button ng-click="doSearch2()">Suche2</button>
 {{params}}
 
 </div>
-<script src="Controller.js" defer></script>
-</body>
-</html> 
