@@ -1,5 +1,27 @@
 var app = angular.module('ImmoPiratenApp', []);
 
+app.directive('onlyDigits', function () {
+    return {
+      require: 'ngModel',
+      restrict: 'A',
+      link: function (scope, element, attr, ctrl) {
+        function inputValue(val) {
+          if (val) {
+            var digits = val.replace(/[^0-9]/g, '');
+
+            if (digits !== val) {
+              ctrl.$setViewValue(digits);
+              ctrl.$render();
+            }
+            return parseInt(digits,10);
+          }
+          return undefined;
+        }            
+        ctrl.$parsers.push(inputValue);
+      }
+    };
+});
+
 app.controller('searchCtrl', function($scope, $http, $location) {
 	
 	/*$scope.doSearch = function() {
@@ -11,23 +33,54 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	    });
     }*/
     $scope.getDetail = function() {	
-		
-		$scope.debug=$scope.city;
-		$scope.city= $location.search()['city'];
+				
 		$scope.realestatetype = $location.search()['realestatetype'];
+		if (typeof $scope.realestatetype === 'undefined') {
+			$scope.realestatetype='0';
+		}
 		$scope.purchasetype =$location.search()['purchasetype'];
-		$scope.doSearch();
+		if (typeof $scope.purchasetype === 'undefined') {
+			$scope.purchasetype='0';
+		}
+		
+		$scope.city= $location.search()['city'];				
+		if (typeof $scope.city !== 'undefined') {
+			$scope.doSearch();
+		}
 		
 	}    	
     
     $scope.doSearch = function() {	
+    	
+		var searchparams="realestatetype="+$scope.realestatetype+"&purchasetype="+$scope.purchasetype+"&input="+$scope.city;
+		
+		
 		if (typeof $scope.radius === 'undefined') {
-				$scope.radius = '100';
-		    } 
+			$scope.radius = '100';
+	    } 
+		searchparams+="&radius="+$scope.radius;
+
 		if (typeof $scope.freeofcommission === 'undefined') {
 			$scope.freeofcommission = '1';
-	    } 
-	    $http.get("http://localhost:8080/search?realestatetype="+$scope.realestatetype+"&purchasetype="+$scope.purchasetype+"&input="+$scope.city+"&radius="+$scope.radius+"&freeofcommission="+$scope.freeofcommission).then(function(response) {
+	    }
+		searchparams+="&freeofcommission="+$scope.freeofcommission;
+
+		if (typeof $scope.pricetill !== 'undefined') {
+			searchparams+="&pricetill="+$scope.pricetill;
+		}
+		if (typeof $scope.pricefrom !== 'undefined') {
+			searchparams+="&pricefrom="+$scope.pricefrom;
+		}
+		if (typeof $scope.livingareatill !== 'undefined') {
+			searchparams+="&livingareatill="+$scope.livingareatill;
+		}
+		if (typeof $scope.livingareafrom !== 'undefined') {
+			searchparams+="&livingareafrom="+$scope.livingareafrom;
+		}
+		
+		
+	    
+		$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
 	    	$scope.exposedata = response.data;  
 	    	$scope.exposedata.title = response.data[0].title; 
 	    });	    

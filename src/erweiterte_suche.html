@@ -115,42 +115,42 @@
 
             <!-- Ort (Text Field) -->
             <div id="u100" class="ax_default text_field" data-label="Ort">
-              <input id="u100_input" type="text" placeholder="Preis von"/>
+                 <input id="u100_input" type="text" only-digits name="pricefrom" placeholder="Preis von" ng-model="pricefrom" />
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u101" class="ax_default text_field" data-label="Ort">
-              <input id="u101_input" type="text" placeholder="Preis bis"/>
+                 <input id="u101_input" type="text" only-digits name="pricetill" placeholder="Preis bis" ng-model="pricetill" />
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u102" class="ax_default text_field" data-label="Ort">
-              <input id="u102_input" type="text" placeholder="Anzahl Zimmer ab"/>
+              <input id="u102_input" type="text" placeholder="Anzahl Zimmer ab" disabled/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u103" class="ax_default text_field" data-label="Ort">
-              <input id="u103_input" type="text" placeholder="Anzahl Zimmer bis"/>
+              <input id="u103_input" type="text" placeholder="Anzahl Zimmer bis" disabled/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u104" class="ax_default text_field" data-label="Ort">
-              <input id="u104_input" type="text" placeholder="Fläche von"/>
+              <input id="u104_input" type="text" name="livingareafrom" placeholder="Fläche von" ng-model="livingareafrom" only-digits/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u105" class="ax_default text_field" data-label="Ort">
-              <input id="u105_input" type="text" placeholder="Fläche bis"/>
+              <input id="u105_input" type="text" name="livingareatill" placeholder="Fläche bis" ng-model="livingareatill" only-digits/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u106" class="ax_default text_field" data-label="Ort">
-              <input id="u106_input" type="text" placeholder="Baujahr von"/>
+              <input id="u106_input" type="text" placeholder="Baujahr von" disabled/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u107" class="ax_default text_field" data-label="Ort">
-              <input id="u107_input" type="text" placeholder="Baujahr bis"/>
+              <input id="u107_input" type="text" placeholder="Baujahr bis" disabled/>
             </div>
 
             <!-- Unnamed (Rectangle) -->
@@ -184,7 +184,7 @@
             <div id="u114" class="ax_default primary_text_dark">
               <div id="u115" class="text">
               <label>Garten:</label>
-              <input style="float: right;" type="checkbox" name="garden" ng-init="garden='0'" ng-model="garden" ng-true-value="'1'" ng-false-value="'0'">
+              <input style="float: right;" type="checkbox" name="garden" ng-init="garden='0'" ng-model="garden" ng-true-value="'1'" ng-false-value="'0'" disabled>
    
               </div>
             </div>
@@ -194,7 +194,7 @@
               <!-- Unnamed () -->
               <div id="u117" class="text">
                  <label>Balkon:</label>
-              <input style="float: right;" type="checkbox" name="balcony" ng-init="balcony='0'" ng-model="balcony" ng-true-value="'1'" ng-false-value="'0'">
+              <input style="float: right;" type="checkbox" name="balcony" ng-init="balcony='0'" ng-model="balcony" ng-true-value="'1'" ng-false-value="'0'" disabled>
    
               </div>
             </div>
@@ -205,7 +205,7 @@
               <!-- Unnamed () -->
               <div id="u119" class="text">
                  <label>Terasse:</label>
-              <input style="float: right;" type="checkbox" name="terasse" ng-init="terasse='0'" ng-model="terasse" ng-true-value="'1'" ng-false-value="'0'">
+              <input style="float: right;" type="checkbox" name="terasse" ng-init="terasse='0'" ng-model="terasse" ng-true-value="'1'" ng-false-value="'0'" disabled>
    
               </div>
             </div>
@@ -332,7 +332,7 @@
               <!-- Unnamed () -->
               <div id="u162" class="text">
                    <label>zentral:</label>
-              <input style="float: right;" type="checkbox" name="heating1" ng-init="heating1='0'" ng-model="heating1" ng-true-value="'1'" ng-false-value="'0'">
+              <input style="float: right;" type="checkbox" name="heating1" ng-init="heating1='0'" ng-model="heating1" ng-true-value="'1'" ng-false-value="'0'" disabled>
    
               </div>
             </div>
@@ -342,7 +342,7 @@
               <!-- Unnamed () -->
               <div id="u164" class="text">
                    <label>Gas:</label>
-              <input style="float: right;" type="checkbox" name="heating2" ng-init="heating2='0'" ng-model="heating2" ng-true-value="'1'" ng-false-value="'0'">
+              <input style="float: right;" type="checkbox" name="heating2" ng-init="heating2='0'" ng-model="heating2" ng-true-value="'1'" ng-false-value="'0'" disabled>
    
               </div>
             </div>
@@ -352,7 +352,7 @@
               <!-- Unnamed () -->
               <div id="u166" class="text">
    				<label>Öl:</label>
-             	 <input style="float: right;" type="checkbox" name="heating3" ng-init="heating3='0'" ng-model="heating3" ng-true-value="'1'" ng-false-value="'0'">
+             	 <input style="float: right;" type="checkbox" name="heating3" ng-init="heating3='0'" ng-model="heating3" ng-true-value="'1'" ng-false-value="'0'" disabled>
                  </div>
             </div>
 
@@ -373,7 +373,7 @@
               <!-- Unnamed () -->
               <div id="u185" class="text">
               <label>Garage:</label>
-              <input style="float: right;" type="checkbox" name="garage" ng-init="garage='0'" ng-model="garage" ng-true-value="'1'" ng-false-value="'0'">
+              <input style="float: right;" type="checkbox" name="garage" ng-init="garage='0'" ng-model="garage" ng-true-value="'1'" ng-false-value="'0'" disabled>
    
               </div>
             </div>
@@ -458,12 +458,12 @@
 
             <!-- Ort (Text Field) -->
             <div id="u216" class="ax_default text_field" data-label="Ort">
-              <input id="u216_input" type="text" placeholder="Fläche von"/>
+                <input id="u216_input" type="text" name="areafrom" placeholder="Fläche von" disabled/>
             </div>
 
             <!-- Ort (Text Field) -->
             <div id="u217" class="ax_default text_field" data-label="Ort">
-              <input id="u217_input" type="text" placeholder="Fläche bis"/>
+                <input id="u217_input" type="text" name="areatill" placeholder="Fläche bis" disabled/>
             </div>
 
             <!-- Unnamed (Rectangle) -->

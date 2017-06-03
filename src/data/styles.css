@@ -1,4 +1,4 @@
-input.ng-touched.ng-invalid
+input.ng-touched.ng-invalid-required
 {
   border:3px solid #f00;
 }
