@@ -1,39 +1,56 @@
 package de.immoPiraten.ImmoScout24;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.APIException;
 import de.immoPiraten.OAuth.OAuth;
+import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.PurchaseType;
+import de.immoPiraten.realEstate.RealEstateType;
+import de.immoPiraten.site.Site;
+import de.immoPiraten.utility.Parser;
 
 public class Search {
 	
+	private static final String IMMOSCOUT_EXPOSE_BASE_URL = "https://www.immobilienscout24.de/expose/";	
 	protected final static String CONTEXT = "search/";	
 	
 	/* CAUTION: Only supports House and Flat.*/
-	public static RealEstateType mapRealEstateType(de.immoPiraten.realEstate.RealEstateType realEstateType, PurchaseType purchaseType)
+	public static de.immoPiraten.ImmoScout24.RealEstateType mapRealEstateType(de.immoPiraten.realEstate.RealEstateType realEstateType, PurchaseType purchaseType)
 	{
 		switch (realEstateType)
 		{
 		case House:
 			if (purchaseType == PurchaseType.Buy)
-				return RealEstateType.HouseBuy;
+				return de.immoPiraten.ImmoScout24.RealEstateType.HouseBuy;
 			else
-				return RealEstateType.HouseRent;
+				return de.immoPiraten.ImmoScout24.RealEstateType.HouseRent;
 		case Flat:
 			if (purchaseType == PurchaseType.Buy)
-				return RealEstateType.ApartmentBuy;
+				return de.immoPiraten.ImmoScout24.RealEstateType.ApartmentBuy;
 			else
-				return RealEstateType.ApartmentRent;
+				return de.immoPiraten.ImmoScout24.RealEstateType.ApartmentRent;
 		default:
 			throw new IllegalArgumentException("Could not map the specified combination of real estate type and purchase type to an real estate type.");
 		}
 	}
 	
 	/* CAUTION: Only supports House and Apartment.*/
-	public static de.immoPiraten.realEstate.RealEstateType mapRealEstateType(RealEstateType realEstateType)
+	public static de.immoPiraten.realEstate.RealEstateType mapRealEstateType(de.immoPiraten.ImmoScout24.RealEstateType realEstateType)
 	{
 		switch (realEstateType)
 		{
@@ -49,7 +66,7 @@ public class Search {
 	}
 	
 	/* CAUTION: Only supports House and Apartment.*/
-	public static de.immoPiraten.realEstate.PurchaseType mapPurchaseType(RealEstateType realEstateType)
+	public static de.immoPiraten.realEstate.PurchaseType mapPurchaseType(de.immoPiraten.ImmoScout24.RealEstateType realEstateType)
 	{
 		switch (realEstateType)
 		{
@@ -65,7 +82,7 @@ public class Search {
 	}
 	
 	/* 92756718 */
-	public static String getExpose(int id) throws APIException
+	private static String getExposeResponse(int id) throws APIException
 	{		
 		HttpGet request = new HttpGet(Request.BASE_URL + Search.CONTEXT + Request.VERSION + "expose/" + id);
 		request.addHeader("accept", "application/json");
@@ -73,8 +90,8 @@ public class Search {
 
 		return Request.getResponse(signedRequest, "getExpose").toString();
 	}
-		
-	public static String Execute(RealEstateType realEstateType, String entityType, String input, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
+	
+	private static String ExecuteSearch(de.immoPiraten.ImmoScout24.RealEstateType realEstateType, String entityType, String input, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
 	{				
 		GeoAutoCompletionService geoAutoCompletion = new GeoAutoCompletionService();
 	    
@@ -84,7 +101,7 @@ public class Search {
 		return Search.getSearchResult(realEstateType, geoCode, radius, freeOfCourtageOnly, livingSpace, price);
 	}
 	
-	private static String getSearchResult(RealEstateType realEstateType, GeoCode geoCode, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
+	private static String getSearchResult(de.immoPiraten.ImmoScout24.RealEstateType realEstateType, GeoCode geoCode, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
 	{		
 		// example uri:
 		// https://rest.immobilienscout24.de/restapi/api/search/v1.0/search/region?realestatetype=apartmentrent&geocodes=1276003001046
@@ -126,5 +143,248 @@ public class Search {
 			
 		// executes the request and returns the response
 		return Request.getResponse(signedRequest, "searchRegion").toString();
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static House getHouse(Object json) throws ParseException {
+		House house = new House();
+		LinkedHashMap<String, Object> properties = (LinkedHashMap<String, Object>) json;
+
+		// sets the publication date
+		String rawDate = properties.get("@publishDate").toString();
+
+		DateTimeZone zone = DateTimeZone.UTC;
+		DateTime dt = new DateTime(rawDate, zone);
+		house.setPublicationDate(dt.toDate());
+
+		// sets the id
+		String exposeId = properties.get("@id").toString();
+		house.setId(Integer.parseInt(exposeId));
+
+		// sets the origin portal
+		house.setPortal(de.immoPiraten.realEstate.Portal.ImmobilienScout24);
+
+		// sets the link to the origin expose
+		house.setLink(Search.IMMOSCOUT_EXPOSE_BASE_URL.concat(exposeId));
+
+		// sets the house properties
+		LinkedHashMap<String, Object> realEstate = (LinkedHashMap<String, Object>) properties
+				.get("resultlist.realEstate");
+
+		if (realEstate == null)
+			realEstate = (LinkedHashMap<String, Object>) properties.get("realEstate");
+
+		// sets the purchase type
+		String rawPurchaseType = realEstate.get("@xsi.type").toString();
+		String purchaseType = rawPurchaseType.substring(rawPurchaseType.indexOf(':') + 1);
+		house.setPurchaseType(Search.mapPurchaseType(de.immoPiraten.ImmoScout24.RealEstateType.valueOf(purchaseType)));
+
+		// a real estate has always a title
+		house.setTitle(realEstate.get("title").toString());
+				
+		// sets the price
+		LinkedHashMap<String, Object> price = (LinkedHashMap<String, Object>) realEstate.get("price");
+		if (price != null)
+			house.setPrice(Search.parseDouble(price, "value", 0));
+
+		// sets a value indicating whether a energy certificate is available
+		house.setEnergyCertificate(Boolean.parseBoolean(
+				Search.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
+
+		// sets a value indicating whether a commission has to be paid by the
+		// customer
+		LinkedHashMap<String, Object> courtage = (LinkedHashMap<String, Object>) realEstate.get("courtage");
+
+		if (courtage != null)
+			house.setCommission(
+					Boolean.parseBoolean(Search.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
+
+		// sets a value indicating whether an energy performance certificate is
+		// available
+		house.setEnergyCertificate(Boolean.parseBoolean(
+				Search.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
+
+		// sets the availability date
+		Object freeFrom = realEstate.get("freeFrom");
+
+		if (freeFrom != null) {
+			// house.setAvailabilityDate(this.parseDate(X, ));
+			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+			try {
+				house.setAvailabilityDate(df.parse(freeFrom.toString()));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw e;
+			}
+		}		
+
+		house.setDescription(Parser.parseString(realEstate.get("descriptionNote")));
+		house.setLivingArea(Search.parseDouble(realEstate, "livingSpace", 0));
+		house.setLandArea(Search.parseDouble(realEstate, "plotArea", 0));
+		house.setRoom(Search.parseDouble(realEstate, "numberOfRooms", 0));
+		house.setSite(Search.getSite(realEstate));
+		house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
+		house.setImage(Search.getImageUrl(realEstate));
+				
+		return house;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static String getImageUrl(LinkedHashMap<String, Object> realEstate) {
+		LinkedHashMap<String, Object> titlePicture = (LinkedHashMap<String, Object>) realEstate.get("titlePicture");
+
+		if (titlePicture != null) {
+			Object href = titlePicture.get("@xlink.href");
+			if (href != null) {
+				return titlePicture.get("@xlink.href").toString();
+			} else {
+				ArrayList<LinkedHashMap<String, Object>> pictureUrlsContainer = (ArrayList<LinkedHashMap<String, Object>>) titlePicture
+						.get("urls");
+				ArrayList<LinkedHashMap<String, Object>> pictureUrls = (ArrayList<LinkedHashMap<String, Object>>) pictureUrlsContainer
+						.get(0).get("url");
+				return pictureUrls.get(0).get("@href").toString();
+			}
+		}
+
+		return null;
+	}
+
+	private static Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue) {
+		Object property = map.get(key);
+		if (property != null) {
+			if (property instanceof Integer)
+				return ((Integer) property).intValue();
+			return property;
+		}
+
+		return defaultValue;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static Site getSite(LinkedHashMap<String, Object> realEstate) {
+
+		Object address = realEstate.get("address");
+
+		if (address != null) {
+			LinkedHashMap<String, Object> addressMap = (LinkedHashMap<String, Object>) address;
+
+			Site site = new Site("Deutschland");
+			site.setStreet(Parser.parseString(addressMap.get("street")));
+			site.setHouseNumber(Parser.parseString(addressMap.get("houseNumber")));
+			site.setPostCode(Parser.parseString(addressMap.get("postcode")));
+			site.setCity(Parser.parseString(addressMap.get("city")));
+			return site;
+		}
+		return null;
+	}
+
+	private static double parseDouble(LinkedHashMap<String, Object> map, String key, double defaultValue) {
+		Object value = Search.getJsonValueOrDefault(map, key, defaultValue);
+
+		Object property = map.get(key);
+		if (property != null) {
+			if (value instanceof Integer) {
+				int intValue = ((Integer) value).intValue();
+				return (double) intValue;
+			} else {
+				return (double) value;
+			}
+		}
+
+		return defaultValue;
+	}	
+	
+	// returns an immoScout24 range, if a from or a till value is specified,
+	// otherwise null
+	private static String getRange(Object from, Object till) {
+		StringBuilder rangeBuilder = new StringBuilder();
+
+		if (from != null)
+			rangeBuilder.append(String.valueOf(from));
+
+		if (till != null)
+			rangeBuilder.append("-").append(String.valueOf(till));
+
+		String range = null;
+		if (rangeBuilder.length() > 0)
+			range = rangeBuilder.toString();
+
+		return range;
+	}
+	
+	@SuppressWarnings("unchecked")	
+	public static House getExpose(int id) {
+		String response = Search.getExposeResponse(id);
+		
+		try {
+			LinkedHashMap<String, Object> result = new ObjectMapper().readValue(response, LinkedHashMap.class);
+
+			LinkedHashMap<String, Object> expose = (LinkedHashMap<String, Object>) result.get("expose.expose");
+			return Search.getHouse(expose);
+
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}		
+	}
+	
+	@SuppressWarnings("unchecked")	
+	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
+			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
+			Integer priceTill){
+		
+		List<House> results = new ArrayList<House>();		
+		
+		// maps the real estate type on the immoScout24 real estate type
+		de.immoPiraten.ImmoScout24.RealEstateType immoScoutRealEstateType = Search.mapRealEstateType(realEstateType, purchaseType);
+
+		// converts the living area for the immoScout24 requirements, they call
+		// it living space
+		String livingSpace = Search.getRange(livingAreaFrom, livingAreaTill);
+
+		// converts the price for the immoScout24 requirements
+		String price = Search.getRange(priceFrom, priceTill);
+
+		String response = Search.ExecuteSearch(immoScoutRealEstateType, entityType, input, radius, freeOfCommission,
+				livingSpace, price);
+
+		LinkedHashMap<String, Object> result = Request.getLinkedHashMap(response);
+		LinkedHashMap<String, Object> resultList = (LinkedHashMap<String, Object>) result.get("resultlist.resultlist");
+
+		ArrayList<Object> resultListEntries = (ArrayList<Object>) resultList.get("resultlistEntries");
+
+		LinkedHashMap<String, Object> entry = (LinkedHashMap<String, Object>) resultListEntries.get(0);
+		int numberOfHits = Integer.parseInt(entry.get("@numberOfHits").toString());
+
+		if (numberOfHits > 1) {
+			ArrayList<Object> exposes = (ArrayList<Object>) entry.get("resultlistEntry");
+
+			// the result list is restricted to 20 entries
+			int max = numberOfHits < 50 ? numberOfHits : 50;
+			for (int index = 0; index < max; index++)
+				try {
+					results.add(Search.getHouse(exposes.get(index)));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		} else {
+			if (numberOfHits == 1) {
+				try {
+					results.add(Search.getHouse(entry.get("resultlistEntry")));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return results;
 	}
 }
