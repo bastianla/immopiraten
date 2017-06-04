@@ -147,7 +147,7 @@ public class Search {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static House getHouse(Object json) throws ParseException {
+	private static House getHouse(Object json, int imageWidth, int imageHeight) throws ParseException {
 		House house = new House();
 		LinkedHashMap<String, Object> properties = (LinkedHashMap<String, Object>) json;
 
@@ -182,7 +182,7 @@ public class Search {
 
 		// a real estate has always a title
 		house.setTitle(realEstate.get("title").toString());
-				
+
 		// sets the price
 		LinkedHashMap<String, Object> price = (LinkedHashMap<String, Object>) realEstate.get("price");
 		if (price != null)
@@ -226,29 +226,40 @@ public class Search {
 		house.setRoom(Search.parseDouble(realEstate, "numberOfRooms", 0));
 		house.setSite(Search.getSite(realEstate));
 		house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
-		house.setImage(Search.getImageUrl(realEstate));
+		house.setImage(Search.getImageUrl(realEstate, imageWidth, imageHeight));
 				
 		return house;
 	}
 
 	@SuppressWarnings("unchecked")
-	private static String getImageUrl(LinkedHashMap<String, Object> realEstate) {
+	private static String getImageUrl(LinkedHashMap<String, Object> realEstate, int width, int height) {
 		LinkedHashMap<String, Object> titlePicture = (LinkedHashMap<String, Object>) realEstate.get("titlePicture");
 
+		String url = null;
+		
 		if (titlePicture != null) {
 			Object href = titlePicture.get("@xlink.href");
 			if (href != null) {
-				return titlePicture.get("@xlink.href").toString();
+				url = titlePicture.get("@xlink.href").toString();
 			} else {
 				ArrayList<LinkedHashMap<String, Object>> pictureUrlsContainer = (ArrayList<LinkedHashMap<String, Object>>) titlePicture
 						.get("urls");
 				ArrayList<LinkedHashMap<String, Object>> pictureUrls = (ArrayList<LinkedHashMap<String, Object>>) pictureUrlsContainer
 						.get(0).get("url");
-				return pictureUrls.get(0).get("@href").toString();
+				url = pictureUrls.get(0).get("@href").toString();
 			}
 		}
+		
+		if (url != null)
+		{
+			Integer resWidth = Parser.parseInteger(width);
+			Integer resHeight = Parser.parseInteger(height);
+			
+			String targetResolution = resWidth.toString().concat("x").concat(resHeight.toString());
+			url = url.replaceAll("(\\d+)x(\\d+)", targetResolution);
+		}
 
-		return null;
+		return url;
 	}
 
 	private static Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue) {
@@ -322,7 +333,7 @@ public class Search {
 			LinkedHashMap<String, Object> result = new ObjectMapper().readValue(response, LinkedHashMap.class);
 
 			LinkedHashMap<String, Object> expose = (LinkedHashMap<String, Object>) result.get("expose.expose");
-			return Search.getHouse(expose);
+			return Search.getHouse(expose, 740, 560);
 
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -365,6 +376,9 @@ public class Search {
 		LinkedHashMap<String, Object> entry = (LinkedHashMap<String, Object>) resultListEntries.get(0);
 		int numberOfHits = Integer.parseInt(entry.get("@numberOfHits").toString());
 
+		int imageWidth = 281;
+		int imageHeight = 211;
+		
 		if (numberOfHits > 1) {
 			ArrayList<Object> exposes = (ArrayList<Object>) entry.get("resultlistEntry");
 
@@ -372,7 +386,7 @@ public class Search {
 			int max = numberOfHits < 50 ? numberOfHits : 50;
 			for (int index = 0; index < max; index++)
 				try {
-					results.add(Search.getHouse(exposes.get(index)));
+					results.add(Search.getHouse(exposes.get(index), imageWidth, imageHeight));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -380,7 +394,7 @@ public class Search {
 		} else {
 			if (numberOfHits == 1) {
 				try {
-					results.add(Search.getHouse(entry.get("resultlistEntry")));
+					results.add(Search.getHouse(entry.get("resultlistEntry"), imageWidth, imageHeight));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
