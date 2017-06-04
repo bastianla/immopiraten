@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.immoPiraten.ImmoScout24.GeoAutoCompletionService;
 import de.immoPiraten.query.ResultsSorting;
 import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.Portal;
@@ -41,7 +40,7 @@ public class SearchController {
 			@RequestParam(value = "pricefrom", required = false) Integer priceFrom,
 			@RequestParam(value = "pricetill", required = false) Integer priceTill,
 			@RequestParam(value = "sorting", required = false) Integer sorting) {
-	
+			
 		if (portal == null)
 			portal = Portal.All.getValue();
 		
@@ -49,7 +48,6 @@ public class SearchController {
 			sorting = ResultsSorting.PublicationDateDESC.getValue();
 		
 		return this.searchService.Search(Portal.values()[portal], RealEstateType.values()[realEstateType], PurchaseType.values()[purchaseType],
-				GeoAutoCompletionService.ENTITY_TYPE_CITY, input, radius, freeOfCommission, livingAreaFrom,
-				livingAreaTill, priceFrom, priceTill, ResultsSorting.values()[sorting]);
+				input, radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill, ResultsSorting.values()[sorting]);
 	}
 }

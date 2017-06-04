@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
@@ -31,15 +32,18 @@ public class SearchService {
 		return houseExpose;
 	}
 	
-	public List<House> Search(Portal portal, RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
+	public List<House> Search(Portal portal, RealEstateType realEstateType, PurchaseType purchaseType, String input,
 			byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
 			Integer priceTill, ResultsSorting sorting) {
+		
+		boolean isPostCode = Pattern.matches("\\d{5}", input);
+		SearchType searchType = isPostCode ? SearchType.PostCode : SearchType.City;	
 		
 		List<House> results = new ArrayList<House>();
 
 		if (portal == Portal.ImmobilienScout24 || portal == Portal.All){		
 			try {
-				results.addAll(de.immoPiraten.ImmoScout24.Search.Execute(realEstateType, purchaseType, entityType, input,
+				results.addAll(de.immoPiraten.ImmoScout24.Search.Execute(realEstateType, purchaseType, searchType, input,
 						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -48,7 +52,7 @@ public class SearchService {
 		
 		if (portal == Portal.Immonet || portal == Portal.All){
 			try {
-				results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, entityType, input,
+				results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, searchType, input,
 						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
 			} catch (Exception e) {
 				e.printStackTrace();

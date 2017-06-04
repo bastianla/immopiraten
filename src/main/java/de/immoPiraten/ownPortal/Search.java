@@ -21,6 +21,7 @@ import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.Portal;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
+import de.immoPiraten.search.SearchType;
 import de.immoPiraten.site.Site;
 import de.immoPiraten.utility.Parser;
 
@@ -60,11 +61,11 @@ public class Search {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
+	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
 			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTo, Integer priceFrom,
 			Integer priceTo){
 		
-		String url = Search.buildURL(realEstateType, purchaseType, entityType, input, radius, freeOfCommission, livingAreaFrom, livingAreaTo, priceFrom, priceTo);
+		String url = Search.buildURL(realEstateType, purchaseType, searchType, input, radius, freeOfCommission, livingAreaFrom, livingAreaTo, priceFrom, priceTo);
 		
 		String jsonResult;
 		try {
@@ -96,7 +97,7 @@ public class Search {
 		return houseList;
 	}
 	
-	private static String buildURL(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
+	private static String buildURL(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
 			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTo, Integer priceFrom,
 			Integer priceTo)
 	{
@@ -114,11 +115,11 @@ public class Search {
 		if (purchaseType != null)
 			uriBuilder.addParameter("purchaseType", Integer.toString(purchaseType.ordinal()));		
 		
-		if (entityType != null)
+		if (searchType != null)
 		{
-			if (entityType == "city")
+			if (searchType == SearchType.City)
 				uriBuilder.addParameter("city", input);
-			else if (entityType == "postCode")
+			else if (searchType == SearchType.PostCode)
 				uriBuilder.addParameter("postCode", input);
 		}
 

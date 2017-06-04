@@ -21,6 +21,7 @@ import de.immoPiraten.OAuth.OAuth;
 import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
+import de.immoPiraten.search.SearchType;
 import de.immoPiraten.site.Site;
 import de.immoPiraten.utility.Parser;
 
@@ -335,9 +336,11 @@ public class Search {
 	}
 	
 	@SuppressWarnings("unchecked")	
-	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, String entityType, String input,
+	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
 			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
 			Integer priceTill){
+		
+		String entityType = Search.mapGeoType(searchType);	
 		
 		List<House> results = new ArrayList<House>();		
 		
@@ -386,5 +389,20 @@ public class Search {
 		}
 		
 		return results;
+	}
+	
+	private static String mapGeoType(SearchType searchType)
+	{
+		String geoType = null;
+		
+		switch(searchType){
+		case PostCode:
+			geoType= GeoAutoCompletionService.ENTITY_TYPE_POSTCODE;
+			break;
+		default:
+			geoType= GeoAutoCompletionService.ENTITY_TYPE_CITY;
+		}
+		
+		return geoType;
 	}
 }
