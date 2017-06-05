@@ -92,17 +92,22 @@ public class Search {
 		return Request.getResponse(signedRequest, "getExpose").toString();
 	}
 	
-	private static String ExecuteSearch(de.immoPiraten.ImmoScout24.RealEstateType realEstateType, String entityType, String input, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
+	private static String executeSearch(de.immoPiraten.ImmoScout24.RealEstateType realEstateType, String entityType, String input,
+			byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price, String ground, String numberOfRooms,
+			String constructionyear, Boolean balcony, Boolean garden)
 	{				
 		GeoAutoCompletionService geoAutoCompletion = new GeoAutoCompletionService();
 	    
 		String entityId = geoAutoCompletion.getEntityId(entityType, input);
 		GeoCode geoCode = geoAutoCompletion.getGeoCode(entityId);
 		
-		return Search.getSearchResult(realEstateType, geoCode, radius, freeOfCourtageOnly, livingSpace, price);
+		return Search.getSearchResult(realEstateType, geoCode, radius, freeOfCourtageOnly, livingSpace, price, ground, numberOfRooms,
+				constructionyear, balcony, garden);
 	}
 	
-	private static String getSearchResult(de.immoPiraten.ImmoScout24.RealEstateType realEstateType, GeoCode geoCode, byte radius, Boolean freeOfCourtageOnly, String livingSpace, String price)
+	private static String getSearchResult(de.immoPiraten.ImmoScout24.RealEstateType realEstateType, GeoCode geoCode, byte radius, 
+			Boolean freeOfCourtageOnly, String livingSpace, String price, String ground, String numberOfRooms, String constructionyear,
+			Boolean balcony, Boolean garden)
 	{		
 		// example uri:
 		// https://rest.immobilienscout24.de/restapi/api/search/v1.0/search/region?realestatetype=apartmentrent&geocodes=1276003001046
@@ -136,6 +141,18 @@ public class Search {
 			uriBuilder.addParameter("price", price);
 		if (freeOfCourtageOnly != null)
 			uriBuilder.addParameter("freeofcourtageonly", freeOfCourtageOnly.toString());
+		if (ground != null)
+			uriBuilder.addParameter("ground", ground);
+		if (numberOfRooms != null)
+			uriBuilder.addParameter("numberOfRooms", numberOfRooms);
+		if (constructionyear != null)
+			uriBuilder.addParameter("constructionyear", constructionyear);		
+		if (balcony != null)
+			uriBuilder.addParameter("balcony", balcony.toString());
+		if (garden != null)
+			uriBuilder.addParameter("garden", garden.toString());
+		
+		// TODO Implement terrace and garage
 		
 		// gets the signed request
 		HttpGet request = new HttpGet(uriBuilder.toString());
@@ -184,9 +201,11 @@ public class Search {
 		house.setTitle(realEstate.get("title").toString());
 				
 		// sets the price
-		LinkedHashMap<String, Object> price = (LinkedHashMap<String, Object>) realEstate.get("price");
+		LinkedHashMap<String, Object> priceMap = (LinkedHashMap<String, Object>) realEstate.get("price");
+		// house.setPrice(Search.parseDouble(price, "value", 0));		
+		Integer price = Parser.parseInteger(Search.getJsonValue(priceMap, "value"));
 		if (price != null)
-			house.setPrice(Search.parseDouble(price, "value", 0));
+			house.setPrice(price);
 
 		// sets a value indicating whether a energy certificate is available
 		house.setEnergyCertificate(Boolean.parseBoolean(
@@ -218,14 +237,34 @@ public class Search {
 				e.printStackTrace();
 				throw e;
 			}
-		}		
+		}
 
-		house.setDescription(Parser.parseString(realEstate.get("descriptionNote")));
-		house.setLivingArea(Search.parseDouble(realEstate, "livingSpace", 0));
-		house.setLandArea(Search.parseDouble(realEstate, "plotArea", 0));
-		house.setRoom(Search.parseDouble(realEstate, "numberOfRooms", 0));
+		String description = Parser.parseString(realEstate.get("descriptionNote"));
+		if (description != null)
+			house.setDescription(description);
+		
+		// house.setLivingArea(Search.parseDouble(realEstate, "livingSpace", 0));
+		Short livingArea = Parser.parseShort(Search.getJsonValue(realEstate, "livingSpace"));
+		if (livingArea != null)
+			house.setLivingArea(livingArea);
+		
+		// house.setLandArea(Search.parseDouble(realEstate, "plotArea", 0));
+		Short landArea = Parser.parseShort(Search.getJsonValue(realEstate, "plotArea"));
+		if (landArea != null)
+			house.setLandArea(landArea);
+		
+		// house.setRoom(Search.parseDouble(realEstate, "numberOfRooms", 0));
+		Float room = Parser.parseFloat(Search.getJsonValue(realEstate, "numberOfRooms"));
+		if (room != null)
+			house.setRoom(room);
+		
 		house.setSite(Search.getSite(realEstate));
-		house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
+		
+		// house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
+		Float additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "ServiceCharge"));
+		if (additionalCosts != null)
+			house.setAdditionalCosts(additionalCosts);
+		
 		house.setImage(Search.getImageUrl(realEstate));
 				
 		return house;
@@ -251,6 +290,12 @@ public class Search {
 		return null;
 	}
 
+	private static Object getJsonValue(LinkedHashMap<String, Object> map, String key) {
+		Object property = map.get(key);
+		 property = map.get(key);
+		return property;
+	}	
+	
 	private static Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue) {
 		Object property = map.get(key);
 		if (property != null) {
@@ -294,7 +339,7 @@ public class Search {
 		}
 
 		return defaultValue;
-	}	
+	}
 	
 	// returns an immoScout24 range, if a from or a till value is specified,
 	// otherwise null
@@ -336,9 +381,10 @@ public class Search {
 	}
 	
 	@SuppressWarnings("unchecked")	
-	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
-			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
-			Integer priceTill){
+	public static List<House> execute(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
+			Byte radius, Boolean freeOfCommission, Short livingAreaFrom, Short livingAreaTill, Integer priceFrom, Integer priceTill,
+			Short constructionYearFrom, Short constructionYearTill, Float roomsFrom, Float roomsTill, Short landAreaFrom, Short landAreaTill,
+			Boolean balcony, Boolean terrace, Boolean garden, Boolean garage){
 		
 		String entityType = Search.mapGeoType(searchType);	
 		
@@ -354,8 +400,19 @@ public class Search {
 		// converts the price for the immoScout24 requirements
 		String price = Search.getRange(priceFrom, priceTill);
 
-		String response = Search.ExecuteSearch(immoScoutRealEstateType, entityType, input, radius, freeOfCommission,
-				livingSpace, price);
+		// converts the landArea for the immoScout24 requirements
+		String ground = Search.getRange(landAreaFrom, landAreaTill);
+		
+		// converts the rooms for the immoScout24 requirements
+		String numberOfRooms = Search.getRange(roomsFrom, roomsTill);		
+		
+		// converts the construction for the immoScout24 requirements
+		String constructionyear = Search.getRange(constructionYearFrom, constructionYearTill);		
+		
+		// TODO Implement terrace and garage	
+		
+		String response = Search.executeSearch(immoScoutRealEstateType, entityType, input, radius, freeOfCommission,
+				livingSpace, price, ground, numberOfRooms, constructionyear, balcony, garden);
 
 		LinkedHashMap<String, Object> result = Request.getLinkedHashMap(response);
 		LinkedHashMap<String, Object> resultList = (LinkedHashMap<String, Object>) result.get("resultlist.resultlist");

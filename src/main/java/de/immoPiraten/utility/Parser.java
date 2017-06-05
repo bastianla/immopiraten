@@ -23,6 +23,10 @@ public class Parser {
 		return Parser.parseValue(value, valueToConvert -> Integer.parseInt(valueToConvert.toString()));
 	}		
 	
+	public static Short parseShort(Object value){
+		return Parser.parseValue(value, valueToConvert -> Short.parseShort(valueToConvert.toString()));
+	}	
+	
 	public static Boolean parseBoolean(Object value){
 		return Parser.parseValue(value, valueToConvert -> Boolean.parseBoolean(valueToConvert.toString()));
 	}

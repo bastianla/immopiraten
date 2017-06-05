@@ -61,11 +61,13 @@ public class Search {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<House> Execute(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
-			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTo, Integer priceFrom,
-			Integer priceTo){
+	public static List<House> execute(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
+			Byte radius, Boolean freeOfCommission, Short livingAreaFrom, Short livingAreaTo, Integer priceFrom, Integer priceTo,
+			Short constructionYearFrom, Short constructionYearTo, Float roomsFrom, Float roomsTo, Short landAreaFrom, Short landAreaTo,
+			Boolean balcony, Boolean terrace, Boolean garden, Boolean garage){
 		
-		String url = Search.buildURL(realEstateType, purchaseType, searchType, input, radius, freeOfCommission, livingAreaFrom, livingAreaTo, priceFrom, priceTo);
+		String url = Search.buildURL(realEstateType, purchaseType, searchType, input, radius, freeOfCommission, livingAreaFrom, livingAreaTo, priceFrom, priceTo,
+									 constructionYearFrom, constructionYearTo, roomsFrom, roomsTo, landAreaFrom, landAreaTo, balcony, terrace, garden, garage);
 		
 		String jsonResult;
 		try {
@@ -98,8 +100,9 @@ public class Search {
 	}
 	
 	private static String buildURL(RealEstateType realEstateType, PurchaseType purchaseType, SearchType searchType, String input,
-			Byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTo, Integer priceFrom,
-			Integer priceTo)
+			Byte radius, Boolean freeOfCommission, Short livingAreaFrom, Short livingAreaTo, Integer priceFrom, Integer priceTo,
+			Short constructionYearFrom, Short constructionYearTo, Float roomsFrom, Float roomsTo, Short landAreaFrom, Short landAreaTo,
+			Boolean balcony, Boolean terrace, Boolean garden, Boolean garage)
 	{
 		URIBuilder uriBuilder = null;
 		try {
@@ -127,7 +130,7 @@ public class Search {
 			uriBuilder.addParameter("commission", freeOfCommission.toString());
 		
 		if (livingAreaFrom != null)
-			uriBuilder.addParameter("landAreaFrom", livingAreaFrom.toString());
+			uriBuilder.addParameter("livingAreaFrom", livingAreaFrom.toString());
 
 		if (livingAreaTo != null)
 			uriBuilder.addParameter("livingAreaTo", livingAreaTo.toString());
@@ -136,7 +139,37 @@ public class Search {
 			uriBuilder.addParameter("priceFrom", priceFrom.toString());		
 		
 		if (priceTo != null)
-			uriBuilder.addParameter("priceTo", priceTo.toString());		
+			uriBuilder.addParameter("priceTo", priceTo.toString());
+		
+		if (constructionYearFrom != null)
+			uriBuilder.addParameter("constructionYearFrom", constructionYearFrom.toString());
+
+		if (constructionYearTo != null)
+			uriBuilder.addParameter("constructionYearTo", constructionYearTo.toString());
+		
+		if (roomsFrom != null)
+			uriBuilder.addParameter("roomsFrom", roomsFrom.toString());
+
+		if (roomsTo != null)
+			uriBuilder.addParameter("roomsTo", roomsTo.toString());		
+
+		if (landAreaFrom != null)
+			uriBuilder.addParameter("landAreaFrom", landAreaFrom.toString());
+
+		if (landAreaTo != null)
+			uriBuilder.addParameter("landAreaTo", landAreaTo.toString());			
+		
+		if (balcony != null)
+			uriBuilder.addParameter("balcony", balcony.toString());		
+
+		if (terrace != null)
+			uriBuilder.addParameter("terrace", terrace.toString());		
+		
+		if (garden != null)
+			uriBuilder.addParameter("garden", garden.toString());		
+		
+		if (garage != null)
+			uriBuilder.addParameter("garage", garage.toString());			
 		
 		return uriBuilder.toString();
 	}
@@ -180,7 +213,7 @@ public class Search {
 		if (additionalCosts != null)
 			newHouse.setAdditionalCosts(additionalCosts);
 		
-		Integer construction = Parser.parseInteger(jsonHouseElement.get("constructionYear"));
+		Short construction = Parser.parseShort(jsonHouseElement.get("constructionYear"));
 		if (construction != null)
 			newHouse.setConstruction(construction);
 		
@@ -188,7 +221,7 @@ public class Search {
 		if (energyCertificate != null)
 			newHouse.setEnergyCertificate(energyCertificate);
 		
-		Double energyConsumption = Parser.parseDouble(jsonHouseElement.get("energyConsumption"));
+		Float energyConsumption = Parser.parseFloat(jsonHouseElement.get("energyConsumption"));
 		if (energyConsumption != null)
 			newHouse.setEnergyConsumption(energyConsumption);
 		
@@ -200,7 +233,7 @@ public class Search {
 		if (garden != null)
 			newHouse.setGarden(garden);		
 
-		Double landArea = Parser.parseDouble(jsonHouseElement.get("landArea"));
+		Short landArea = Parser.parseShort(jsonHouseElement.get("landArea"));
 		if (landArea != null)
 			newHouse.setEnergyConsumption(landArea);	
 		
@@ -208,22 +241,26 @@ public class Search {
 		if (link != null)
 			newHouse.setLink(link);		
 		
-		Double livingArea = Parser.parseDouble(jsonHouseElement.get("livingArea"));
+		Short livingArea = Parser.parseShort(jsonHouseElement.get("livingArea"));
 		if (livingArea != null)
 			newHouse.setLivingArea(livingArea);
 		
-		Double price = Parser.parseDouble(jsonHouseElement.get("price"));
+		Integer price = Parser.parseInteger(jsonHouseElement.get("price"));
 		if (price != null)
 			newHouse.setPrice(price);		
 		
-		Double room = Parser.parseDouble(jsonHouseElement.get("room"));
+		Float room = Parser.parseFloat(jsonHouseElement.get("room"));
 		if (room != null)
-			newHouse.setRoom(room);			
+			newHouse.setRoom(room);
 		
 		Boolean terrace = Parser.parseBoolean(jsonHouseElement.get("terrace"));
 		if (terrace != null)
 			newHouse.setTerrace(terrace);
-				
+
+		Boolean balcony = Parser.parseBoolean(jsonHouseElement.get("balcony"));
+		if (terrace != null)
+			newHouse.setBalcony(balcony);		
+		
 		Date publicationDate = Parser.parseDate(jsonHouseElement.get("publicationDate"));		
 		if (publicationDate != null)
 			newHouse.setPublicationDate(publicationDate);

@@ -17,34 +17,34 @@ public class Query {
 	private int id;
 	private String name;
 	private RealEstateType realEstateType;
-	private boolean notification;
+	private Boolean notification;
 	private Date lastNotification;
 	private PurchaseType purchaseType;
-	private double priceFrom;
-	private double priceTo;
-	private short roomsFrom;
-	private short roomsTo;
-	private short livingAreaFrom;
-	private short livingAreaTo;
-	private short landAreaFrom;
-	private short landAreaTo;
-	private short constructionYearFrom;
-	private short constructionYearTo;
-	private short radius;
-	private boolean balcony;
-	private boolean terrace;
-	private boolean garden;
-	private boolean garage;
-	private boolean commission;
+	private Integer priceFrom;
+	private Integer priceTo;
+	private Float roomsFrom;
+	private Float roomsTo;
+	private Short livingAreaFrom;
+	private Short livingAreaTo;
+	private Short landAreaFrom;
+	private Short landAreaTo;
+	private Short constructionYearFrom;
+	private Short constructionYearTo;
+	private Byte radius;
+	private Boolean balcony;
+	private Boolean terrace;
+	private Boolean garden;
+	private Boolean garage;
+	private Boolean commission;
 	
 	public Query(){
 	}
 	
-	public Query(String name, RealEstateType realEstateType, boolean notification, Date lastNotification,
-			PurchaseType purchaseType, double priceFrom, double priceTo, short roomsFrom, short roomsTo,
-			short livingAreaFrom, short livingAreaTo, short landAreaFrom, short landAreaTo, short constructionYearFrom,
-			short constructionYearTo, short radius, boolean balcony, boolean terrace, boolean garden, boolean garage,
-			boolean commission) {
+	public Query(String name, RealEstateType realEstateType, Boolean notification, Date lastNotification,
+			PurchaseType purchaseType, Integer priceFrom, Integer priceTo, Float roomsFrom, Float roomsTo,
+			Short livingAreaFrom, Short livingAreaTo, Short landAreaFrom, Short landAreaTo, Short constructionYearFrom,
+			Short constructionYearTo, Byte radius, Boolean balcony, Boolean terrace, Boolean garden, Boolean garage,
+			Boolean commission) {
 		super();
 		this.name = name;
 		this.realEstateType = realEstateType;
@@ -93,11 +93,11 @@ public class Query {
 		this.realEstateType = realEstateType;
 	}
 
-	public boolean isNotification() {
+	public Boolean isNotification() {
 		return notification;
 	}
 
-	public void setNotification(boolean notification) {
+	public void setNotification(Boolean notification) {
 		this.notification = notification;
 	}
 
@@ -117,131 +117,131 @@ public class Query {
 		this.purchaseType = purchaseType;
 	}
 
-	public double getPriceFrom() {
+	public Integer getPriceFrom() {
 		return priceFrom;
 	}
 
-	public void setPriceFrom(double priceFrom) {
+	public void setPriceFrom(Integer priceFrom) {
 		this.priceFrom = priceFrom;
 	}
 
-	public double getPriceTo() {
+	public Integer getPriceTo() {
 		return priceTo;
 	}
 
-	public void setPriceTo(double priceTo) {
+	public void setPriceTo(Integer priceTo) {
 		this.priceTo = priceTo;
 	}
 
-	public short getRoomsFrom() {
+	public Float getRoomsFrom() {
 		return roomsFrom;
 	}
 
-	public void setRoomsFrom(short roomsFrom) {
+	public void setRoomsFrom(Float roomsFrom) {
 		this.roomsFrom = roomsFrom;
 	}
 
-	public short getRoomsTo() {
+	public Float getRoomsTo() {
 		return roomsTo;
 	}
 
-	public void setRoomsTo(short roomsTo) {
+	public void setRoomsTo(Float roomsTo) {
 		this.roomsTo = roomsTo;
 	}
 
-	public short getLivingAreaFrom() {
+	public Short getLivingAreaFrom() {
 		return livingAreaFrom;
 	}
 
-	public void setLivingAreaFrom(short livingAreaFrom) {
+	public void setLivingAreaFrom(Short livingAreaFrom) {
 		this.livingAreaFrom = livingAreaFrom;
 	}
 
-	public short getLivingAreaTo() {
+	public Short getLivingAreaTo() {
 		return livingAreaTo;
 	}
 
-	public void setLivingAreaTo(short livingAreaTo) {
+	public void setLivingAreaTo(Short livingAreaTo) {
 		this.livingAreaTo = livingAreaTo;
 	}
 
-	public short getLandAreaFrom() {
+	public Short getLandAreaFrom() {
 		return landAreaFrom;
 	}
 
-	public void setLandAreaFrom(short landAreaFrom) {
+	public void setLandAreaFrom(Short landAreaFrom) {
 		this.landAreaFrom = landAreaFrom;
 	}
 
-	public short getLandAreaTo() {
+	public Short getLandAreaTo() {
 		return landAreaTo;
 	}
 
-	public void setLandAreaTo(short landAreaTo) {
+	public void setLandAreaTo(Short landAreaTo) {
 		this.landAreaTo = landAreaTo;
 	}
 
-	public short getConstructionYearFrom() {
+	public Short getConstructionYearFrom() {
 		return constructionYearFrom;
 	}
 
-	public void setConstructionYearFrom(short constructionYearFrom) {
+	public void setConstructionYearFrom(Short constructionYearFrom) {
 		this.constructionYearFrom = constructionYearFrom;
 	}
 
-	public short getConstructionYearTo() {
+	public Short getConstructionYearTo() {
 		return constructionYearTo;
 	}
 
-	public void setConstructionYearTo(short constructionYearTo) {
+	public void setConstructionYearTo(Short constructionYearTo) {
 		this.constructionYearTo = constructionYearTo;
 	}
 
-	public short getRadius() {
+	public Byte getRadius() {
 		return radius;
 	}
 
-	public void setRadius(short radius) {
+	public void setRadius(Byte radius) {
 		this.radius = radius;
 	}
 
-	public boolean isBalcony() {
+	public Boolean isBalcony() {
 		return balcony;
 	}
 
-	public void setBalcony(boolean balcony) {
+	public void setBalcony(Boolean balcony) {
 		this.balcony = balcony;
 	}
 
-	public boolean isTerrace() {
+	public Boolean isTerrace() {
 		return terrace;
 	}
 
-	public void setTerrace(boolean terrace) {
+	public void setTerrace(Boolean terrace) {
 		this.terrace = terrace;
 	}
 
-	public boolean isGarden() {
+	public Boolean isGarden() {
 		return garden;
 	}
 
-	public void setGarden(boolean garden) {
+	public void setGarden(Boolean garden) {
 		this.garden = garden;
 	}
 
-	public boolean isGarage() {
+	public Boolean isGarage() {
 		return garage;
 	}
 
-	public void setGarage(boolean garage) {
+	public void setGarage(Boolean garage) {
 		this.garage = garage;
 	}
 
-	public boolean isCommission() {
+	public Boolean isCommission() {
 		return commission;
 	}
 
-	public void setCommission(boolean commission) {
+	public void setCommission(Boolean commission) {
 		this.commission = commission;
 	}
 }

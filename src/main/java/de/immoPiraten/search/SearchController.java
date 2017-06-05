@@ -35,10 +35,20 @@ public class SearchController {
 			@RequestParam(value = "input") String input,
 			@RequestParam(value = "radius") byte radius,
 			@RequestParam(value = "freeofcommission", required = false) Boolean freeOfCommission,
-			@RequestParam(value = "livingareafrom", required = false) Double livingAreaFrom,
-			@RequestParam(value = "livingareatill", required = false) Double livingAreaTill,
+			@RequestParam(value = "livingareafrom", required = false) Short livingAreaFrom,
+			@RequestParam(value = "livingareatill", required = false) Short livingAreaTill,
 			@RequestParam(value = "pricefrom", required = false) Integer priceFrom,
 			@RequestParam(value = "pricetill", required = false) Integer priceTill,
+			@RequestParam(value = "constructionyearfrom", required = false) Short constructionYearFrom,
+			@RequestParam(value = "constructionyeartill", required = false) Short constructionYearTill,
+			@RequestParam(value = "roomsfrom", required = false) Float roomsFrom,
+			@RequestParam(value = "roomstill", required = false) Float roomsTill,
+			@RequestParam(value = "landAreafrom", required = false) Short landAreaFrom,
+			@RequestParam(value = "landAreafill", required = false) Short landAreaTill,
+			@RequestParam(value = "balcony", required = false) Boolean balcony,			
+			@RequestParam(value = "terrace", required = false) Boolean terrace,
+			@RequestParam(value = "garden", required = false) Boolean garden,
+			@RequestParam(value = "garage", required = false) Boolean garage,			
 			@RequestParam(value = "sorting", required = false) Integer sorting) {
 			
 		if (portal == null)
@@ -48,6 +58,8 @@ public class SearchController {
 			sorting = ResultsSorting.PublicationDateDESC.getValue();
 		
 		return this.searchService.Search(Portal.values()[portal], RealEstateType.values()[realEstateType], PurchaseType.values()[purchaseType],
-				input, radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill, ResultsSorting.values()[sorting]);
+				input, radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill, 
+				constructionYearFrom, constructionYearTill, roomsFrom, roomsTill, landAreaFrom, landAreaTill, balcony, terrace, garden, garage,
+				ResultsSorting.values()[sorting]);
 	}
 }

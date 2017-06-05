@@ -5,31 +5,31 @@ import javax.persistence.Entity;
 @Entity
 public class ResidentialRealEstate extends RealEstate {
 
-	private double room;
-	private double livingArea;
+	private float room;
+	private short livingArea;
 	private HeaterType heater;
 	private boolean energyCertificate;
-	private double energyConsumption;
-	private double additionalCosts;
+	private float energyConsumption;
+	private float additionalCosts;
 	private boolean balcony;
 	private boolean terrace;
 	private boolean garden;
 	private boolean garage;
-	private int construction;
+	private short construction;
 	
-	public double getRoom() {
+	public float getRoom() {
 		return room;
 	}
 
-	public void setRoom(double room) {
+	public void setRoom(float room) {
 		this.room = room;
 	}
 
-	public double getLivingArea() {
+	public short getLivingArea() {
 		return livingArea;
 	}
 
-	public void setLivingArea(double livingArea) {
+	public void setLivingArea(short livingArea) {
 		this.livingArea = livingArea;
 	}
 
@@ -49,19 +49,19 @@ public class ResidentialRealEstate extends RealEstate {
 		this.energyCertificate = energyCertificate;
 	}
 
-	public double getEnergyConsumption() {
+	public float getEnergyConsumption() {
 		return energyConsumption;
 	}
 
-	public void setEnergyConsumption(double energyConsumption) {
+	public void setEnergyConsumption(float energyConsumption) {
 		this.energyConsumption = energyConsumption;
 	}
 
-	public double getAdditionalCosts() {
+	public float getAdditionalCosts() {
 		return additionalCosts;
 	}
 
-	public void setAdditionalCosts(double additionalCosts) {
+	public void setAdditionalCosts(float additionalCosts) {
 		this.additionalCosts = additionalCosts;
 	}
 
@@ -97,11 +97,11 @@ public class ResidentialRealEstate extends RealEstate {
 		this.garage = garage;
 	}
 
-	public int getConstruction() {
+	public short getConstruction() {
 		return construction;
 	}
 
-	public void setConstruction(int construction) {
+	public void setConstruction(short construction) {
 		this.construction = construction;
 	}
 }

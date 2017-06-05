@@ -33,8 +33,9 @@ public class SearchService {
 	}
 	
 	public List<House> Search(Portal portal, RealEstateType realEstateType, PurchaseType purchaseType, String input,
-			byte radius, Boolean freeOfCommission, Double livingAreaFrom, Double livingAreaTill, Integer priceFrom,
-			Integer priceTill, ResultsSorting sorting) {
+			byte radius, Boolean freeOfCommission, Short livingAreaFrom, Short livingAreaTill, Integer priceFrom, Integer priceTill, 
+			Short constructionYearFrom, Short constructionYearTill, Float roomsFrom, Float roomsTill, Short landAreaFrom, Short landAreaTill,
+			Boolean balcony, Boolean terrace, Boolean garden, Boolean garage, ResultsSorting sorting) {
 		
 		boolean isPostCode = Pattern.matches("\\d{5}", input);
 		SearchType searchType = isPostCode ? SearchType.PostCode : SearchType.City;	
@@ -43,8 +44,10 @@ public class SearchService {
 
 		if (portal == Portal.ImmobilienScout24 || portal == Portal.All){		
 			try {
-				results.addAll(de.immoPiraten.ImmoScout24.Search.Execute(realEstateType, purchaseType, searchType, input,
-						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
+				results.addAll(de.immoPiraten.ImmoScout24.Search.execute(realEstateType, purchaseType, searchType, input,
+						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill,
+						constructionYearFrom, constructionYearTill, roomsFrom, roomsTill, landAreaFrom, landAreaTill,
+						balcony, terrace, garden, garage));
 			} catch (Exception e) {
 				e.printStackTrace();
 			};
@@ -52,8 +55,10 @@ public class SearchService {
 		
 		if (portal == Portal.Immonet || portal == Portal.All){
 			try {
-				results.addAll(de.immoPiraten.ownPortal.Search.Execute(realEstateType, purchaseType, searchType, input,
-						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill));
+				results.addAll(de.immoPiraten.ownPortal.Search.execute(realEstateType, purchaseType, searchType, input,
+						radius, freeOfCommission, livingAreaFrom, livingAreaTill, priceFrom, priceTill,
+						constructionYearFrom, constructionYearTill, roomsFrom, roomsTill, landAreaFrom, landAreaTill,
+						balcony, terrace, garden, garage));
 			} catch (Exception e) {
 				e.printStackTrace();
 			};
