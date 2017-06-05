@@ -7,17 +7,17 @@ public class Query {
 
 	private RealEstateType realEstateType;
 	private PurchaseType purchaseType;
-	private Double priceFrom;
-	private Double priceTo;
-	private Short roomsFrom;
-	private Short roomsTo;
+	private Integer priceFrom;
+	private Integer priceTo;
+	private Float roomsFrom;
+	private Float roomsTo;
 	private Short livingAreaFrom;
 	private Short livingAreaTo;
 	private Short landAreaFrom;
 	private Short landAreaTo;
 	private Short constructionYearFrom;
 	private Short constructionYearTo;
-	private Short radius;
+	private Byte radius;
 	private Boolean balcony;
 	private Boolean terrace;
 	private Boolean garden;
@@ -42,35 +42,35 @@ public class Query {
 		this.purchaseType = purchaseType;
 	}
 
-	public Double getPriceFrom() {
+	public Integer getPriceFrom() {
 		return priceFrom;
 	}
 
-	public void setPriceFrom(Double priceFrom) {
+	public void setPriceFrom(Integer priceFrom) {
 		this.priceFrom = priceFrom;
 	}
 
-	public Double getPriceTo() {
+	public Integer getPriceTo() {
 		return priceTo;
 	}
 
-	public void setPriceTo(Double priceTo) {
+	public void setPriceTo(Integer priceTo) {
 		this.priceTo = priceTo;
 	}
 
-	public Short getRoomsFrom() {
+	public Float getRoomsFrom() {
 		return roomsFrom;
 	}
 
-	public void setRoomsFrom(Short roomsFrom) {
+	public void setRoomsFrom(Float roomsFrom) {
 		this.roomsFrom = roomsFrom;
 	}
 
-	public Short getRoomsTo() {
+	public Float getRoomsTo() {
 		return roomsTo;
 	}
 
-	public void setRoomsTo(Short roomsTo) {
+	public void setRoomsTo(Float roomsTo) {
 		this.roomsTo = roomsTo;
 	}
 
@@ -122,11 +122,11 @@ public class Query {
 		this.constructionYearTo = constructionYearTo;
 	}
 
-	public Short getRadius() {
+	public Byte getRadius() {
 		return radius;
 	}
 
-	public void setRadius(Short radius) {
+	public void setRadius(Byte radius) {
 		this.radius = radius;
 	}
 

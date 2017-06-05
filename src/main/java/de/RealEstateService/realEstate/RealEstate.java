@@ -35,13 +35,13 @@ public class RealEstate {
 	private RealEstateType realEstateType;	
 	
 	// residential real estate
-	private Short room;
+	private Float room;
 	private Short livingArea;
 	// ordinal means that the number will be persist in the database
 	@Enumerated(EnumType.ORDINAL)
 	private HeaterType heater;
 	private Boolean energyCertificate;
-	private Double energyConsumption;
+	private Float energyConsumption;
 	private Float additionalCosts;
 	private Boolean balcony;
 	private Boolean terrace;
@@ -50,7 +50,7 @@ public class RealEstate {
 	private Short constructionYear;
 	
 	// house
-	private Integer landArea;	
+	private Short landArea;	
 	
 
 	public int getId() {
@@ -101,7 +101,7 @@ public class RealEstate {
 		this.price = price;
 	}
 
-	public boolean isCommission() {
+	public Boolean isCommission() {
 		return commission;
 	}
 
@@ -181,11 +181,11 @@ public class RealEstate {
 		this.realEstateType = realEstateType;
 	}	
 	
-	public Short getRoom() {
+	public Float getRoom() {
 		return room;
 	}
 
-	public void setRoom(Short room) {
+	public void setRoom(Float room) {
 		this.room = room;
 	}
 
@@ -213,11 +213,11 @@ public class RealEstate {
 		this.energyCertificate = energyCertificate;
 	}
 
-	public Double getEnergyConsumption() {
+	public Float getEnergyConsumption() {
 		return energyConsumption;
 	}
 
-	public void setEnergyConsumption(Double energyConsumption) {
+	public void setEnergyConsumption(Float energyConsumption) {
 		this.energyConsumption = energyConsumption;
 	}
 
@@ -269,11 +269,11 @@ public class RealEstate {
 		this.constructionYear = constructionYear;
 	}
 	
-	public Integer getLandArea() {
+	public Short getLandArea() {
 		return landArea;
 	}
 
-	public void setLandArea(Integer landArea) {
+	public void setLandArea(Short landArea) {
 		this.landArea = landArea;
 	}	
 }
