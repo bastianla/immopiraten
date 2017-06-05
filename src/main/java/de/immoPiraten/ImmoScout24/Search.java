@@ -196,16 +196,22 @@ public class Search {
 		String rawPurchaseType = realEstate.get("@xsi.type").toString();
 		String purchaseType = rawPurchaseType.substring(rawPurchaseType.indexOf(':') + 1);
 		house.setPurchaseType(Search.mapPurchaseType(de.immoPiraten.ImmoScout24.RealEstateType.valueOf(purchaseType)));
-
+		
 		// a real estate has always a title
 		house.setTitle(realEstate.get("title").toString());
 
 		// sets the price
+		// (Important: By a expose request a rent object includes the price in the baseRent property
+		//			   and in a search request at a price-value property)
+		Double price = null;
 		LinkedHashMap<String, Object> priceMap = (LinkedHashMap<String, Object>) realEstate.get("price");
-		// house.setPrice(Search.parseDouble(price, "value", 0));		
-		Integer price = Parser.parseInteger(Search.getJsonValue(priceMap, "value"));
+		if (priceMap != null)
+			price = Parser.parseDouble(Search.getJsonValue(priceMap, "value"));
+		else
+			price = Parser.parseDouble(Search.getJsonValue(realEstate, "baseRent"));
+		
 		if (price != null)
-			house.setPrice(price);
+			house.setPrice(price.intValue());
 
 		// sets a value indicating whether a energy certificate is available
 		house.setEnergyCertificate(Boolean.parseBoolean(
@@ -228,7 +234,6 @@ public class Search {
 		Object freeFrom = realEstate.get("freeFrom");
 
 		if (freeFrom != null) {
-			// house.setAvailabilityDate(this.parseDate(X, ));
 			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 			try {
 				house.setAvailabilityDate(df.parse(freeFrom.toString()));
@@ -244,14 +249,14 @@ public class Search {
 			house.setDescription(description);
 		
 		// house.setLivingArea(Search.parseDouble(realEstate, "livingSpace", 0));
-		Short livingArea = Parser.parseShort(Search.getJsonValue(realEstate, "livingSpace"));
+		Float livingArea = Parser.parseFloat(Search.getJsonValue(realEstate, "livingSpace"));
 		if (livingArea != null)
-			house.setLivingArea(livingArea);
+			house.setLivingArea(livingArea.shortValue());
 		
 		// house.setLandArea(Search.parseDouble(realEstate, "plotArea", 0));
-		Short landArea = Parser.parseShort(Search.getJsonValue(realEstate, "plotArea"));
+		Float landArea = Parser.parseFloat(Search.getJsonValue(realEstate, "plotArea"));
 		if (landArea != null)
-			house.setLandArea(landArea);
+			house.setLandArea(landArea.shortValue());
 		
 		// house.setRoom(Search.parseDouble(realEstate, "numberOfRooms", 0));
 		Float room = Parser.parseFloat(Search.getJsonValue(realEstate, "numberOfRooms"));
