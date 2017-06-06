@@ -239,8 +239,6 @@ public class Search {
 				house.setAvailabilityDate(df.parse(freeFrom.toString()));
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-				throw e;
 			}
 		}
 
