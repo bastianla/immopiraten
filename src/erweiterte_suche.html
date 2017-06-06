@@ -481,18 +481,45 @@
         </div>
       </div>
 <div >
-<div>
-<ul>
+<div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div id="loop"  ng-repeat="x in exposedata">
+	<div id="looper" style="position: relative;margin-top:35px;">
+		<div id="box" style="position: absolute; margin-left:320px;margin-top: 0px;">	
+			<div id="ueberschrift" style="width: 866px;font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;font-size: 24px;">
+			<a href="detailseite.html#?id={{ x.id }}&portal=1" style="color: #FF9400;">{{ x.title }}</a>
+			</div>
+			<div id="untertext" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #333333;font-size: 18px;">
+			{{ x.description }}
+			</div>
+			<div id="logozeile" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #333333;font-size: 18px;">
+			gefunden bei <img style="padding-left:30px; padding-top:10px; width:96px; heigt: 50px;" src="images/erweiterte_suche/u206.png" />
+			</div>
+		</div>
+		<div id="boxgrau" style="position: absolute; margin-left:320px; bottom: 0px;padding-bottom: 0px">
+				<div style="position: absolute; left:5px;top:5px;">
+					<div class="miete" style="font-size: 13px;width:100px;color: #FFFFFF;">Kaltmiete   </div>
+					<div class="miete2" style="font-size: 25px;color: #FF9400;">{{ x.price }} €</div>
+				</div>
+				<div style="position: absolute; left:150px;top:5px;">
+					<div class="flaeche" style="font-size: 13px;width:100px;color: #FFFFFF;">Wohnfläche</div>
+					<div class="flaeche2" style="font-size: 25px;color: #FF9400;">{{ x.livingArea }} m²</div>
+				</div>
+				<div style="position: absolute; left:300px;top:5px;">
+					<div class="zimmer" style="font-size: 13px;width:100px;color: #FFFFFF;">Zimmer</div>
+					<div class="zimmer2" style="font-size: 25px;color: #FF9400;">{{ x.room }}</div>
+				</div>
+			<img style="width: 866px; height: 65px;"src="images/trefferliste/u638.png"/>
+			</div>
+		<div id="bild">
+				<img width="281" high="211" style="left 0px; top 0px;"src="{{ x.image }}><!--images/trefferliste/u632.png"/ -->
+		</div>
+		
+	</div>
+</div>
 
-  <li ng-repeat="x in exposedata">
-    Titel: {{ x.title }}<br>
-    ID: {{x.id}}
-  </li>
-  
-</ul>
 </div>
      </div></div>
-     <div ng-include="'footer.html'"></div>
+     <div style="position: fixed; button: 3;" ng-include="'footer.html'"></div>
     <script src="Controller.js" defer></script>
   </body>
 </html>
