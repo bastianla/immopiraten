@@ -261,6 +261,33 @@ public class Search {
 		if (room != null)
 			house.setRoom(room);
 		
+		Short construction = null;
+		try{
+			construction = Parser.parseShort(Search.getJsonValue(realEstate, "constructionYear"));
+			if (construction != null)
+				house.setConstruction(construction);			
+		}
+		catch(Exception e){
+		}
+		
+		Boolean balcony = null;
+		try{
+			balcony = Parser.parseBoolean(Search.getJsonValue(realEstate, "balcony"));
+			if (balcony != null)
+				house.setBalcony(balcony);
+		}
+		catch(Exception e){
+		}
+		
+		Boolean garden = null;
+		try{
+			garden = Parser.parseBoolean(Search.getJsonValue(realEstate, "garden"));
+			if(garden != null)
+				house.setGarden(garden);
+		}
+		catch(Exception e){
+		}		
+		
 		house.setSite(Search.getSite(realEstate));
 		
 		// house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
