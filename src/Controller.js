@@ -131,6 +131,29 @@ app.controller('searchCtrl', function($scope, $http, $location) {
     }
 });
     
+app.controller('exposeCtrl', function($scope, $http, $location) {
+	
+	$scope.doSearch2 = function() {
+		$scope.debug="Debuger:";
+	    //$http.get("http://localhost:8080/houses?postcode="+$scope.postcode+"&city=Essen&pricefrom=0&pricetill=1000&livingareafrom=0&livingareatill=1000&landareafrom=0&landareatill=10000&roomfrom=1&roomtill=5&constructionyearfrom=0&constructionyeartill=1000&balcony=1&terrace=0&garden=0&garage=0&commission=0").then(function(response) {
+	    	$http.get("http://localhost:8080/search?realestatetype=1&purchasetype=1&input=aachen&radius=20").then(function(response) {
+			$scope.exposedata = response.data;  
+	    	$scope.exposedata.title = response.data[0].title; 
+	    });
+    }
+    $scope.getDetail = function() {
+		
+		
+		$scope.debug="Debuger:"+ "http://localhost:8080/expose?portal=1&id="+$location.search()['id'];
+	    //$http.get("http://localhost:8080/expose?id="+$scope.postcode+").then(function(response) {
+	    	$http.get("http://localhost:8080/expose?portal=1&id="+$location.search()['id']).then(function(response) {
+			$scope.exposedata = response.data;  
+	    	$scope.exposedata.title = response.data[0].title;  
+			
+	    });
+		
+    }    	
+});
 
 
 	
