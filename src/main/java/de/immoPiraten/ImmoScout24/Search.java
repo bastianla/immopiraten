@@ -144,7 +144,7 @@ public class Search {
 		if (ground != null)
 			uriBuilder.addParameter("ground", ground);
 		if (numberOfRooms != null)
-			uriBuilder.addParameter("numberOfRooms", numberOfRooms);
+			uriBuilder.addParameter("numberofrooms", numberOfRooms);
 		if (constructionyear != null)
 			uriBuilder.addParameter("constructionyear", constructionyear);		
 		if (balcony != null)
