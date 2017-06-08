@@ -17,6 +17,20 @@ public class ResidentialRealEstate extends RealEstate {
 	private boolean garage;
 	private short construction;
 	
+	private Short floor;
+	private Short numberOfFloors;
+	private Short numberOfBedRooms;
+	private Short numberOfBathRooms;
+	private Short numberOfParkingSpaces;
+	private Float heatingCosts;
+	private Boolean heatingCostsInAdditionalCosts;
+	private String deposit;
+	private Float thermalCharacteristic;
+	private String locationNote;
+	private String otherNote;
+	private String furnishingNote;	
+	private String energyEfficiencyClass;
+	
 	public float getRoom() {
 		return room;
 	}
@@ -103,5 +117,109 @@ public class ResidentialRealEstate extends RealEstate {
 
 	public void setConstruction(short construction) {
 		this.construction = construction;
+	}
+
+	public Short getFloor() {
+		return floor;
+	}
+
+	public void setFloor(Short floor) {
+		this.floor = floor;
+	}
+
+	public Short getNumberOfFloors() {
+		return numberOfFloors;
+	}
+
+	public void setNumberOfFloors(Short numberOfFloors) {
+		this.numberOfFloors = numberOfFloors;
+	}
+
+	public Short getNumberOfBedRooms() {
+		return numberOfBedRooms;
+	}
+
+	public void setNumberOfBedRooms(Short numberOfBedRooms) {
+		this.numberOfBedRooms = numberOfBedRooms;
+	}
+
+	public Short getNumberOfBathRooms() {
+		return numberOfBathRooms;
+	}
+
+	public void setNumberOfBathRooms(Short numberOfBathRooms) {
+		this.numberOfBathRooms = numberOfBathRooms;
+	}
+
+	public Short getNumberOfParkingSpaces() {
+		return numberOfParkingSpaces;
+	}
+
+	public void setNumberOfParkingSpaces(Short numberOfParkingSpaces) {
+		this.numberOfParkingSpaces = numberOfParkingSpaces;
+	}
+
+	public Float getHeatingCosts() {
+		return heatingCosts;
+	}
+
+	public void setHeatingCosts(Float heatingCosts) {
+		this.heatingCosts = heatingCosts;
+	}
+
+	public Boolean getHeatingCostsInAdditionalCosts() {
+		return heatingCostsInAdditionalCosts;
+	}
+
+	public void setHeatingCostsInAdditionalCosts(Boolean heatingCostsInAdditionalCosts) {
+		this.heatingCostsInAdditionalCosts = heatingCostsInAdditionalCosts;
+	}
+
+	public String getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(String deposit) {
+		this.deposit = deposit;
+	}
+
+	public Float getThermalCharacteristic() {
+		return thermalCharacteristic;
+	}
+
+	public void setThermalCharacteristic(Float thermalCharacteristic) {
+		this.thermalCharacteristic = thermalCharacteristic;
+	}
+
+	public String getLocationNote() {
+		return locationNote;
+	}
+
+	public void setLocationNote(String locationNote) {
+		this.locationNote = locationNote;
+	}
+
+	public String getOtherNote() {
+		return otherNote;
+	}
+
+	public void setOtherNote(String otherNote) {
+		this.otherNote = otherNote;
+	}
+
+	public String getFurnishingNote() {
+		return furnishingNote;
+	}
+
+	public void setFurnishingNote(String furnishingNote) {
+		this.furnishingNote = furnishingNote;
+	}
+
+	public String getEnergyEfficiencyClass() {
+		return energyEfficiencyClass;
+	}
+
+	public void setEnergyEfficiencyClass(String energyEfficiencyClass) {
+		this.energyEfficiencyClass = energyEfficiencyClass;
 	}
 }

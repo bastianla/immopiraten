@@ -201,14 +201,14 @@ public class Search {
 		house.setTitle(realEstate.get("title").toString());
 
 		// sets the price
-		// (Important: By a expose request a rent object includes the price in the baseRent property
-		//			   and in a search request at a price-value property)
+		// (Important: In the expose response a rent object includes the price in the baseRent property
+		//			   and in a search response at a price-value property)
 		Double price = null;
 		LinkedHashMap<String, Object> priceMap = (LinkedHashMap<String, Object>) realEstate.get("price");
 		if (priceMap != null)
 			price = Parser.parseDouble(Search.getJsonValue(priceMap, "value"));
 		else
-			price = Parser.parseDouble(Search.getJsonValue(realEstate, "baseRent"));
+			price = Parser.parseDouble(Search.getJsonValue(realEstate, "baseRent"));		
 		
 		if (price != null)
 			house.setPrice(price.intValue());
@@ -224,11 +224,6 @@ public class Search {
 		if (courtage != null)
 			house.setCommission(
 					Boolean.parseBoolean(Search.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
-
-		// sets a value indicating whether an energy performance certificate is
-		// available
-		house.setEnergyCertificate(Boolean.parseBoolean(
-				Search.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
 
 		// sets the availability date
 		Object freeFrom = realEstate.get("freeFrom");
@@ -260,43 +255,89 @@ public class Search {
 		Float room = Parser.parseFloat(Search.getJsonValue(realEstate, "numberOfRooms"));
 		if (room != null)
 			house.setRoom(room);
+
+		Short construction = Parser.parseShort(Search.getJsonValue(realEstate, "constructionYear"));
+		if (construction != null)
+			house.setConstruction(construction);
 		
-		Short construction = null;
-		try{
-			construction = Parser.parseShort(Search.getJsonValue(realEstate, "constructionYear"));
-			if (construction != null)
-				house.setConstruction(construction);			
-		}
-		catch(Exception e){
-		}
+		Boolean balcony = Parser.parseBoolean(Search.getJsonValue(realEstate, "balcony"));
+		if (balcony != null)
+			house.setBalcony(balcony);
 		
-		Boolean balcony = null;
-		try{
-			balcony = Parser.parseBoolean(Search.getJsonValue(realEstate, "balcony"));
-			if (balcony != null)
-				house.setBalcony(balcony);
-		}
-		catch(Exception e){
-		}
-		
-		Boolean garden = null;
-		try{
-			garden = Parser.parseBoolean(Search.getJsonValue(realEstate, "garden"));
-			if(garden != null)
-				house.setGarden(garden);
-		}
-		catch(Exception e){
-		}		
+		Boolean garden = Parser.parseBoolean(Search.getJsonValue(realEstate, "garden"));
+		if(garden != null)
+			house.setGarden(garden);			
 		
 		house.setSite(Search.getSite(realEstate));
 		
 		// house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
-		Float additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "ServiceCharge"));
+		Float additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "ServiceCharge")); // Nebenkosten bei Miete
+		if (additionalCosts == null)
+			additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "rentSubsidy")); // Hausgeld bei Eigentumswohnung
+		
 		if (additionalCosts != null)
 			house.setAdditionalCosts(additionalCosts);
 		
 		house.setImage(Search.getImageUrl(realEstate, imageWidth, imageHeight));
 				
+		Short floor = Parser.parseShort(Search.getJsonValue(realEstate, "floor"));
+		if (floor != null)
+			house.setFloor(floor);
+		
+		Short numberOfFloors = Parser.parseShort(Search.getJsonValue(realEstate, "numberOfFloors"));
+		if (numberOfFloors != null)
+			house.setNumberOfFloors(numberOfFloors);		
+		
+		Short numberOfBedRooms = Parser.parseShort(Search.getJsonValue(realEstate, "numberOfBedRooms"));
+		if (numberOfBedRooms != null)
+			house.setNumberOfBedRooms(numberOfBedRooms);
+		
+		Short numberOfBathRooms = Parser.parseShort(Search.getJsonValue(realEstate, "numberOfBathRooms"));
+		if (numberOfBathRooms != null)
+			house.setNumberOfBathRooms(numberOfBathRooms);
+		
+		Short numberOfParkingSpaces = Parser.parseShort(Search.getJsonValue(realEstate, "numberOfParkingSpaces"));
+		if (numberOfParkingSpaces != null)
+			house.setNumberOfParkingSpaces(numberOfParkingSpaces);		
+		
+		Float heatingCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "heatingCosts"));
+		if (heatingCosts != null)
+			house.setHeatingCosts(heatingCosts);
+		
+		Boolean heatingCostsInAdditionalCosts = Parser.parseBoolean(Search.getJsonValue(realEstate, "heatingCostsInServiceCharge"));
+		if (heatingCostsInAdditionalCosts != null)
+			house.setHeatingCostsInAdditionalCosts(heatingCostsInAdditionalCosts);
+		
+		String deposit = Parser.parseString(Search.getJsonValue(realEstate, "deposit"));
+		if (deposit != null)
+			house.setDeposit(deposit);		
+		
+		Float thermalCharacteristic = Parser.parseFloat(Search.getJsonValue(realEstate, "thermalCharacteristic"));
+		if (thermalCharacteristic != null)
+			house.setThermalCharacteristic(thermalCharacteristic);		
+		
+		String locationNote = Parser.parseString(Search.getJsonValue(realEstate, "locationNote"));
+		if (locationNote != null)
+			house.setLocationNote(locationNote);
+		
+		String otherNote = Parser.parseString(Search.getJsonValue(realEstate, "otherNote"));
+		if (otherNote != null)
+			house.setOtherNote(otherNote);
+		
+		String furnishingNote = Parser.parseString(Search.getJsonValue(realEstate, "furnishingNote"));
+		if (furnishingNote != null)
+			house.setFurnishingNote(furnishingNote);		
+		
+		String energyEfficiencyClass = null;
+		LinkedHashMap<String, Object> energyCertificateMap = (LinkedHashMap<String, Object>)Search.getJsonValue(realEstate, "energyCertificate");
+		if (energyCertificateMap != null)
+			energyEfficiencyClass = Parser.parseString(Search.getJsonValue(energyCertificateMap, "energyEfficiencyClass"));
+		
+		if (energyEfficiencyClass != null)
+			house.setEnergyEfficiencyClass(energyEfficiencyClass);		
+		
+		// String interiorQuality = Parser.parseString(Search.getJsonValue(realEstate, "interiorQuality"));
+		
 		return house;
 	}
 
@@ -332,16 +373,21 @@ public class Search {
 	}
 
 	private static Object getJsonValue(LinkedHashMap<String, Object> map, String key) {
-		Object property = map.get(key);
-		return property;
+		return Search.getJsonValueOrDefault(map, key, null);
+		// Object property = map.get(key);
+		// return property;
 	}	
 	
 	private static Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue) {
-		Object property = map.get(key);
-		if (property != null) {
-			if (property instanceof Integer)
-				return ((Integer) property).intValue();
-			return property;
+		try{
+			Object property = map.get(key);
+			if (property != null) {
+				if (property instanceof Integer)
+					return ((Integer) property).intValue();
+				return property;
+			}			
+		}
+		catch(Exception e){
 		}
 
 		return defaultValue;
