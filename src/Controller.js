@@ -24,6 +24,15 @@ app.directive('onlyDigits', function () {
 
 app.controller('searchCtrl', function($scope, $http, $location) {
 	
+	$scope.realestatetypes = ["Wohnung", "Haus", "Grundstück"];
+	$scope.purchasetypes = ["Kaufen", "Mieten"];
+			
+    $scope.submit = function() {
+    	window.location.href = "erweiterte_suche.html#?city=" + $scope.city 
+    		+ "&purchasetype=" + $scope.purchasetype 
+    		+ "&realestatetype=" + $scope.realestatetype;
+    	   }
+	
 	$scope.followBtnImgUrlImmoScout = '/images/erweiterte_suche/u210.png'
 
     $scope.toggleImageImmoScout = function () {
@@ -119,9 +128,7 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 			}
 			if (typeof $scope.livingareafrom !== 'undefined') {
 				searchparams+="&livingareafrom="+$scope.livingareafrom;
-			}
-			
-			
+			}			
 		    
 			$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
 		    	$scope.exposedata = response.data;  
@@ -152,7 +159,7 @@ app.controller('exposeCtrl', function($scope, $http, $location) {
 			
 	    });
 		
-    }    	
+    } 
 });
 
 
