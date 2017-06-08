@@ -374,8 +374,6 @@ public class Search {
 
 	private static Object getJsonValue(LinkedHashMap<String, Object> map, String key) {
 		return Search.getJsonValueOrDefault(map, key, null);
-		// Object property = map.get(key);
-		// return property;
 	}	
 	
 	private static Object getJsonValueOrDefault(LinkedHashMap<String, Object> map, String key, Object defaultValue) {
