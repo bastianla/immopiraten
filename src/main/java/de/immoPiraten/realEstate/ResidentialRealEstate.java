@@ -7,7 +7,6 @@ public class ResidentialRealEstate extends RealEstate {
 
 	private float room;
 	private short livingArea;
-	private HeaterType heater;
 	private boolean energyCertificate;
 	private float energyConsumption;
 	private float additionalCosts;
@@ -31,6 +30,13 @@ public class ResidentialRealEstate extends RealEstate {
 	private String furnishingNote;	
 	private String energyEfficiencyClass;
 	
+	private ConditionType objectstate;
+	private InteriorQualityType interiorQuality;
+	private BuildingEnergyRatingType buildingEnergyRating;
+	private HeatingType heating;
+	private FiringType firing;
+	private ResidentialRealEstateType residentialRealEstate; 
+	
 	public float getRoom() {
 		return room;
 	}
@@ -45,14 +51,6 @@ public class ResidentialRealEstate extends RealEstate {
 
 	public void setLivingArea(short livingArea) {
 		this.livingArea = livingArea;
-	}
-
-	public HeaterType getHeater() {
-		return heater;
-	}
-
-	public void setHeater(HeaterType heater) {
-		this.heater = heater;
 	}
 
 	public boolean isEnergyCertificate() {
@@ -221,5 +219,53 @@ public class ResidentialRealEstate extends RealEstate {
 
 	public void setEnergyEfficiencyClass(String energyEfficiencyClass) {
 		this.energyEfficiencyClass = energyEfficiencyClass;
+	}
+	
+	public ConditionType getObjectstate() {
+		return objectstate;
+	}
+
+	public void setObjectstate(ConditionType objectstate) {
+		this.objectstate = objectstate;
+	}
+	
+	public InteriorQualityType getInteriorQuality() {
+		return interiorQuality;
+	}
+
+	public void setInteriorQuality(InteriorQualityType interiorQuality) {
+		this.interiorQuality = interiorQuality;
+	}
+
+	public BuildingEnergyRatingType getBuildingEnergyRating() {
+		return buildingEnergyRating;
+	}
+
+	public void setBuildingEnergyRating(BuildingEnergyRatingType buildingEnergyRating) {
+		this.buildingEnergyRating = buildingEnergyRating;
+	}
+	
+	public HeatingType getHeating() {
+		return heating;
+	}
+
+	public void setHeating(HeatingType heating) {
+		this.heating = heating;
+	}
+	
+	public FiringType getFiring() {
+		return firing;
+	}
+
+	public void setFiring(FiringType firing) {
+		this.firing = firing;
+	}
+
+	public ResidentialRealEstateType getResidentialRealEstate() {
+		return residentialRealEstate;
+	}
+
+	public void setResidentialRealEstate(ResidentialRealEstateType residentialRealEstate) {
+		this.residentialRealEstate = residentialRealEstate;
 	}
 }

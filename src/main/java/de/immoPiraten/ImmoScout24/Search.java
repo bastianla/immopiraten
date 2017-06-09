@@ -81,7 +81,7 @@ public class Search {
 			throw new IllegalArgumentException("Could not map the specified real estate type to an purchase type.");
 		}
 	}
-	
+		
 	/* 92756718 */
 	private static String getExposeResponse(int id) throws APIException
 	{		
@@ -222,8 +222,7 @@ public class Search {
 		LinkedHashMap<String, Object> courtage = (LinkedHashMap<String, Object>) realEstate.get("courtage");
 
 		if (courtage != null)
-			house.setCommission(
-					Boolean.parseBoolean(Search.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
+			house.setCommission(Boolean.parseBoolean(Search.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
 
 		// sets the availability date
 		Object freeFrom = realEstate.get("freeFrom");
@@ -336,8 +335,46 @@ public class Search {
 		if (energyEfficiencyClass != null)
 			house.setEnergyEfficiencyClass(energyEfficiencyClass);		
 		
-		// String interiorQuality = Parser.parseString(Search.getJsonValue(realEstate, "interiorQuality"));
+		// important: JPA can't persist the property name condition. Therefore the property was renamed from condition to objectState.   
+		de.immoPiraten.realEstate.ConditionType condition = Parser.parseEnum(Search.getJsonValue(realEstate, "condition"), de.immoPiraten.realEstate.ConditionType.class);		
+		if (condition != null)
+			house.setObjectstate(condition);
 		
+		de.immoPiraten.realEstate.InteriorQualityType interiorQuality = Parser.parseEnum(Search.getJsonValue(realEstate, "interiorQuality"), de.immoPiraten.realEstate.InteriorQualityType.class);		
+		if (interiorQuality != null)
+			house.setInteriorQuality(interiorQuality);		
+		
+		de.immoPiraten.realEstate.BuildingEnergyRatingType buildingEnergyRating = Parser.parseEnum(Search.getJsonValue(realEstate, "buildingEnergyRatingType"), de.immoPiraten.realEstate.BuildingEnergyRatingType.class);		
+		if (buildingEnergyRating != null)
+			house.setBuildingEnergyRating(buildingEnergyRating);
+		
+		de.immoPiraten.realEstate.HeatingType heating = Parser.parseEnum(Search.getJsonValue(realEstate, "heatingType"), de.immoPiraten.realEstate.HeatingType.class);
+		if (heating == null)
+			heating  = Parser.parseEnum(Search.getJsonValue(realEstate, "heatingTypeEnev2014"), de.immoPiraten.realEstate.HeatingType.class);
+		
+		if (heating != null)
+			house.setHeating(heating);	
+				
+		try
+		{
+			de.immoPiraten.realEstate.FiringType firing = null;			
+			de.immoPiraten.realEstate.FiringType[] firingArray = (de.immoPiraten.realEstate.FiringType[])Search.getJsonValue(realEstate, "firingTypes");
+			
+			if (firingArray != null)
+				firing = firingArray[0];
+			
+			if (firing != null)
+				house.setFiring(firing);			
+		}catch(Exception e)
+		{}
+				
+		de.immoPiraten.realEstate.ResidentialRealEstateType residentialRealEstate = Parser.parseEnum(Search.getJsonValue(realEstate, "apartmentType"), de.immoPiraten.realEstate.ResidentialRealEstateType.class);
+		if (residentialRealEstate == null)
+			residentialRealEstate = Parser.parseEnum(Search.getJsonValue(realEstate, "buildingType"), de.immoPiraten.realEstate.ResidentialRealEstateType.class);
+		
+		if (residentialRealEstate != null)
+			house.setResidentialRealEstate(residentialRealEstate);
+				
 		return house;
 	}
 
