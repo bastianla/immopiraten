@@ -39,7 +39,7 @@ public class RealEstate {
 	private Short livingArea;
 	// ordinal means that the number will be persist in the database
 	@Enumerated(EnumType.ORDINAL)
-	private HeaterType heater;
+	private HeatingType heating;
 	private Boolean energyCertificate;
 	private Float energyConsumption;
 	private Float additionalCosts;
@@ -197,12 +197,12 @@ public class RealEstate {
 		this.livingArea = livingArea;
 	}
 
-	public HeaterType getHeater() {
-		return heater;
+	public HeatingType getHeating() {
+		return heating;
 	}
 
-	public void setHeater(HeaterType heater) {
-		this.heater = heater;
+	public void setHeating(HeatingType heating) {
+		this.heating = heating;
 	}
 
 	public Boolean isEnergyCertificate() {
