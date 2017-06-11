@@ -26,7 +26,8 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	
 	$scope.realestatetypes = ["Wohnung", "Haus", "Grundstück"];
 	$scope.purchasetypes = ["Kaufen", "Mieten"];
-			
+	$scope.radiuses = ["1 km", "5 km", "10 km", "50 km"];
+	
     $scope.submit = function() {
     	window.location.href = "erweiterte_suche.html#?city=" + $scope.city 
     		+ "&purchasetype=" + $scope.purchasetype 
@@ -59,14 +60,7 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	            $scope.followBtnImgUrlImmoNet = '/images/erweiterte_suche/u210.png';
 	            $scope.immoNet='1';
 	        }
-	    }
-	
-	$scope.markField = function(fieldname) {
-		angular.element( document.querySelector( fieldname ) ).addClass('ng-touched');
-		angular.element( document.querySelector( fieldname ) ).removeClass('ng-untouched');
-	}
-	
-	
+	    }	
 	
     $scope.getDetail = function() {	
 				
@@ -86,55 +80,48 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	}    	
        
     $scope.doSearch = function() {	
-    	
-    	//wenn Feld Ort leer ist, keine Suche durchführen und rot markieren
-    	if (typeof $scope.city === 'undefined') {
-    		$scope.markField('#u97_input');    		
+ 	
+		var searchparams="realestatetype="+$scope.realestatetype+"&purchasetype="+$scope.purchasetype+"&input="+$scope.city;
+		
+		//Default alle Portale (4)
+		$scope.portal='4';
+		// nur immoScout
+		if ($scope.immoScout=='1' && $scope.immoNet=='0') {
+			$scope.portal='1';
+		// nur immonet
+		} else if ($scope.immoScout=='0' && $scope.immoNet=='1'){
+			$scope.portal='2';
+		} // immowelt (3) nicht angebunden, (0) none nicht möglich
+    
+		searchparams+="&portal="+$scope.portal;
+		
+		if (typeof $scope.radius === 'undefined') {
+			$scope.radius = '100';
+	    } 
+		searchparams+="&radius="+$scope.radius;
 
-    	} else {
-    		    	
-			var searchparams="realestatetype="+$scope.realestatetype+"&purchasetype="+$scope.purchasetype+"&input="+$scope.city;
-			
-			//Default alle Portale (4)
-			$scope.portal='4';
-			//nur immoScout
-			if ($scope.immoScout=='1' && $scope.immoNet=='0') {
-				$scope.portal='1';
-			//nur immonet
-			} else if ($scope.immoScout=='0' && $scope.immoNet=='1'){
-				$scope.portal='2';
-			} //immowelt (3) nicht angebunden, (0) none nicht möglich
+		if (typeof $scope.freeofcommission === 'undefined') {
+			$scope.freeofcommission = '1';
+	    }
+		searchparams+="&freeofcommission="+$scope.freeofcommission;
+
+		if (typeof $scope.pricetill !== 'undefined') {
+			searchparams+="&pricetill="+$scope.pricetill;
+		}
+		if (typeof $scope.pricefrom !== 'undefined') {
+			searchparams+="&pricefrom="+$scope.pricefrom;
+		}
+		if (typeof $scope.livingareatill !== 'undefined') {
+			searchparams+="&livingareatill="+$scope.livingareatill;
+		}
+		if (typeof $scope.livingareafrom !== 'undefined') {
+			searchparams+="&livingareafrom="+$scope.livingareafrom;
+		}			
 	    
-			searchparams+="&portal="+$scope.portal;
-			
-			if (typeof $scope.radius === 'undefined') {
-				$scope.radius = '100';
-		    } 
-			searchparams+="&radius="+$scope.radius;
-	
-			if (typeof $scope.freeofcommission === 'undefined') {
-				$scope.freeofcommission = '1';
-		    }
-			searchparams+="&freeofcommission="+$scope.freeofcommission;
-	
-			if (typeof $scope.pricetill !== 'undefined') {
-				searchparams+="&pricetill="+$scope.pricetill;
-			}
-			if (typeof $scope.pricefrom !== 'undefined') {
-				searchparams+="&pricefrom="+$scope.pricefrom;
-			}
-			if (typeof $scope.livingareatill !== 'undefined') {
-				searchparams+="&livingareatill="+$scope.livingareatill;
-			}
-			if (typeof $scope.livingareafrom !== 'undefined') {
-				searchparams+="&livingareafrom="+$scope.livingareafrom;
-			}			
-		    
-			$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
-		    	$scope.exposedata = response.data;  
-		    	$scope.exposedata.title = response.data[0].title; 
-		    });	    
-    	}
+		$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
+	    	$scope.exposedata = response.data;  
+	    	$scope.exposedata.title = response.data[0].title; 
+	    });	    
     }
 });
     

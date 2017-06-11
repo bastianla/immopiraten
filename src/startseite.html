@@ -1,64 +1,63 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-<title>Startseite</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<script src="files/startseite/data.js"></script>
-<link href="files/startseite/styles.css" type="text/css" rel="stylesheet"/>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-</head>
-<body data-ng-app="ImmoPiratenApp" data-ng-controller="searchCtrl">
-	<div id="base" class="ax_default">
-
-		<!-- User Panel -->
-		<div class="frameUserPanel">
-			<!-- User (Shape) -->
-			<img id="ImageUserShape" class="img "
-				src="images/startseite/User_Shape.png" />
-
-			<!-- Login (Rectangle) -->
-			<label>Mein Konto | Login</label>
+	<head>
+		<title>ImmoPiraten | Startseite</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<script src="files/startseite/data.js"></script>
+		<link href="files/startseite/styles.css" type="text/css" rel="stylesheet"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	</head>
+	<body data-ng-app="ImmoPiratenApp" data-ng-controller="searchCtrl">
+		<div id="base" class="">
+	
+			<!-- User Panel -->
+			<div class="frameUserPanel">
+				<!-- User (Shape) -->
+				<img id="ImageUserShape" class="img "
+					src="images/startseite/User_Shape.png" />
+	
+				<!-- Login (Rectangle) -->
+				<label>Mein Konto | Login</label>
+			</div>
+	
+			<!-- Logo (Image) -->
+			<div class="frameLogo" data-label="Logo">
+				<img class="logo" src="images/startseite/Logo.png" />
+			</div>
+	
+			<!-- Background Image -->
+			<div class="frameBackgroundImage">
+				<img class="backgroundImage"
+					src="images/startseite/Background_City.jpg" />
+			</div>
+	
+			<form id="SearchForm" class="formSearch" data-ng-submit="submit()">
+	
+				<!-- Real Estate Type (Droplist) -->
+				<select class="dropListSearch" name="realestatetype"
+					data-ng-model="realestatetype" data-ng-options="id as option for (id, option) in realestatetypes">
+				</select>
+	
+				<!-- Purchase Type (Droplist) -->
+				<select class="dropListSearch" name="purchasetype"
+					data-ng-model="purchasetype" data-ng-options="id as option for (id, option) in purchasetypes">
+				</select>
+	
+				<!-- Input (Text Field) -->
+				<input type="text" class="inputSearchCity" name="city" data-ng-model="city" placeholder="Straße, PLZ, Ort" required/>
+	
+				<!-- Input (Submit button) -->
+				<input type="submit" class="submitSearch" value="Finden"/>
+				
+				<!-- Extended Search (Link) -->
+				<a class="linkSearch" data-ng-href="erweiterte_suche.html#?purchasetype={{purchasetype}}&realestatetype={{realestatetype}}&city={{city}}">Erweiterte Suche</a>
+				
+			</form>
+	
 		</div>
-
-		<!-- Logo (Image) -->
-		<div class="frameLogo" data-label="Logo">
-			<img class="logo" src="images/startseite/Logo.png" />
-		</div>
-
-		<!-- Background Image -->
-		<div class="frameBackgroundImage">
-			<img class="backgroundImage"
-				src="images/startseite/Background_City.jpg" />
-		</div>
-
-		<form id="SearchForm" class="formSearch" data-ng-submit="submit()">
-
-			<!-- Real Estate Type (Droplist) -->
-			<select class="dropListSearch" name="realestatetype"
-				data-ng-model="realestatetype" data-ng-options="id as option for (id, option) in realestatetypes">
-			</select>
-
-			<!-- Purchase Type (Droplist) -->
-			<select class="dropListSearch" name="purchasetype"
-				data-ng-model="purchasetype" data-ng-options="id as option for (id, option) in purchasetypes">
-			</select>
-
-			<!-- Input (Text Field) -->
-			<input type="text" class="inputSearch" name="city" data-ng-model="city" placeholder="Straße, PLZ, Ort" required/>
-
-			<!-- Input (Submit button) -->
-			<input type="submit" class="submitSearch" value="Finden"/>
-			
-			<!-- Extended Search (Link) -->
-			<a class="linkSearch" data-ng-href="erweiterte_suche.html#?purchasetype={{purchasetype}}&realestatetype={{realestatetype}}&city={{city}}">Erweiterte Suche</a>
-			
-		</form>
-
-	</div>
-
-	<div data-ng-include="'footer.html'"></div>
-	<script src="Controller.js" defer></script>
-</body>
+	
+		<div data-ng-include="'footer.html'"></div>
+		<script src="Controller.js" defer></script>
+	</body>
 </html>

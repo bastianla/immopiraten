@@ -1,529 +1,226 @@
 ﻿<!DOCTYPE html>
 <html>
-  <head>
-    <title>erweiterte Suche</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
-    <link href="files/erweiterte_suche/styles.css" type="text/css" rel="stylesheet"/>
-    <script src="data/document.js"></script>
-    <script src="files/erweiterte_suche/data.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    
-  </head>
-  <body ng-app="ImmoPiratenApp" ng-controller="searchCtrl" data-ng-init="getDetail()">
- 
-    <div id="base" class=""  >
+<head>
+<title>ImmoPiraten | Erweiterte Suche</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script src="files/erweiterte_suche/data.js"></script>
+<script src="data/document.js"></script>
+<link href="files/erweiterte_suche/styles.css" type="text/css"
+	rel="stylesheet" />
+<link href="files/startseite/styles.css" type="text/css"
+	rel="stylesheet" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body data-ng-app="ImmoPiratenApp" data-ng-controller="searchCtrl"
+	data-ng-init="getDetail()">
+	<div id="base" class="">
 
-      <!-- Unnamed (Rectangle) -->
-      <!-- Logo (Image) -->
-      <div id="u61" class="ax_default image" data-label="Logo">
-        <a href="#!startseite"><img id="u61_img" class="img " src="images/startseite/logo.png"/>
-        <!-- Unnamed () -->
-        <div id="u62" class="text" style="display:none; visibility: hidden">
-          <p><span></span></p>
-        </div></a>
-      </div>
+		<!-- User Panel -->
+		<div class="frameUserPanel">
+			<!-- User (Shape) -->
+			<img id="ImageUserShape" class="img "
+				src="images/startseite/User_Shape.png" />
 
-      <!-- Login -->
-      <div id="u63" class="ax_default">
-        <div id="u63_state0" class="panel_state" data-label="State1">
-          <div id="u63_state0_content" class="panel_state_content">
+			<!-- Login (Rectangle) -->
+			<label>Mein Konto | Login</label>
+		</div>
 
-            <!-- User (Shape) -->
-            <div id="u64" class="ax_default icon" data-label="User">
-              <img id="u64_img" class="img " src="images/startseite/user_Shape.png"/>
-              <!-- Unnamed () -->
-              <div id="u65" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
+		<!-- Logo (Image) -->
+		<div class="frameLogo" data-label="Logo">
+			<img class="logo" src="images/startseite/Logo.png" />
+		</div>
 
-            <!-- Login (Rectangle) -->
-            <div id="u66" class="ax_default paragraph" data-label="Login">
-              <div id="u66_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u67" class="text">
-                <p><span>Mein Konto | Login</span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-<div>
+		<div id="frameExtendedSearch" class="extendedSearchFrame">
+			<form id="SearchForm" class="formSearch" data-ng-submit="doSearch()">
 
+				<!-- Real Estate Type (Droplist) -->
+				<select class="dropListSearch" name="realestatetype"
+					data-ng-model="realestatetype"
+					data-ng-options="id as option for (id, option) in realestatetypes">
+				</select>
 
-</div>
-      <!-- Unnamed (Suche) -->
-      <div id="u91" class="ax_default">
-        <div id="u91_state0" class="panel_state" data-label="State1">
-          <div id="u91_state0_content" class="panel_state_content">
+				<!-- Purchase Type (Droplist) -->
+				<select class="dropListSearch" name="purchasetype"
+					data-ng-model="purchasetype"
+					data-ng-options="id as option for (id, option) in purchasetypes">
+				</select>
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u92" class="ax_default box_1">
-              <div id="u92_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u93" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
+				<!-- Input (Text Field) -->
+				<input type="text" class="inputSearchCity" name="city"
+					data-ng-model="city" placeholder="Straße, PLZ, Ort" required />
 
-            <!-- Art (Droplist) -->
-            <div id="u94" class="ax_default droplist" data-label="Art" >
-              <select id="u94_input" name="realestatetype" ng-model="realestatetype">
-                <option value="0" >Wohnung</option>
-                <option value="1">Haus</option>
-                <option value="2">Grundstück</option>
-              </select>
-            </div>
+				<!-- Distance (Droplist) -->
+				<select class="dropListSearch" name="radius" data-ng-model="radius"
+					data-ng-options="id as option for (id, option) in radiuses">
+				</select>
 
-            <!-- Typ (Droplist) -->
-            <div id="u95" class="ax_default droplist" data-label="Typ">
-              <select id="u95_input" name="purchasetype" ng-model="purchasetype">
-                <option value="0">Kauf</option>
-                <option value="1">Miete</option>
-              </select>
-            </div>
+				<!-- Input (Submit button) -->
+				<input type="submit" class="submitSearch" value="Finden" />
 
-            <!-- Umkreis (Droplist) -->
-            <div id="u96" class="ax_default droplist" data-label="Umkreis">
-              <select id="u96_input" name="radius" ng-model="radius" ng-init="radius='10'">
-                <option value="1">1 km</option>
-                <option value="5">5 km</option>
-                <option value="10">10 km</option>
-                <option value="50">50 km</option>
-                <option value="100">100 km</option>
-                <option value="200">200 km</option>
-              </select>
-            </div>
+				<!-- Save Search (Link) -->
+				<a class="linkSearch">Suche speichern</a> <br />
 
-            <!-- Ort (Text Field) -->
-            <div id="u97" class="ax_default text_field" data-label="Ort">
-            	<label for="city">Straße, PLZ, Ort</label>
-              <input id="u97_input" type="text" name="city" placeholder="Straße, PLZ, Ort" ng-model="city" required/>
-            </div>
+				<div class="horizontalBar"></div>
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u98" class="ax_default primary_button" ng-click="doSearch()">
-              <div id="u98_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u99" class="text">
-                <p ><span >Suche</span></p>
-              </div>
-            </div>
+				<!-- price -->
 
-            <!-- Ort (Text Field) -->
-            <div id="u100" class="ax_default text_field" data-label="Ort">
-                 <input id="u100_input" type="text" only-digits name="pricefrom" placeholder="Preis von" ng-model="pricefrom" />
-            </div>
+				<div class="frameSearchRange">
+					<label class="labelSearch">Preis</label>
 
-            <!-- Ort (Text Field) -->
-            <div id="u101" class="ax_default text_field" data-label="Ort">
-                 <input id="u101_input" type="text" only-digits name="pricetill" placeholder="Preis bis" ng-model="pricetill" />
-            </div>
+					<!-- price from (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange"
+						name="pricefrom" placeholder="von" data-ng-model="pricefrom" />
 
-            <!-- Ort (Text Field) -->
-            <div id="u102" class="ax_default text_field" data-label="Ort">
-              <input id="u102_input" type="text" placeholder="Anzahl Zimmer ab" disabled/>
-            </div>
+					<!-- price till (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange"
+						name="pricetill" placeholder="bis" data-ng-model="pricetill" />
+				</div>
 
-            <!-- Ort (Text Field) -->
-            <div id="u103" class="ax_default text_field" data-label="Ort">
-              <input id="u103_input" type="text" placeholder="Anzahl Zimmer bis" disabled/>
-            </div>
+				<!-- rooms -->
 
-            <!-- Ort (Text Field) -->
-            <div id="u104" class="ax_default text_field" data-label="Ort">
-              <input id="u104_input" type="text" name="livingareafrom" placeholder="Fläche von" ng-model="livingareafrom" only-digits/>
-            </div>
+				<div class="frameSearchRange">
+					<label class="labelSearch">Zimmer</label>
 
-            <!-- Ort (Text Field) -->
-            <div id="u105" class="ax_default text_field" data-label="Ort">
-              <input id="u105_input" type="text" name="livingareatill" placeholder="Fläche bis" ng-model="livingareatill" only-digits/>
-            </div>
+					<!-- room from (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange" placeholder="von"
+						disabled />
 
-            <!-- Ort (Text Field) -->
-            <div id="u106" class="ax_default text_field" data-label="Ort">
-              <input id="u106_input" type="text" placeholder="Baujahr von" disabled/>
-            </div>
+					<!-- room till (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange" placeholder="bis"
+						disabled />
+				</div>
 
-            <!-- Ort (Text Field) -->
-            <div id="u107" class="ax_default text_field" data-label="Ort">
-              <input id="u107_input" type="text" placeholder="Baujahr bis" disabled/>
-            </div>
+				<!-- living area -->
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u108" class="ax_default shape">
-              <div id="u108_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u109" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u110" class="ax_default shape">
-              <div id="u110_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u111" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u112" class="ax_default shape">
-              <div id="u112_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u113" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u114" class="ax_default primary_text_dark">
-              <div id="u115" class="text">
-              <label>Garten:</label>
-              <input style="float: right;" type="checkbox" name="garden" ng-init="garden='0'" ng-model="garden" ng-true-value="'1'" ng-false-value="'0'" disabled>
-   
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u116" class="ax_default primary_text_dark">
-              <!-- Unnamed () -->
-              <div id="u117" class="text">
-                 <label>Balkon:</label>
-              <input style="float: right;" type="checkbox" name="balcony" ng-init="balcony='0'" ng-model="balcony" ng-true-value="'1'" ng-false-value="'0'" disabled>
-   
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u118" class="ax_default primary_text_dark">
-              <div id="u118_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u119" class="text">
-                 <label>Terasse:</label>
-              <input style="float: right;" type="checkbox" name="terasse" ng-init="terasse='0'" ng-model="terasse" ng-true-value="'1'" ng-false-value="'0'" disabled>
-   
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u135" class="ax_default paragraph">
-              <div id="u135_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u136" class="text">
-                <p><span>Preis</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u137" class="ax_default paragraph">
-              <div id="u137_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u138" class="text">
-                <p><span>-</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u139" class="ax_default paragraph">
-              <div id="u139_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u140" class="text">
-                <p><span>Anzahl Zimmer</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u141" class="ax_default paragraph">
-              <div id="u141_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u142" class="text">
-                <p><span>-</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u143" class="ax_default paragraph">
-              <div id="u143_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u144" class="text">
-                <p><span>Wohnfläche</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u145" class="ax_default paragraph">
-              <div id="u145_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u146" class="text">
-                <p><span>Baujahr</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u147" class="ax_default paragraph">
-              <div id="u147_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u148" class="text">
-                <p><span>-</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u149" class="ax_default paragraph">
-              <div id="u149_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u150" class="text">
-                <p><span>-</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u151" class="ax_default paragraph">
-              <div id="u151_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u152" class="text">
-                <p><span>Heizart</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u153" class="ax_default paragraph">
-              <div id="u153_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u154" class="text">
-                <p><span>weitere Optionen</span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u155" class="ax_default shape">
-              <div id="u155_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u156" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u157" class="ax_default shape">
-              <div id="u157_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u158" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u159" class="ax_default shape">
-              <div id="u159_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u160" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u161" class="ax_default primary_text_dark">
-              <!-- Unnamed () -->
-              <div id="u162" class="text">
-                   <label>zentral:</label>
-              <input style="float: right;" type="checkbox" name="heating1" ng-init="heating1='0'" ng-model="heating1" ng-true-value="'1'" ng-false-value="'0'" disabled>
-   
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u163" class="ax_default primary_text_dark">
-              <!-- Unnamed () -->
-              <div id="u164" class="text">
-                   <label>Gas:</label>
-              <input style="float: right;" type="checkbox" name="heating2" ng-init="heating2='0'" ng-model="heating2" ng-true-value="'1'" ng-false-value="'0'" disabled>
-   
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u165" class="ax_default primary_text_dark">
-              <!-- Unnamed () -->
-              <div id="u166" class="text">
-   				<label>Öl:</label>
-             	 <input style="float: right;" type="checkbox" name="heating3" ng-init="heating3='0'" ng-model="heating3" ng-true-value="'1'" ng-false-value="'0'" disabled>
-                 </div>
-            </div>
-
-           
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u182" class="ax_default shape">
-              <div id="u182_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u183" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
-
-            <!-- Unnamed (Rectangle) -->
-            <div id="u184" class="ax_default primary_text_dark">
-
-              <!-- Unnamed () -->
-              <div id="u185" class="text">
-              <label>Garage:</label>
-              <input style="float: right;" type="checkbox" name="garage" ng-init="garage='0'" ng-model="garage" ng-true-value="'1'" ng-false-value="'0'" disabled>
-   
-              </div>
-            </div>
+				<div class="frameSearchRange">
+					<label class="labelSearch">Wohnfläche</label>
 
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u191" class="ax_default shape">
-              <div id="u191_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u192" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
+					<!-- living area from (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange" placeholder="von"
+						data-ng-model="livingareafrom" />
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u193" class="ax_default primary_text_dark">
-              <!-- Unnamed () -->
-              <div id="u194" class="text">
-              <label>Provision:</label>
-              <input style="float: right;" type="checkbox" name="freeofcommission" ng-checked="1" ng-init="freeofcommission='1'" ng-model="freeofcommission" ng-true-value="'false'" ng-false-value="'true'">
-   
-              </div>
-            </div>
+					<!-- living area till (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange" placeholder="bis"
+						data-ng-model="livingareatill" />
+				</div>
 
-            <!-- Checkbox (Dynamic Panel) -->
+				<!-- plot area -->
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u200" class="ax_default paragraph">
-              <div id="u200_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u201" class="text">
-                <p><span>Suche speichern</span></p>
-              </div>
-            </div>
+				<div class="frameSearchRange">
+					<label class="labelSearch">Grundstücksfläche</label>
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u202" class="ax_default paragraph">
-              <div id="u202_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u203" class="text">
-                <p><span>Durchsuche</span></p>
-              </div>
-            </div>
+					<!-- construction year from (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange" placeholder="von"
+						data-ng-model="plotareafrom" />
 
-            <!-- Unnamed (Image) -->
-            <div id="u204" class="ax_default image">
-              <img id="u204_img" class="img " src="images/erweiterte_suche/u208.png"/>
-              <!-- Unnamed () -->
-              <div id="u205" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
+					<!-- construction year till (Text Field) -->
+					<input type="number" min=0 class="inputSearchRange" placeholder="bis"
+						data-ng-model="plotareatill" />
+				</div>
 
-            <!-- Unnamed (Image) -->
-            <div id="u206" class="ax_default image">
-              <img id="u206_img" class="img " src="images/erweiterte_suche/u206.png"/>
-              <!-- Unnamed () -->
-              <div id="u207" class="text" style="display:none; visibility: hidden">
-                <p><span></span></p>
-              </div>
-            </div>
+				<!-- Heating -->
+				<div class="frameSearchCheck">
+					<label class="labelSearch">Heizung</label>
 
-           
-            <!-- Unnamed (Shape) -->
-            <div id="u210" class="ax_default icon">
-              <input type="checkbox" name="immoScout" ng-init="immoScout='1'" ng-model="immoScout" ng-true-value="'1'" ng-false-value="'0'" style="display:none; visibility: hidden">
-              <a ng-click="toggleImageImmoScout()"><img id="followbuttonImmoScout" ng-src="{{followBtnImgUrlImmoScout}}"  /></a>            
-            </div>
+					<!-- fire type (Checkbox) -->
+					<input type="checkbox" class="inputSearchCheck"
+						data-ng-model="heating1" disabled><label>Zentral</label><br /> 
+						<input type="checkbox" class="inputSearchCheck" data-ng-model="heating2"
+						disabled><label>Gas</label><br /> 
+					<input type="checkbox"
+						class="inputSearchCheck" data-ng-model="heating3" disabled>
+						<label>Öl</label><br />
 
-            <!-- Unnamed (Shape) -->
-            <div id="u212" class="ax_default icon">
-              <input type="checkbox" name="immoNet" ng-init="immoNet='1'" ng-model="immoNet" ng-true-value="'1'" ng-false-value="'0'" style="display:none; visibility: hidden">
-              <a ng-click="toggleImageImmoNet()"><img id="followbuttonImmoNet" ng-src="{{followBtnImgUrlImmoNet}}"  /></a>    
-            </div>
+				</div>
 
+				<!-- Other Options -->
+				<div class="frameSearchCheck">
+					<label class="labelSearch">Filter</label>
 
-            <!-- Ort (Text Field) -->
-            <div id="u216" class="ax_default text_field" data-label="Ort">
-                <input id="u216_input" type="text" name="areafrom" placeholder="Fläche von" disabled/>
-            </div>
+					<!-- Other Options (Checkbox) -->
+					<input type="checkbox" class="inputSearchCheck"
+						data-ng-model="freeofcommission" disabled><label>Provisionsfrei</label><br />
+					<input type="checkbox" class="inputSearchCheck"
+						data-ng-model="garden" disabled>
+						<label>Garten</label><br /> <input
+						type="checkbox" class="inputSearchCheck" data-ng-model="terace"
+						disabled>
+						<label>Terrasse</label><br />
+				</div>
 
-            <!-- Ort (Text Field) -->
-            <div id="u217" class="ax_default text_field" data-label="Ort">
-                <input id="u217_input" type="text" name="areatill" placeholder="Fläche bis" disabled/>
-            </div>
+				<div class="frameSearchCheck">
+					<label class="labelSearch">Filter</label>
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u218" class="ax_default paragraph">
-              <div id="u218_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u219" class="text">
-                <p><span>-</span></p>
-              </div>
-            </div>
+					<!-- Other Options (Checkbox) -->
+					<input type="checkbox" class="inputSearchCheck"
+						data-ng-model="balcony" disabled><label>Balkon</label><br /> <input
+						type="checkbox" class="inputSearchCheck" data-ng-model="garage" 
+						disabled>
+						<label>Garage</label><br />
+				</div>				
+				
+				<!-- Portals -->
+				<div class="frameSearchCheck">
+					<label class="labelSearch">Portale</label>
 
-            <!-- Unnamed (Rectangle) -->
-            <div id="u220" class="ax_default paragraph">
-              <div id="u220_div" class=""></div>
-              <!-- Unnamed () -->
-              <div id="u221" class="text">
-                <p><span>Grundstücksfläche</span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-<div >
-<div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<div id="loop"  ng-repeat="x in exposedata">
-	<div id="looper" style="position: relative;margin-top:35px;">
-		<div id="box" style="position: absolute; margin-left:320px;margin-top: 0px;">	
-			<div id="ueberschrift" style="width: 866px;font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;font-size: 24px;">
-			<a href="detailseite.html#?id={{ x.id }}&portal=1" style="color: #FF9400;">{{ x.title }}</a>
-			</div>
-			<div id="untertext" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #333333;font-size: 18px;">
-			{{ x.description }}
-			</div>
-			<div id="logozeile" style="font-family: 'Arial Fett', 'Arial Standard', 'Arial';font-weight: 700;font-style: normal;color: #333333;font-size: 18px;">
-			gefunden bei <img ng-if="x.portal == 'ImmobilienScout24'"style="padding-left:30px; padding-top:10px; width:96px; heigt: 50px;" src="images/erweiterte_suche/u206.png" />
+					<!-- ImmoScout (Checkbox) -->
+					<input type="checkbox" class="inputSearchCheck" ng-init="immoScout='1'" ng-model="immoScout" ng-true-value="'1'" ng-false-value="'0'">
+					    <label>ImmoScout24</label><br />
+					    
+					<!-- Immonet (Checkbox) -->
+					<input type="checkbox" class="inputSearchCheck" ng-init="immoNet='1'" ng-model="immoNet" ng-true-value="'1'" ng-false-value="'0'">
+						<label>ImmoNet</label><br />
+				</div>	
+				
+			</form>
+		</div>
+
+		<div class="frameResultList" data-ng-repeat="x in exposedata">
+			<div class="frameResultListEntry">
+				
+				<div class="frameResultListEntryTitle">
+					<a class="resultListEntryTitle" href="detailseite.html#?id={{ x.id }}&portal=1">{{ x.title }}</a>
+				</div>
+				
+				<div class="frameResultListEntryExpose">
+					<div class="frameImgResultListEntry">
+						<img data-ng-src="{{ x.image }}" />
+					</div>
+					<div class="frameResultListEntryOrigin">
+						<img class="imgResultListEntryOrigin" data-ng-if="x.portal == 'ImmobilienScout24'"
+							src="images/erweiterte_suche/Logo_ImmoScout.png" />
+						<img class="imgResultListEntryOrigin" data-ng-if="x.portal == 'Immonet'"
+							src="images/erweiterte_suche/u208.png" />
+					</div>
+					<div class="frameResultListEntryInfo">
+						<div class="frameResultListEntryPrice">
+							<label class="labelResultListEntryInfoCaption">Kaltmiete</label>
+							<label class="labelResultListEntryInfoValue">{{ x.price }} €</label>
+						</div>
+						<div class="frameResultListEntryLivingArea">
+							<label class="labelResultListEntryInfoCaption">Wohnfläche</label>
+							<label class="labelResultListEntryInfoValue">{{	x.livingArea }} m²</label>
+						</div>
+						<div class="frameResultListEntryRooms">
+							<label class="labelResultListEntryInfoCaption">Zimmer</label>
+							<label class="labelResultListEntryInfoValue">{{	x.room }}</label>
+						</div>
+						<div class="frameResultListEntryCity">
+							<label class="labelResultListEntryInfoCaption">Ort</label>
+							<label class="labelResultListEntryInfoValue">{{	x.site.city }}</label>
+						</div>
+					</div>
+				
+				</div>
+				
 			</div>
 		</div>
-		<div id="boxgrau" style="position: absolute; margin-left:320px; bottom: 0px;padding-bottom: 0px">
-				<div style="position: absolute; left:5px;top:5px;">
-					<div class="miete" style="font-size: 13px;width:100px;color: #FFFFFF;">Kaltmiete   </div>
-					<div class="miete2" style="font-size: 25px;color: #FF9400;">{{ x.price }} €</div>
-				</div>
-				<div style="position: absolute; left:150px;top:5px;">
-					<div class="flaeche" style="font-size: 13px;width:100px;color: #FFFFFF;">Wohnfläche</div>
-					<div class="flaeche2" style="font-size: 25px;color: #FF9400;">{{ x.livingArea }} m²</div>
-				</div>
-				<div style="position: absolute; left:300px;top:5px;">
-					<div class="zimmer" style="font-size: 13px;width:100px;color: #FFFFFF;">Zimmer</div>
-					<div class="zimmer2" style="font-size: 25px;color: #FF9400;">{{ x.room }}</div>
-				</div>
-				<div style="position: absolute; left:450px;top:5px;">
-					<div class="ort" style="font-size: 13px;width:100px;color: #FFFFFF;">Ort</div>
-					<div class="ort" style="font-size: 25px;color: #FF9400;">{{ x.site.city }}</div>
-				</div>
-			<img style="width: 866px; height: 65px;"src="images/trefferliste/u638.png"/>
-			</div>
-		<div id="bild">
-				<img width="281" high="211" style="left 0px; top 0px;"src="{{ x.image }}><!--images/trefferliste/u632.png"/ -->
-		</div>
-		
+		<div data-ng-include="'footer.html'"></div>
 	</div>
-</div>
-
-</div>
-     </div></div>
-     <div data-ng-include="'footer.html'"></div>
-    <script src="Controller.js" defer></script>
-  </body>
+	
+	<script src="Controller.js" defer></script>
+</body>
 </html>
