@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import de.immoPiraten.contact.Contact;
 import de.immoPiraten.site.Site;
 
 @Entity
@@ -36,6 +37,8 @@ public abstract class RealEstate {
 	private PurchaseType purchaseType;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone="GMT")
 	private Date publicationDate;
+	@OneToOne
+	private Contact contact;
 
 	public static final Comparator<RealEstate> REAL_ESTATE_PUBLICATION_DATE_COMPARATOR = new RealEstatePublicationDateComparator();
 	public static final Comparator<RealEstate> REAL_ESTATE_PRICE_COMPARATOR = new RealEstatePriceComparator();
@@ -135,4 +138,12 @@ public abstract class RealEstate {
 	public void setSite(Site site) {
 		this.site = site;
 	}
+	
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}	
 }

@@ -3,6 +3,9 @@ package de.immoPiraten.contact;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import de.immoPiraten.site.Site;
 
 @Entity
 public class Contact {
@@ -12,16 +15,18 @@ public class Contact {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String title; // Enum?
+	private TitleType title;
 	private String telephone;
 	private String email;
 	private String mobile;
 	private String company;
+	@OneToOne
+	private Site site;	
 	
 	public Contact() {
 	}
 
-	public Contact(String firstName, String lastName, String title, String telephone, String email, String mobile, String company) {
+	public Contact(String firstName, String lastName, TitleType title, String telephone, String email, String mobile, String company) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -36,7 +41,6 @@ public class Contact {
 		return id;
 	}
 
-	// Benötigt?
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -57,11 +61,11 @@ public class Contact {
 		this.lastName = lastName;
 	}
 
-	public String getTitle() {
+	public TitleType getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(TitleType title) {
 		this.title = title;
 	}
 
@@ -95,5 +99,13 @@ public class Contact {
 
 	public void setCompany(String company) {
 		this.company = company;
-	}	
+	}
+	
+	public Site getSite() {
+		return site;
+	}
+
+	public void setSite(Site site) {
+		this.site = site;
+	}		
 }

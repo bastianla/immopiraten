@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.APIException;
 import de.immoPiraten.OAuth.OAuth;
+import de.immoPiraten.contact.Contact;
 import de.immoPiraten.realEstate.House;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
@@ -186,9 +187,8 @@ public class Search {
 		house.setLink(Search.IMMOSCOUT_EXPOSE_BASE_URL.concat(exposeId));
 
 		// sets the house properties
-		LinkedHashMap<String, Object> realEstate = (LinkedHashMap<String, Object>) properties
-				.get("resultlist.realEstate");
-
+		LinkedHashMap<String, Object> realEstate = (LinkedHashMap<String, Object>) properties.get("resultlist.realEstate");
+		
 		if (realEstate == null)
 			realEstate = (LinkedHashMap<String, Object>) properties.get("realEstate");
 
@@ -214,19 +214,21 @@ public class Search {
 			house.setPrice(price.intValue());
 
 		// sets a value indicating whether a energy certificate is available
-		house.setEnergyCertificate(Boolean.parseBoolean(
-				Search.getJsonValueOrDefault(realEstate, "energyPerformanceCertificate", false).toString()));
-
-		// sets a value indicating whether a commission has to be paid by the
-		// customer
-		LinkedHashMap<String, Object> courtage = (LinkedHashMap<String, Object>) realEstate.get("courtage");
-
+		Boolean energyCertificate = Parser.parseBoolean(Search.getJsonValue(realEstate, "energyPerformanceCertificate"));
+		if (energyCertificate != null)
+			house.setEnergyCertificate(energyCertificate);		
+		
+		// sets a value indicating whether a commission has to be paid by the customer		
+		Boolean courtage = null;
+		LinkedHashMap<String, Object> courtageMap = (LinkedHashMap<String, Object>)Search.getJsonValue(realEstate, "courtage");		
+		if (courtageMap != null)
+			courtage = Parser.parseBoolean(Search.getJsonValue(realEstate, "hasCourtage"));
+		
 		if (courtage != null)
-			house.setCommission(Boolean.parseBoolean(Search.getJsonValueOrDefault(courtage, "hasCourtage", false).toString()));
+			house.setCommission(courtage);
 
 		// sets the availability date
 		Object freeFrom = realEstate.get("freeFrom");
-
 		if (freeFrom != null) {
 			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 			try {
@@ -240,17 +242,14 @@ public class Search {
 		if (description != null)
 			house.setDescription(description);
 		
-		// house.setLivingArea(Search.parseDouble(realEstate, "livingSpace", 0));
 		Float livingArea = Parser.parseFloat(Search.getJsonValue(realEstate, "livingSpace"));
 		if (livingArea != null)
 			house.setLivingArea(livingArea.shortValue());
 		
-		// house.setLandArea(Search.parseDouble(realEstate, "plotArea", 0));
 		Float landArea = Parser.parseFloat(Search.getJsonValue(realEstate, "plotArea"));
 		if (landArea != null)
 			house.setLandArea(landArea.shortValue());
 		
-		// house.setRoom(Search.parseDouble(realEstate, "numberOfRooms", 0));
 		Float room = Parser.parseFloat(Search.getJsonValue(realEstate, "numberOfRooms"));
 		if (room != null)
 			house.setRoom(room);
@@ -269,10 +268,10 @@ public class Search {
 		
 		house.setSite(Search.getSite(realEstate));
 		
-		// house.setAdditionalCosts(Search.parseDouble(realEstate, "ServiceCharge", 0));
-		Float additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "ServiceCharge")); // Nebenkosten bei Miete
+		// side cost at rent real estate; house money at condominium
+		Float additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "ServiceCharge"));
 		if (additionalCosts == null)
-			additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "rentSubsidy")); // Hausgeld bei Eigentumswohnung
+			additionalCosts = Parser.parseFloat(Search.getJsonValue(realEstate, "rentSubsidy"));
 		
 		if (additionalCosts != null)
 			house.setAdditionalCosts(additionalCosts);
@@ -357,14 +356,15 @@ public class Search {
 				
 		try
 		{
-			de.immoPiraten.realEstate.FiringType firing = null;			
-			de.immoPiraten.realEstate.FiringType[] firingArray = (de.immoPiraten.realEstate.FiringType[])Search.getJsonValue(realEstate, "firingTypes");
+			Object firing = null;			
+			// de.immoPiraten.realEstate.FiringType[] firingArray = (de.immoPiraten.realEstate.FiringType[])Search.getJsonValue(realEstate, "firingTypes");
+			ArrayList<de.immoPiraten.realEstate.FiringType> firingArray = (ArrayList<de.immoPiraten.realEstate.FiringType>)Search.getJsonValue(realEstate, "firingTypes");
+
+			if ((firingArray != null) && !firingArray.isEmpty())
+				firing = firingArray.get(0);
 			
-			if (firingArray != null)
-				firing = firingArray[0];
-			
-			if (firing != null)
-				house.setFiring(firing);			
+			// if (firing != null)
+				// house.setFiring(firing);			
 		}catch(Exception e)
 		{}
 				
@@ -374,7 +374,11 @@ public class Search {
 		
 		if (residentialRealEstate != null)
 			house.setResidentialRealEstate(residentialRealEstate);
-				
+		
+		Contact contact = Search.getContact(properties);
+		if (contact != null)
+			house.setContact(contact);
+		
 		return house;
 	}
 
@@ -446,20 +450,47 @@ public class Search {
 		return null;
 	}
 
-	private static double parseDouble(LinkedHashMap<String, Object> map, String key, double defaultValue) {
-		Object value = Search.getJsonValueOrDefault(map, key, defaultValue);
+	@SuppressWarnings("unchecked")
+	private static Contact getContact(LinkedHashMap<String, Object> realEstate) {
 
-		Object property = map.get(key);
-		if (property != null) {
-			if (value instanceof Integer) {
-				int intValue = ((Integer) value).intValue();
-				return (double) intValue;
-			} else {
-				return (double) value;
+		try{
+			
+			LinkedHashMap<String, Object> contactDetailsMap = (LinkedHashMap<String, Object>)realEstate.get("contactDetails");
+	
+			if (contactDetailsMap != null) {
+	
+				Contact contact = new Contact();
+				
+				String firstName = Parser.parseString(Search.getJsonValue(contactDetailsMap, "firstname"));
+				if (firstName != null)
+					contact.setFirstName(firstName);
+				
+				String lastName = Parser.parseString(Search.getJsonValue(contactDetailsMap, "lastname"));
+				if (lastName != null)
+					contact.setLastName(lastName);
+
+				String telephone = Parser.parseString(Search.getJsonValue(contactDetailsMap, "faxNumber"));
+				if (telephone != null)
+					contact.setTelephone(telephone);			
+
+				String company = Parser.parseString(Search.getJsonValue(contactDetailsMap, "company"));
+				if (company != null)
+					contact.setCompany(company);							
+				
+				de.immoPiraten.contact.TitleType title = Parser.parseEnum(Search.getJsonValue(contactDetailsMap, "salutation"), de.immoPiraten.contact.TitleType.class);
+				if (title != null)
+					contact.setTitle(title);
+
+				Site site = Search.getSite(contactDetailsMap);
+				if (site != null)
+					contact.setSite(site);
+				
+				return contact;
 			}
+		}catch(Exception e){
 		}
-
-		return defaultValue;
+		
+		return null;
 	}
 	
 	// returns an immoScout24 range, if a from or a till value is specified,
