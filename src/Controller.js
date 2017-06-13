@@ -29,35 +29,35 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	$scope.radiuses = ["1 km", "5 km", "10 km", "50 km"];
 	
     $scope.submit = function() {
-    	window.location.href = "erweiterte_suche.html#?city=" + $scope.city 
+    	window.location.href = "suche.html#?city=" + $scope.city 
     		+ "&purchasetype=" + $scope.purchasetype 
     		+ "&realestatetype=" + $scope.realestatetype;
     	   }
 	
-	$scope.followBtnImgUrlImmoScout = '/images/erweiterte_suche/u210.png'
+	$scope.followBtnImgUrlImmoScout = '/images/suche/u210.png'
 
     $scope.toggleImageImmoScout = function () {
-        if ($scope.followBtnImgUrlImmoScout === '/images/erweiterte_suche/u210.png') {
+        if ($scope.followBtnImgUrlImmoScout === '/images/suche/u210.png') {
         	if($scope.immoNet!=='0'){
-	            $scope.followBtnImgUrlImmoScout = '/images/erweiterte_suche/u211.png';
+	            $scope.followBtnImgUrlImmoScout = '/images/suche/u211.png';
 	            $scope.immoScout='0';
         	}
         } else {
-            $scope.followBtnImgUrlImmoScout = '/images/erweiterte_suche/u210.png';
+            $scope.followBtnImgUrlImmoScout = '/images/suche/u210.png';
             $scope.immoScout='1';
         }
     }
 	
-	$scope.followBtnImgUrlImmoNet = '/images/erweiterte_suche/u210.png'
+	$scope.followBtnImgUrlImmoNet = '/images/suche/u210.png'
 
 	    $scope.toggleImageImmoNet = function () {
-	        if ($scope.followBtnImgUrlImmoNet === '/images/erweiterte_suche/u210.png') {
+	        if ($scope.followBtnImgUrlImmoNet === '/images/suche/u210.png') {
 	        	if($scope.immoScout!=='0'){
-		        	$scope.followBtnImgUrlImmoNet = '/images/erweiterte_suche/u211.png';
+		        	$scope.followBtnImgUrlImmoNet = '/images/suche/u211.png';
 		            $scope.immoNet='0';
 	        	}
 	        } else {
-	            $scope.followBtnImgUrlImmoNet = '/images/erweiterte_suche/u210.png';
+	            $scope.followBtnImgUrlImmoNet = '/images/suche/u210.png';
 	            $scope.immoNet='1';
 	        }
 	    }	
