@@ -276,6 +276,10 @@ public class Search {
 		PurchaseType purchaseType = Parser.parseEnum(jsonHouseElement.get("purchaseType"), PurchaseType.class);
 		if (purchaseType != null)
 			newHouse.setPurchaseType(purchaseType);
+		
+		String image = Parser.parseString(jsonHouseElement.get("image"));		
+		if (image != null)
+			newHouse.setImage(image);
 			
 		Site newSite = new Site(null);
 		
@@ -297,8 +301,8 @@ public class Search {
 		
 		String street = Parser.parseString(jsonHouseElement.get("street"));
 		if (street != null)
-			newSite.setStreet(street);			
-	
+			newSite.setStreet(street);		
+		
 		newHouse.setSite(newSite);
 		
 		return newHouse;
