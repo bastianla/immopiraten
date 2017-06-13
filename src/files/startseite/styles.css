@@ -247,6 +247,65 @@ a{
     overflow-x: hidden;
 }
 
+/*---Detail specific styles---*/
+
+.frameDetailHeader {
+	position: relative;
+	width: 100%;
+	height: 2rem;
+	background-color: #515151;
+	margin-top: 1rem;
+	padding: 0.5rem;
+	height: auto;
+}
+
+.frameDetailHeaderLeft {
+   	width: 33.33%;
+    display: inline-block;
+    text-align: left;
+}
+
+.frameDetailHeaderCenter {
+	width: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.frameDetailHeaderRight {
+    width: 33.33%;
+    display: inline-block;
+    text-align: right;
+}
+
+.labelDetailHeader {
+	font-size: 1rem;
+	color: #FF9400;
+}
+
+.frameDetailExpose {
+	position: relative;
+	width: 100%;
+    text-align: left;
+    padding: 1% 6.75%;	
+}
+
+.frameDetailExposeTitle {
+	font-size: 2rem;
+}
+
+.imgDetailExpose {
+  position: relative;
+  width: 740px;
+  height: 560px;
+}
+
+.frameDetailExposeContactInfo {
+	position: relative;
+}
+
+
+
+
 /*--------------
 #u1_img {
   position:absolute;
