@@ -36,12 +36,12 @@
 	
 				<!-- Real Estate Type (Droplist) -->
 				<select class="dropListSearch" name="realestatetype"
-					data-ng-model="realestatetype" data-ng-options="id as option for (id, option) in realestatetypes">
+					data-ng-model="realestatetype" data-ng-options="id as option for (id, option) in realestatetypes" ng-init="realestatetype='0'">
 				</select>
 	
 				<!-- Purchase Type (Droplist) -->
 				<select class="dropListSearch" name="purchasetype"
-					data-ng-model="purchasetype" data-ng-options="id as option for (id, option) in purchasetypes">
+					data-ng-model="purchasetype" data-ng-options="id as option for (id, option) in purchasetypes" ng-init="purchasetype='1'">
 				</select>
 	
 				<!-- Input (Text Field) -->
