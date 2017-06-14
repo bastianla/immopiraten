@@ -16,11 +16,17 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.immoPiraten.APIException;
+import de.immoPiraten.contact.Contact;
+import de.immoPiraten.realEstate.BuildingEnergyRatingType;
+import de.immoPiraten.realEstate.ConditionType;
+import de.immoPiraten.realEstate.FiringType;
 import de.immoPiraten.realEstate.HeatingType;
 import de.immoPiraten.realEstate.House;
+import de.immoPiraten.realEstate.InteriorQualityType;
 import de.immoPiraten.realEstate.Portal;
 import de.immoPiraten.realEstate.PurchaseType;
 import de.immoPiraten.realEstate.RealEstateType;
+import de.immoPiraten.realEstate.ResidentialRealEstateType;
 import de.immoPiraten.search.SearchType;
 import de.immoPiraten.site.Site;
 import de.immoPiraten.utility.Parser;
@@ -280,7 +286,135 @@ public class Search {
 		String image = Parser.parseString(jsonHouseElement.get("image"));		
 		if (image != null)
 			newHouse.setImage(image);
-			
+		
+		Short floor = Parser.parseShort(jsonHouseElement.get("floor"));
+		if (floor != null)
+			newHouse.setFloor(floor);
+
+		Short numberOfFloors = Parser.parseShort(jsonHouseElement.get("numberOfFloors"));
+		if (numberOfFloors != null)
+			newHouse.setNumberOfFloors(numberOfFloors);
+		
+		Short numberOfBedRooms = Parser.parseShort(jsonHouseElement.get("numberOfBedRooms"));
+		if (numberOfBedRooms != null)
+			newHouse.setNumberOfBedRooms(numberOfBedRooms);		
+		
+		Short numberOfBathRooms = Parser.parseShort(jsonHouseElement.get("numberOfBathRooms"));
+		if (numberOfBathRooms != null)
+			newHouse.setNumberOfBathRooms(numberOfBathRooms);		
+		
+		Short numberOfParkingSpaces = Parser.parseShort(jsonHouseElement.get("numberOfParkingSpaces"));
+		if (numberOfParkingSpaces != null)
+			newHouse.setNumberOfParkingSpaces(numberOfParkingSpaces);		
+		
+		Float heatingCosts = Parser.parseFloat(jsonHouseElement.get("heatingCosts"));
+		if (numberOfParkingSpaces != null)
+			newHouse.setHeatingCosts(heatingCosts);			
+		
+		Boolean heatingCostsInAdditionalCosts = Parser.parseBoolean(jsonHouseElement.get("heatingCostsInAdditionalCosts"));
+		if (heatingCostsInAdditionalCosts != null)
+			newHouse.setHeatingCostsInAdditionalCosts(heatingCostsInAdditionalCosts);				
+		
+		String deposit = Parser.parseString(jsonHouseElement.get("deposit"));
+		if (deposit != null)
+			newHouse.setDeposit(deposit);
+		
+		Float thermalCharacteristic = Parser.parseFloat(jsonHouseElement.get("thermalCharacteristic"));
+		if (thermalCharacteristic != null)
+			newHouse.setThermalCharacteristic(thermalCharacteristic);
+
+		String locationNote = Parser.parseString(jsonHouseElement.get("locationNote"));
+		if (locationNote != null)
+			newHouse.setLocationNote(locationNote);		
+
+		String otherNote = Parser.parseString(jsonHouseElement.get("otherNote"));
+		if (otherNote != null)
+			newHouse.setOtherNote(otherNote);		
+		
+		String furnishingNote = Parser.parseString(jsonHouseElement.get("furnishingNote"));
+		if (furnishingNote != null)
+			newHouse.setFurnishingNote(furnishingNote);
+		
+		String energyEfficiencyClass = Parser.parseString(jsonHouseElement.get("energyEfficiencyClass"));
+		if (energyEfficiencyClass != null)
+			newHouse.setEnergyEfficiencyClass(energyEfficiencyClass);
+		
+		ConditionType objectstate = Parser.parseEnum(jsonHouseElement.get("objectstate"), ConditionType.class);
+		if (objectstate != null)
+			newHouse.setObjectstate(objectstate);
+		
+		InteriorQualityType interiorQuality = Parser.parseEnum(jsonHouseElement.get("interiorQuality"), InteriorQualityType.class);
+		if (interiorQuality != null)
+			newHouse.setInteriorQuality(interiorQuality);
+		
+		BuildingEnergyRatingType buildingEnergyRating = Parser.parseEnum(jsonHouseElement.get("buildingEnergyRating"), BuildingEnergyRatingType.class);
+		if (buildingEnergyRating != null)
+			newHouse.setBuildingEnergyRating(buildingEnergyRating);
+		
+		FiringType firing = Parser.parseEnum(jsonHouseElement.get("firing"), FiringType.class);
+		if (firing != null)
+			newHouse.setFiring(firing);
+		
+		ResidentialRealEstateType residentialRealEstate = Parser.parseEnum(jsonHouseElement.get("residentialRealEstate"), ResidentialRealEstateType.class);
+		if (residentialRealEstate != null)
+			newHouse.setResidentialRealEstate(residentialRealEstate);
+		
+		Contact newContact = new Contact();
+		
+		de.immoPiraten.contact.TitleType contactTitle = Parser.parseEnum(jsonHouseElement.get("contactTitle"), de.immoPiraten.contact.TitleType.class);
+		if (contactTitle != null)
+			newContact.setTitle(contactTitle);
+		
+		String contactFirstName = Parser.parseString(jsonHouseElement.get("contactFirstName"));
+		if (contactFirstName != null)
+			newContact.setFirstName(contactFirstName);		
+		
+		String contactLastName = Parser.parseString(jsonHouseElement.get("contactLastName"));
+		if (contactLastName != null)
+			newContact.setLastName(contactLastName);
+		
+		String contactTelephone = Parser.parseString(jsonHouseElement.get("contactTelephone"));
+		if (contactTelephone != null)
+			newContact.setTelephone(contactTelephone);
+		
+		String contactEmail = Parser.parseString(jsonHouseElement.get("contactEmail"));
+		if (contactEmail != null)
+			newContact.setEmail(contactEmail);
+		
+		String contactMobile = Parser.parseString(jsonHouseElement.get("contactMobile"));
+		if (contactMobile != null)
+			newContact.setMobile(contactMobile);
+		
+		String contactCompany = Parser.parseString(jsonHouseElement.get("contactCompany"));
+		if (contactCompany != null)
+			newContact.setCompany(contactCompany);
+		
+		newHouse.setContact(newContact);
+		
+		Site newContactSite = new Site(null);
+		
+		String siteStreet = Parser.parseString(jsonHouseElement.get("siteStreet"));
+		if (siteStreet != null)
+			newContactSite.setStreet(siteStreet);		
+
+		String siteCity = Parser.parseString(jsonHouseElement.get("siteCity"));
+		if (siteCity != null)
+			newContactSite.setCity(siteCity);		
+
+		String sitePostCode = Parser.parseString(jsonHouseElement.get("sitePostCode"));
+		if (sitePostCode != null)
+			newContactSite.setPostCode(sitePostCode);		
+		
+		String siteHouseNumber = Parser.parseString(jsonHouseElement.get("siteHouseNumber"));
+		if (siteHouseNumber != null)
+			newContactSite.setHouseNumber(siteHouseNumber);		
+
+		String siteCountry = Parser.parseString(jsonHouseElement.get("siteCountry"));
+		if (siteCountry != null)
+			newContactSite.setCountry(siteCountry);		
+				
+		newContact.setSite(newContactSite);		
+		
 		Site newSite = new Site(null);
 		
 		String country = Parser.parseString(jsonHouseElement.get("country"));
