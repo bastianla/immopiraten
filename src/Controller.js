@@ -26,8 +26,15 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 	
 	$scope.realestatetypes = ["Wohnung", "Haus", "Grundstück"];
 	$scope.purchasetypes = ["Kaufen", "Mieten"];
-	$scope.radiuses = ["1 km", "5 km", "10 km", "50 km"];
+	$scope.radiuses = [
+		{label : "1 km", value:"1"},
+		{label : "5 km", value:"5"},
+		{label : "10 km", value:"10"},
+		{label : "50 km", value:"50"}
+	];
+	$scope.sortings = ["Veröffentlichkeitsdatum absteigend", "Veröffentlichkeitsdatum aufsteigend", "Preis absteigend", "Preis aufsteigend"];
 	
+
     $scope.submit = function() {
     	window.location.href = "suche.html#?city=" + $scope.city 
     		+ "&purchasetype=" + $scope.purchasetype 
@@ -77,7 +84,9 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		if (typeof $scope.city !== 'undefined') {
 			$scope.doSearch();
 		}		
-	}    	
+	}  
+    
+    
        
     $scope.doSearch = function() {	
  	
@@ -96,31 +105,67 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		searchparams+="&portal="+$scope.portal;
 		
 		if (typeof $scope.radius === 'undefined') {
-			$scope.radius = '100';
+			$scope.radius = $scope.radiuses[0];
 	    } 
-		searchparams+="&radius="+$scope.radius;
+		searchparams+="&radius="+$scope.radius.value;
+		
+		if (typeof $scope.sorting === 'undefined') {
+			$scope.sorting = $scope.sortings.indexOf($scope.sortings[0]);
+	    } 
+		searchparams+="&sorting="+$scope.sorting;
 
-		if (typeof $scope.freeofcommission === 'undefined') {
-			$scope.freeofcommission = '1';
-	    }
-		searchparams+="&freeofcommission="+$scope.freeofcommission;
-
-		if (typeof $scope.pricetill !== 'undefined') {
+		if (typeof $scope.freeofcommission !== 'undefined') {
+			if($scope.freeofcommission === true){
+				searchparams+="&freeofcommission="+$scope.freeofcommission;
+			}
+		}
+		if (typeof $scope.terrace !== 'undefined') {
+			if($scope.terrace === true){
+				searchparams+="&terrace="+$scope.terrace;
+			}
+		}
+		if (typeof $scope.garden !== 'undefined') {
+			if($scope.garden === true){
+				searchparams+="&garden="+$scope.garden;
+			}
+		}
+		if (typeof $scope.balcony !== 'undefined') {
+			if($scope.balcony === true){
+				searchparams+="&balcony="+$scope.balcony;
+			}
+		}
+		if (typeof $scope.garage !== 'undefined') {
+			if($scope.garage === true){
+				searchparams+="&garage="+$scope.garage;
+			}
+		}
+		if (typeof $scope.freeofcommission !== 'undefined') {
+			if($scope.freeofcommission === true){
+				searchparams+="&freeofcommission="+$scope.freeofcommission;
+			}
+		}
+		if (typeof $scope.pricetill !== 'undefined' && $scope.pricetill !== null) {
 			searchparams+="&pricetill="+$scope.pricetill;
 		}
-		if (typeof $scope.pricefrom !== 'undefined') {
+		if (typeof $scope.pricefrom !== 'undefined' && $scope.pricefrom !== null) {
 			searchparams+="&pricefrom="+$scope.pricefrom;
 		}
-		if (typeof $scope.livingareatill !== 'undefined') {
+		if (typeof $scope.roomfrom !== 'undefined'  && $scope.roomfrom !== null) {
+			searchparams+="&roomfrom="+$scope.roomfrom;
+		}
+		if (typeof $scope.roomtill !== 'undefined'  && $scope.roomtill !== null) {
+			searchparams+="&roomtill="+$scope.roomtill;
+		}
+		if (typeof $scope.livingareatill !== 'undefined'  && $scope.livingareatill !== null) {
 			searchparams+="&livingareatill="+$scope.livingareatill;
 		}
-		if (typeof $scope.livingareafrom !== 'undefined') {
+		if (typeof $scope.livingareafrom !== 'undefined'  && $scope.livingareafrom !== null) {
 			searchparams+="&livingareafrom="+$scope.livingareafrom;
 		}			
 	    
 		$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
 	    	$scope.exposedata = response.data;  
-	    	$scope.exposedata.title = response.data[0].title; 
+	    	//$scope.exposedata.title = response.data[0].title; 
 	    });	    
     }
 });
