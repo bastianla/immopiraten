@@ -32,7 +32,7 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		{label : "10 km", value:"10"},
 		{label : "50 km", value:"50"}
 	];
-	$scope.sortings = ["Veröffentlichkeitsdatum absteigend", "Veröffentlichkeitsdatum aufsteigend", "Preis absteigend", "Preis aufsteigend"];
+	$scope.sortings = ["Neuste zuerst", "Älteste zuerst", "Preis absteigend", "Preis aufsteigend"];
 	
 
     $scope.submit = function() {

@@ -50,7 +50,7 @@
 					data-ng-model="city" placeholder="Straße, PLZ, Ort" required />
 
 				<!-- Distance (Droplist) -->
-				<select class="dropListSearch" name="radius" data-ng-model="radius"	ng-options="x.label for x in radiuses" ng-init="radius=radiuses[3]">
+				<select class="dropListSearch" name="radius" data-ng-model="radius"	data-ng-options="x.label for x in radiuses" data-ng-init="radius=radiuses[3]">
 				</select>
 
 				<!-- Input (Submit button) -->
@@ -138,9 +138,9 @@
 					<label class="labelSearch">Filter</label>
 
 					<!-- Other Options (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" data-ng-model="freeofcommission" ng-true-value="true" ng-false-value="false" ng-init="freeofcommission='false'"><label>Provisionsfrei</label><br />
-					<input type="checkbox" class="inputSearchCheck"	data-ng-model="garden" ng-true-value="true" ng-false-value="false" ng-init="garden='false'"><label>Garten</label><br /> 
-					<input type="checkbox" class="inputSearchCheck" data-ng-model="terrace" ng-true-value="true" ng-false-value="false" ng-init="terrace='false'">
+					<input type="checkbox" class="inputSearchCheck" data-ng-model="freeofcommission" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="freeofcommission='false'"><label>Provisionsfrei</label><br />
+					<input type="checkbox" class="inputSearchCheck"	data-ng-model="garden" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="garden='false'"><label>Garten</label><br /> 
+					<input type="checkbox" class="inputSearchCheck" data-ng-model="terrace" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="terrace='false'">
 						<label>Terrasse</label><br />
 				</div>
 
@@ -148,8 +148,8 @@
 					<label class="labelSearch">Filter</label>
 
 					<!-- Other Options (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" data-ng-model="balcony" data-ng-model="balcony" ng-true-value="true" ng-false-value="false" ng-init="balcony='false'"><label>Balkon</label><br /> <input
-						type="checkbox" class="inputSearchCheck" data-ng-model="garage" data-ng-model="garage" ng-true-value="true" ng-false-value="false" ng-init="garage='false'">
+					<input type="checkbox" class="inputSearchCheck" data-ng-model="balcony" data-ng-model="balcony" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="balcony='false'"><label>Balkon</label><br /> <input
+						type="checkbox" class="inputSearchCheck" data-ng-model="garage" data-ng-model="garage" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="garage='false'">
 						<label>Garage</label><br />
 				</div>				
 				
@@ -158,19 +158,18 @@
 					<label class="labelSearch">Portale</label>
 
 					<!-- ImmoScout (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" ng-init="immoScout='1'" ng-model="immoScout" ng-true-value="'1'" ng-false-value="'0'">
+					<input type="checkbox" class="inputSearchCheck" data-ng-init="immoScout='1'" data-ng-model="immoScout" data-ng-true-value="'1'" data-ng-false-value="'0'">
 					    <label>ImmoScout24</label><br />
 					    
 					<!-- Immonet (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" ng-init="immoNet='1'" ng-model="immoNet" ng-true-value="'1'" ng-false-value="'0'">
+					<input type="checkbox" class="inputSearchCheck" data-ng-init="immoNet='1'" data-ng-model="immoNet" data-ng-true-value="'1'" data-ng-false-value="'0'">
 						<label>ImmoNet</label><br />
 						
 					
 				</div>	<br/>
 		
 				<div class="searchbar">
-					Sortieren nach
-					<select class="dropListSort" name="sorting" data-ng-model="sorting" data-ng-options="id as option for (id, option) in sortings" ng-change="doSearch()"  ng-init="sorting='0'" >
+					<select class="dropListSort" name="sorting" data-ng-model="sorting" data-ng-options="id as option for (id, option) in sortings" data-ng-change="doSearch()"  data-ng-init="sorting='0'" >
 								</select>
 				</div>
 			</form>
