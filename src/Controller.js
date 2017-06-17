@@ -55,6 +55,14 @@ app.controller('searchCtrl', function($scope, $http, $location) {
         }
     }
 	
+	$scope.toggleSortingValue = 'display:none; visibility: hidden'
+
+	$scope.toggleSorting = function () {
+	    if ($scope.toggleSortingValue === 'display:none; visibility: hidden') {	        	
+        	$scope.toggleSortingValue = '';
+    	}
+    }	
+	
 	$scope.followBtnImgUrlImmoNet = '/images/suche/checked.png'
 
 	    $scope.toggleImageImmoNet = function () {
@@ -166,7 +174,13 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
 	    	$scope.exposedata = response.data;  
 	    	$scope.exposedata.title = response.data[0].title; 
-	    });	    
+	    });	
+		
+		if (typeof $scope.exposedata !== 'undefined'){
+			$scope.toggleSorting();
+		}
+		
+		
     }
 });
     
