@@ -89,7 +89,7 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		}
 		
 		$scope.city= $location.search()['city'];				
-		if (typeof $scope.city !== 'undefined') {
+		if (typeof $scope.city !== 'undefined' && $scope.city !=='') {
 			$scope.doSearch();
 		}		
 	}  
@@ -174,11 +174,8 @@ app.controller('searchCtrl', function($scope, $http, $location) {
 		$http.get("http://localhost:8080/search?"+searchparams).then(function(response) {
 	    	$scope.exposedata = response.data;  
 	    	$scope.exposedata.title = response.data[0].title; 
-	    });	
-		
-		if (typeof $scope.exposedata !== 'undefined'){
-			$scope.toggleSorting();
-		}
+	    	$scope.toggleSorting(); 
+	    })
 		
 		
     }
