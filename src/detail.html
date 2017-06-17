@@ -4,163 +4,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-   
-<!--script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script -->
-	<!-- script src="ImmoPiratenApp.js"></script-->
+  <link href="styles.css" type="text/css" rel="stylesheet"/>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="ImmoPiratenApp.js"></script>
 	
 </head>
-<body>
-
-
-<style>
-	.header{
-		border-style:solid; 
-		border-color: #515151; 
-		text-align: center; 
-		background-color: #515151;
-		width: 1355px;
-	}
-	.textorange{
-		font-family: 'Arial Fett', 'Arial Standard', 'Arial';
-		font-weight: 700;
-		font-style: normal;
-		color: #FF9400;
-		font-size: 24px;
-	}
-	.content{
-		position: absolute;
-		margin-top: 40px;
-		margin-left:100px;
-	
-	}
-	
-	.anbieter{
-		float: right;
-		border-style:solid;
-		margin-left: 100px;
-		border-width: 2px;
-		border-color: #515151; 
-		width: 386px;
-		height: 636px;
-	}
-	
-	.boxgrau{
-		border-style:solid; 
-		border-color: #515151; 
-		background-color: #515151;
-		width: 780px;
-		height:60px;
-		position: relative;
-		
-		
-	}
-	.textweissklein{
-		font-size: 13px;
-		color: #FFFFFF;
-		
-	}
-	.textorangegross{
-		font-size: 25px;
-		color: #FF9400;
-		font-weight: 700;
-	}
-	.textschwarzgross{
-		font-size: 18px;
-		color: #333333;
-		font-weight: 700;
-	}
-	.miete{
-		position: absolute;
-		left:5px;
-		top: 0px;
-		padding: 1px;
-		margin: 5px;
-	}
-	.flaeche{
-		position: absolute;
-		left:175px;
-		top: 0px;
-		padding: 1px;
-		margin: 5px;
-	}
-	.zimmer{
-		position: absolute;
-		left:345px;
-		top: 0px;
-		padding: 1px;
-		margin: 5px;
-	}
-	
-	.content2{
-		position: relative;
-		margin-top: 20px;
-		
-	}
-	
-	.beschreibung{
-		background-color: #F2F2F2;
-		width: 780px;
-		min-height: 100px;
-		padding: 10px;
-	}
-	
-	.content3{
-		position: relative;
-		margin-top: 40px;
-		margin-bottom: 40px;
-		height:250px;
-		
-		}
-	
-	.boxes{
-		background-color: #F2F2F2;
-		width: 380px;
-		min-height: 200px;
-		padding: 1
-		
-	}
-	.box1{
-		position: relative;
-		float: left;
-		margin-bottom: 40px;
-	}
-	.box2{
-		position: relative;
-		top: 0px;
-		float: left;
-		margin-left: 40px;
-		margin-right: 40px;
-		margin-bottom: 40px;
-	}
-	.box3{
-		position: relative;
-		top: 0px;
-		float: left;
-		margin-bottom: 40px;
-		
-	}
-	.content4{
-		margin-top: 40px;
-		position: relative;
-		
-		}
-		.attribute{
-			font-family: 'Arial Fett', 'Arial Standard', 'Arial';
-			font-weight: 700;
-			font-size: 13px;
-			float: left;
-			width: 100px;
-			
-		}
-		.attributevalue{
-		font-family: 'Arial Standard', 'Arial';
-		font-weight: 400;
-		font-size: 13px;
-		float: clear;
-		margin-left: 30px;
-		}
-	</style>
-
+<body ng-app="ImmoPiratenApp" ng-controller="exposeCtrl" data-ng-init="getDetail()">
 
 <div id="header">
 	<div id="textheader" class="header">
@@ -169,62 +19,137 @@
 <!-- img style="width: 1300px; height: 65px;"src="images/trefferliste/u638.png"/ -->
 </div>
 <div class="content">
-		<img src="images/detailseite/u1208.png" />
-		<div class="anbieter">
-		halllo wie geht es dir
+		<img src="{{ DEimage }}" />
+		<div class="frameContact">
+		<p class="textschwarzgross">Anbieter:</p>
+		{{exposedata.contact.company}}<br />
+		{{exposedata.contact.firstName}} {{exposedata.contact.lastName}}<br />
+		{{exposedata.contact.site.street}} {{exposedata.contact.site.houseNumber}}<br />
+		{{exposedata.contact.site.postCode}} {{exposedata.contact.site.city}}<br />
+		<br />
+		{{exposedata.contact.telephone}}
+		<p class="textschwarzgross">Lage:</p>
+		{{exposedata.site.street}} {{exposedata.site.houseNumber}}<br />
+		{{exposedata.site.postCode}} {{exposedata.site.city}}<br />
+		
 		</div>
 		<div class="boxgrau">
-			<div class="miete">
-				<span class="textweissklein">Kaltmiete</span><br />
-				<span class="textorangegross">100000000€</span>
+			<div class="lablePrice">
+				<span class="textweissklein">{{DEpreis}}</span><br />
+				<span class="textorangegross">{{ exposedata.price }} €</span>
 			</div>
-			<div class="flaeche">
-				<span class="textweissklein">Kaltmiete2</span><br />
-				<span class="textorangegross">{{ x.price }} €</span>
+			<div class="labelArea">
+				<span class="textweissklein">Wohnfläche</span><br />
+				<span class="textorangegross">{{ exposedata.livingArea }} m²</span>
 			</div>
-			<div class="zimmer">
-			<span class="textweissklein">Kaltmiete3</span><br />
-			<span class="textorangegross">{{ x.price }} €</span>
+			<div class="lableRoom">
+			<span class="textweissklein">Zimmer</span><br />
+			<span class="textorangegross">{{ exposedata.room }}</span>
 			</div>
 		</div>
 
 		<div class="content2">
-		<p class="textorangegross">Titel</p>
-		<p class="textschwarzgross">Untertitel</p>
-		<p class="textschwarzgross">gefunden bei:</p>
-		<div class="beschreibung">
-		hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />
+		<p class="textorangegross">{{ exposedata.title }}</p>
+		<a href="{{exposedata.link}}" target="_blank" class="textschwarzgross">im portal anzeigen</a>
+		<p class="textschwarzgross">gefunden bei:
+		<img class="imgResultListEntryOrigin" data-ng-if="exposedata.portal == 'ImmobilienScout24'"	src="images/suche/Logo_ImmoScout.png" />
+		<img class="imgResultListEntryOrigin" data-ng-if="exposedata.portal == 'Immonet'" src="images/suche/Logo_Immonet.png" /></p>
+		<div class="frameDescription">
+		{{ exposedata.description }}
 		</div>
 		</div>
 		<div class="content3">
 			<div class="boxes box1">
 			<span class="attribute">Wohnungstyp</span>     
-			<span class="attributevalue">Dachgeschoss</span>
+			<span class="attributevalue">{{ DEresidentialRealEstate }}</span>
 			<br />
 			<span class="attribute">Etage</span> 
-			<span class="attributevalue">Dachgeschoss2</span>
+			<span class="attributevalue">{{DEfloor}}{{ exposedata.numberOfFloors }}</span>
 			<br />
 			<span class="attribute">Wohnfläche ca.</span> 
-			<span class="attributevalue"> Dachgeschoss3</span>
+			<span class="attributevalue"> {{ exposedata.livingArea }} m²</span>
 			<br />
 			<span class="attribute">Zimmer</span> 
-			<span class="attributevalue"> Dachgeschoss4</span>
+			<span class="attributevalue"> {{ exposedata.room }}</span>
 			<br />
 			<span class="attribute">Schlafzimmer</span> 
-			<span class="attributevalue"> Dachgeschoss5</span>
+			<span class="attributevalue"> {{ exposedata.numberOfBedRooms }}</span>
 			<br />
 			<span class="attribute">Badezimmer</span> 
+			<span class="attributevalue"> {{ exposedata.numberOfBathRooms }}</span>
+			<br/>
+			<span class="attribute">Balkon</span>     
+			<span class="attributevalue">{{ DEbalcony }}</span>
+			<br />
+			<span class="attribute">Terrase</span>     
+			<span class="attributevalue">{{ DEterrace }}</span>
+			<br />
+			<span class="attribute">Garten</span>     
+			<span class="attributevalue">{{ DEgarden }}</span>
+			<br />
+			
 			</div>
+			<!-- span class="attribute">Wohnungstyp</span>     
+			<span class="attributevalue">{{ exposedata.residentialRealEstate }}</span>
+			<br />
+			<span class="attribute">Wohnungstyp</span>     
+			<span class="attributevalue">{{ exposedata.residentialRealEstate }}</span>
+			<br / -->
 			<div class="boxes box2">
-			b2
+			<span class="attribute">Objektzustand</span>     
+			<span class="attributevalue">{{ DEobjectstate }}</span>
+			<br />
+			<span class="attribute">Ausstattung</span> 
+			<span class="attributevalue">{{ DEinteriorQuality }}</span>
+			<br />
+			<span class="attribute">Heizungsart</span> 
+			<span class="attributevalue"> {{ DEheating }}</span>
+			<br />
+			<span class="attribute">Energieträge</span> 
+			<span class="attributevalue"> {{ DEfiring }}</span>
+			<br />
+			<span class="attribute">Energieausweis</span>     
+			<span class="attributevalue">{{ DEenergyCertificate }}</span>
+			<br />
+			<span class="attribute">Energieausweistyp</span> 
+			<span class="attributevalue"> {{ DEBuildingEnergyRating }}</span>
+			<br />
+			<span class="attribute">Verbrauchskennwert</span> 
+			<span class="attributevalue"> {{ exposedata.thermalCharacteristic }} kWh/(m²*a)</span>
+			<br />
 			</div>
 			<div class="boxes box3">
-			b3b1hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />hallo das ist die beschreibeung <br />
-		</div>
+			<span class="attribute">Kaution</span>     
+			<span class="attributevalue">{{ DEcommission }}</span>
+			<br />
+			<span class="attribute">verfügbar ab</span> 
+			<span class="attributevalue">{{ DEavailabilityDate }}</span>
+			<br />
+			<span class="attribute">Zusatzkosten</span> 
+			<span class="attributevalue"> {{ exposedata.additionalCosts }} €</span>
+			<br />
+			<span class="attribute">Baujahr</span> 
+			<span class="attributevalue"> {{ exposedata.construction }}</span>
+			<br />
+			<span class="attribute">Heizkosten</span>     
+			<span class="attributevalue">{{ exposedata.heatingCosts }}</span>
+			<br />
+			<span class="attribute">Energie Klasse</span> 
+			<span class="attributevalue"> {{ exposedata.energyEfficiencyClass }}</span>
+			<br />
+			<span class="attribute">Grundstück</span> 
+			<span class="attributevalue"> {{ exposedata.landArea }} m²</span>
+			<br />
+			</div>
 		</div>
 		<div class="content4">
-					<div class="beschreibung">bla</div>
+					<div class="beschreibung">
+					<p>{{ exposedata.locationNote }}</p>
+					<p>{{ exposedata.otherNote }}</p>
+					<p>{{ exposedata.furnishingNote }}</p>
+					</div>
 		</div>
 </div>
+<script src="Controller.js" defer></script>
 </body>
 <html>
