@@ -158,14 +158,14 @@
 					<label class="labelSearch">Portale</label>
 
 					<!-- ImmoScout (Checkbox) -->
-					<a ng-click="toggleImageImmoScout()"><img id="followbuttonImmoScout" class="imgLogoPortaleCheckbox" ng-src="{{followBtnImgUrlImmoScout}}"  /></a>            
+					<a data-ng-click="toggleImageImmoScout()"><img id="followbuttonImmoScout" class="imgLogoPortalsCheckbox" data-ng-src="{{followBtnImgUrlImmoScout}}"  /></a>            
 					<input type="checkbox" name="immoScout" data-ng-init="immoScout='1'" data-ng-model="immoScout" data-ng-true-value="'1'" data-ng-false-value="'0'" style="display:none; visibility: hidden">
-				    <img id="logo" class="imgLogoPortale" src="images/suche/Logo_ImmoScout.png"/><br />
+				    <img id="logo" class="imgLogoPortals" src="images/suche/Logo_ImmoScout.png"/><br />
 					    
 					<!-- Immonet (Checkbox) -->
-					<a ng-click="toggleImageImmoNet()"><img id="followbuttonImmoNet" class="imgLogoPortaleCheckbox" ng-src="{{followBtnImgUrlImmoNet}}"  /></a>    
+					<a data-ng-click="toggleImageImmoNet()"><img id="followbuttonImmoNet" class="imgLogoPortalsCheckbox" data-ng-src="{{followBtnImgUrlImmoNet}}"  /></a>    
 					<input type="checkbox" name="immoNet" data-ng-init="immoNet='1'" data-ng-model="immoNet" data-ng-true-value="'1'" data-ng-false-value="'0'" style="display:none; visibility: hidden">
-					<img id="logo" class="imgLogoPortale" src="images/suche/Logo_ImmoNet.png"/><br />
+					<img id="logo" class="imgLogoPortals" src="images/suche/Logo_ImmoNet.png"/><br />
 						
 					
 				</div>	<br/>
@@ -177,9 +177,9 @@
 			</form>
 		</div>
 
-		<div class="frameResultList" data-ng-repeat="x in exposedata">
+		<div class="frameResultList">
 		
-			<div class="frameResultListEntry">
+			<div class="frameResultListEntry" data-ng-repeat="x in exposedata">
 				
 				<div class="frameResultListEntryTitle">
 					<a class="resultListEntryTitle" href="detailseite.html#?id={{ x.id }}&portal=1">{{ x.title }}</a>
@@ -187,13 +187,16 @@
 				
 				<div class="frameResultListEntryExpose">
 					<div class="frameImgResultListEntry">
-						<img data-ng-src="{{ x.image }}" />
+						<img class="imgResultListEntryPhoto" data-ng-if="!x.image"
+							data-ng-src="images/suche/no-photo.png" />
+						<img class="imgResultListEntryPhoto" data-ng-if="x.image !== 'undefined'"
+							data-ng-src="{{ x.image }}" />
 					</div>
 					<div class="frameResultListEntryOrigin">
 						<img class="imgResultListEntryOrigin" data-ng-if="x.portal == 'ImmobilienScout24'"
-							src="images/suche/Logo_ImmoScout.png" />
+							data-ng-src="images/suche/Logo_ImmoScout.png" />
 						<img class="imgResultListEntryOrigin" data-ng-if="x.portal == 'Immonet'"
-							src="images/suche/Logo_Immonet.png" />
+							data-ng-src="images/suche/Logo_Immonet.png" />
 					</div>
 					<div class="frameResultListEntryInfo">
 						<div class="frameResultListEntryPrice">
