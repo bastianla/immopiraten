@@ -321,6 +321,14 @@ a{
 	position: relative;
 }
 
+.imgLogoPortale {
+	height:36px;
+}
+.imgLogoPortaleCheckbox {
+	margin-bottom:10px;
+	height:16px;
+}
+
 
 
 

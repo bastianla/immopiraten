@@ -41,30 +41,30 @@ app.controller('searchCtrl', function($scope, $http, $location) {
     		+ "&realestatetype=" + $scope.realestatetype;
     	   }
 	
-	$scope.followBtnImgUrlImmoScout = '/images/suche/u210.png'
+	$scope.followBtnImgUrlImmoScout = '/images/suche/checked.png'
 
     $scope.toggleImageImmoScout = function () {
-        if ($scope.followBtnImgUrlImmoScout === '/images/suche/u210.png') {
+        if ($scope.followBtnImgUrlImmoScout === '/images/suche/checked.png') {
         	if($scope.immoNet!=='0'){
-	            $scope.followBtnImgUrlImmoScout = '/images/suche/u211.png';
+	            $scope.followBtnImgUrlImmoScout = '/images/suche/unchecked.png';
 	            $scope.immoScout='0';
         	}
         } else {
-            $scope.followBtnImgUrlImmoScout = '/images/suche/u210.png';
+            $scope.followBtnImgUrlImmoScout = '/images/suche/checked.png';
             $scope.immoScout='1';
         }
     }
 	
-	$scope.followBtnImgUrlImmoNet = '/images/suche/u210.png'
+	$scope.followBtnImgUrlImmoNet = '/images/suche/checked.png'
 
 	    $scope.toggleImageImmoNet = function () {
-	        if ($scope.followBtnImgUrlImmoNet === '/images/suche/u210.png') {
+	        if ($scope.followBtnImgUrlImmoNet === '/images/suche/checked.png') {
 	        	if($scope.immoScout!=='0'){
-		        	$scope.followBtnImgUrlImmoNet = '/images/suche/u211.png';
+		        	$scope.followBtnImgUrlImmoNet = '/images/suche/unchecked.png';
 		            $scope.immoNet='0';
 	        	}
 	        } else {
-	            $scope.followBtnImgUrlImmoNet = '/images/suche/u210.png';
+	            $scope.followBtnImgUrlImmoNet = '/images/suche/checked.png';
 	            $scope.immoNet='1';
 	        }
 	    }	

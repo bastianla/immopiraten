@@ -158,12 +158,14 @@
 					<label class="labelSearch">Portale</label>
 
 					<!-- ImmoScout (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" data-ng-init="immoScout='1'" data-ng-model="immoScout" data-ng-true-value="'1'" data-ng-false-value="'0'">
-					    <label>ImmoScout24</label><br />
+					<a ng-click="toggleImageImmoScout()"><img id="followbuttonImmoScout" class="imgLogoPortaleCheckbox" ng-src="{{followBtnImgUrlImmoScout}}"  /></a>            
+					<input type="checkbox" name="immoScout" data-ng-init="immoScout='1'" data-ng-model="immoScout" data-ng-true-value="'1'" data-ng-false-value="'0'" style="display:none; visibility: hidden">
+				    <img id="logo" class="imgLogoPortale" src="images/suche/Logo_ImmoScout.png"/><br />
 					    
 					<!-- Immonet (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" data-ng-init="immoNet='1'" data-ng-model="immoNet" data-ng-true-value="'1'" data-ng-false-value="'0'">
-						<label>ImmoNet</label><br />
+					<a ng-click="toggleImageImmoNet()"><img id="followbuttonImmoNet" class="imgLogoPortaleCheckbox" ng-src="{{followBtnImgUrlImmoNet}}"  /></a>    
+					<input type="checkbox" name="immoNet" data-ng-init="immoNet='1'" data-ng-model="immoNet" data-ng-true-value="'1'" data-ng-false-value="'0'" style="display:none; visibility: hidden">
+					<img id="logo" class="imgLogoPortale" src="images/suche/Logo_ImmoNet.png"/><br />
 						
 					
 				</div>	<br/>
