@@ -196,8 +196,9 @@ app.controller('exposeCtrl', function($scope, $http, $location) {
 		
 		$scope.debug="Debuger:"+ "http://localhost:8080/expose?portal=1&id="+$location.search()['id'];
 	    //$http.get("http://localhost:8080/expose?id="+$scope.postcode+").then(function(response) {
-	    	$http.get("http://localhost:8080/expose?portal=1&id="+$location.search()['id']).then(function(response) {
-			$scope.exposedata = response.data; 
+			 	$http.get("http://localhost:8080/expose?portal="+$location.search()['portal']+"&id="+$location.search()['id']).then(function(response) {
+
+          $scope.exposedata = response.data; 
         switch(response.data.residentialRealEstate)
 		{
 			case "NO_INFORMATION": $scope.DEresidentialRealEstate="keineAngabe";break;
@@ -336,7 +337,7 @@ app.controller('exposeCtrl', function($scope, $http, $location) {
 			case null:	$scope.DEimage="images/detail/no-photo-available-big.gif";	break;
 			default: $scope.DEimage=response.data.image;
 		}  
-	    	$scope.exposedata.title = response.data[0].title;  
+	    	//$scope.exposedata.title = response.data[0].title;  
 			
 	    });
 		
