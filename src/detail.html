@@ -1,93 +1,85 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <link href="styles.css" type="text/css" rel="stylesheet"/>
- 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-	<script src="ImmoPiratenApp.js"></script>
-	
-</head>
-<body ng-app="ImmoPiratenApp" ng-controller="exposeCtrl" data-ng-init="getDetail()">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="styles/styles.css" type="text/css" rel="stylesheet" />
 
-<div id="header">
-	<div id="textheader" class="header">
-	<a href="javascript:history.back()" class="textorange">Zurück zur Trefferliste</a>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+</head>
+<body data-ng-app="ImmoPiratenApp" data-ng-controller="exposeCtrl"
+	data-ng-init="getDetail()">
+
+	<div id="header">
+		<div id="textheader" class="header">
+			<a href="javascript:history.back()" class="textorange">Zurück zur Trefferliste</a>
+		</div>
 	</div>
-<!-- img style="width: 1300px; height: 65px;"src="images/trefferliste/u638.png"/ -->
-</div>
-<div class="content">
-		<img src="{{ DEimage }}" />
+	<div class="content">
+		<img data-ng-src="{{ DEimage }}" />
 		<div class="frameContact">
-		<p class="textschwarzgross">Anbieter:</p>
-		{{exposedata.contact.company}}<br />
-		{{exposedata.contact.firstName}} {{exposedata.contact.lastName}}<br />
-		{{exposedata.contact.site.street}} {{exposedata.contact.site.houseNumber}}<br />
-		{{exposedata.contact.site.postCode}} {{exposedata.contact.site.city}}<br />
-		<br />
-		{{exposedata.contact.telephone}}
-		<p class="textschwarzgross">Lage:</p>
-		{{exposedata.site.street}} {{exposedata.site.houseNumber}}<br />
-		{{exposedata.site.postCode}} {{exposedata.site.city}}<br />
-		
+			<p class="textschwarzgross">Anbieter:</p>
+			{{exposedata.contact.company}}<br />
+			{{exposedata.contact.firstName}} {{exposedata.contact.lastName}}<br />
+			{{exposedata.contact.site.street}}
+			{{exposedata.contact.site.houseNumber}}<br />
+			{{exposedata.contact.site.postCode}} {{exposedata.contact.site.city}}<br />
+			<br /> {{exposedata.contact.telephone}}
+			<p class="textschwarzgross">Lage:</p>
+			{{exposedata.site.street}} {{exposedata.site.houseNumber}}<br />
+			{{exposedata.site.postCode}} {{exposedata.site.city}}<br />
+
 		</div>
 		<div class="boxgrau">
 			<div class="lablePrice">
-				<span class="textweissklein">{{DEpreis}}</span><br />
-				<span class="textorangegross">{{ exposedata.price }} €</span>
+				<span class="textweissklein">{{DEpreis}}</span><br /> <span
+					class="textorangegross">{{ exposedata.price }} €</span>
 			</div>
 			<div class="labelArea">
-				<span class="textweissklein">Wohnfläche</span><br />
-				<span class="textorangegross">{{ exposedata.livingArea }} m²</span>
+				<span class="textweissklein">Wohnfläche</span><br /> <span
+					class="textorangegross">{{ exposedata.livingArea }} m²</span>
 			</div>
 			<div class="lableRoom">
-			<span class="textweissklein">Zimmer</span><br />
-			<span class="textorangegross">{{ exposedata.room }}</span>
+				<span class="textweissklein">Zimmer</span><br /> <span
+					class="textorangegross">{{ exposedata.room }}</span>
 			</div>
 		</div>
 
 		<div class="content2">
-		<p class="textorangegross">{{ exposedata.title }}</p>
-		<a href="{{exposedata.link}}" target="_blank" class="textschwarzgross">im portal anzeigen</a>
-		<p class="textschwarzgross">gefunden bei:
-		<img class="imgResultListEntryOrigin" data-ng-if="exposedata.portal == 'ImmobilienScout24'"	src="images/suche/Logo_ImmoScout.png" />
-		<img class="imgResultListEntryOrigin" data-ng-if="exposedata.portal == 'Immonet'" src="images/suche/Logo_Immonet.png" /></p>
-		<div class="frameDescription">
-		{{ exposedata.description }}
-		</div>
+			<p class="textorangegross">{{ exposedata.title }}</p>
+			<a href="{{exposedata.link}}" target="_blank"
+				class="textschwarzgross">im portal anzeigen</a>
+			<p class="textschwarzgross">
+				gefunden bei: <img class="imgResultListEntryOrigin"
+					data-ng-if="exposedata.portal == 'ImmobilienScout24'"
+					src="images/suche/Logo_ImmoScout.png" /> <img
+					class="imgResultListEntryOrigin"
+					data-ng-if="exposedata.portal == 'Immonet'"
+					src="images/suche/Logo_Immonet.png" />
+			</p>
+			<div class="frameDescription">{{ exposedata.description }}</div>
 		</div>
 		<div class="content3">
 			<div class="boxes box1">
-			<span class="attribute">Wohnungstyp</span>     
-			<span class="attributevalue">{{ DEresidentialRealEstate }}</span>
-			<br />
-			<span class="attribute">Etage</span> 
-			<span class="attributevalue">{{DEfloor}}{{ exposedata.numberOfFloors }}</span>
-			<br />
-			<span class="attribute">Wohnfläche ca.</span> 
-			<span class="attributevalue"> {{ exposedata.livingArea }} m²</span>
-			<br />
-			<span class="attribute">Zimmer</span> 
-			<span class="attributevalue"> {{ exposedata.room }}</span>
-			<br />
-			<span class="attribute">Schlafzimmer</span> 
-			<span class="attributevalue"> {{ exposedata.numberOfBedRooms }}</span>
-			<br />
-			<span class="attribute">Badezimmer</span> 
-			<span class="attributevalue"> {{ exposedata.numberOfBathRooms }}</span>
-			<br/>
-			<span class="attribute">Balkon</span>     
-			<span class="attributevalue">{{ DEbalcony }}</span>
-			<br />
-			<span class="attribute">Terrase</span>     
-			<span class="attributevalue">{{ DEterrace }}</span>
-			<br />
-			<span class="attribute">Garten</span>     
-			<span class="attributevalue">{{ DEgarden }}</span>
-			<br />
-			
+				<span class="attribute">Wohnungstyp</span> <span
+					class="attributevalue">{{ DEresidentialRealEstate }}</span> <br />
+				<span class="attribute">Etage</span> <span class="attributevalue">{{DEfloor}}{{
+					exposedata.numberOfFloors }}</span> <br /> <span class="attribute">Wohnfläche
+					ca.</span> <span class="attributevalue"> {{ exposedata.livingArea
+					}} m²</span> <br /> <span class="attribute">Zimmer</span> <span
+					class="attributevalue"> {{ exposedata.room }}</span> <br /> <span
+					class="attribute">Schlafzimmer</span> <span class="attributevalue">
+					{{ exposedata.numberOfBedRooms }}</span> <br /> <span class="attribute">Badezimmer</span>
+				<span class="attributevalue"> {{ exposedata.numberOfBathRooms
+					}}</span> <br /> <span class="attribute">Balkon</span> <span
+					class="attributevalue">{{ DEbalcony }}</span> <br /> <span
+					class="attribute">Terrase</span> <span class="attributevalue">{{
+					DEterrace }}</span> <br /> <span class="attribute">Garten</span> <span
+					class="attributevalue">{{ DEgarden }}</span> <br />
+
 			</div>
 			<!-- span class="attribute">Wohnungstyp</span>     
 			<span class="attributevalue">{{ exposedata.residentialRealEstate }}</span>
@@ -96,60 +88,43 @@
 			<span class="attributevalue">{{ exposedata.residentialRealEstate }}</span>
 			<br / -->
 			<div class="boxes box2">
-			<span class="attribute">Objektzustand</span>     
-			<span class="attributevalue">{{ DEobjectstate }}</span>
-			<br />
-			<span class="attribute">Ausstattung</span> 
-			<span class="attributevalue">{{ DEinteriorQuality }}</span>
-			<br />
-			<span class="attribute">Heizungsart</span> 
-			<span class="attributevalue"> {{ DEheating }}</span>
-			<br />
-			<span class="attribute">Energieträge</span> 
-			<span class="attributevalue"> {{ DEfiring }}</span>
-			<br />
-			<span class="attribute">Energieausweis</span>     
-			<span class="attributevalue">{{ DEenergyCertificate }}</span>
-			<br />
-			<span class="attribute">Energieausweistyp</span> 
-			<span class="attributevalue"> {{ DEBuildingEnergyRating }}</span>
-			<br />
-			<span class="attribute">Verbrauchskennwert</span> 
-			<span class="attributevalue"> {{ exposedata.thermalCharacteristic }} kWh/(m²*a)</span>
-			<br />
+				<span class="attribute">Objektzustand</span> <span
+					class="attributevalue">{{ DEobjectstate }}</span> <br /> <span
+					class="attribute">Ausstattung</span> <span class="attributevalue">{{
+					DEinteriorQuality }}</span> <br /> <span class="attribute">Heizungsart</span>
+				<span class="attributevalue"> {{ DEheating }}</span> <br /> <span
+					class="attribute">Energieträge</span> <span class="attributevalue">
+					{{ DEfiring }}</span> <br /> <span class="attribute">Energieausweis</span>
+				<span class="attributevalue">{{ DEenergyCertificate }}</span> <br />
+				<span class="attribute">Energieausweistyp</span> <span
+					class="attributevalue"> {{ DEBuildingEnergyRating }}</span> <br />
+				<span class="attribute">Verbrauchskennwert</span> <span
+					class="attributevalue"> {{ exposedata.thermalCharacteristic
+					}} kWh/(m²*a)</span> <br />
 			</div>
 			<div class="boxes box3">
-			<span class="attribute">Kaution</span>     
-			<span class="attributevalue">{{ DEcommission }}</span>
-			<br />
-			<span class="attribute">verfügbar ab</span> 
-			<span class="attributevalue">{{ DEavailabilityDate }}</span>
-			<br />
-			<span class="attribute">Zusatzkosten</span> 
-			<span class="attributevalue"> {{ exposedata.additionalCosts }} €</span>
-			<br />
-			<span class="attribute">Baujahr</span> 
-			<span class="attributevalue"> {{ exposedata.construction }}</span>
-			<br />
-			<span class="attribute">Heizkosten</span>     
-			<span class="attributevalue">{{ exposedata.heatingCosts }}</span>
-			<br />
-			<span class="attribute">Energie Klasse</span> 
-			<span class="attributevalue"> {{ exposedata.energyEfficiencyClass }}</span>
-			<br />
-			<span class="attribute">Grundstück</span> 
-			<span class="attributevalue"> {{ exposedata.landArea }} m²</span>
-			<br />
+				<span class="attribute">Kaution</span> <span class="attributevalue">{{
+					DEcommission }}</span> <br /> <span class="attribute">verfügbar ab</span>
+				<span class="attributevalue">{{ DEavailabilityDate }}</span> <br />
+				<span class="attribute">Zusatzkosten</span> <span
+					class="attributevalue"> {{ exposedata.additionalCosts }} €</span> <br />
+				<span class="attribute">Baujahr</span> <span class="attributevalue">
+					{{ exposedata.construction }}</span> <br /> <span class="attribute">Heizkosten</span>
+				<span class="attributevalue">{{ exposedata.heatingCosts }}</span> <br />
+				<span class="attribute">Energie Klasse</span> <span
+					class="attributevalue"> {{ exposedata.energyEfficiencyClass
+					}}</span> <br /> <span class="attribute">Grundstück</span> <span
+					class="attributevalue"> {{ exposedata.landArea }} m²</span> <br />
 			</div>
 		</div>
 		<div class="content4">
-					<div class="frameDescription">
-					<p>{{ exposedata.locationNote }}</p>
-					<p>{{ exposedata.otherNote }}</p>
-					<p>{{ exposedata.furnishingNote }}</p>
-					</div>
+			<div class="frameDescription">
+				<p>{{ exposedata.locationNote }}</p>
+				<p>{{ exposedata.otherNote }}</p>
+				<p>{{ exposedata.furnishingNote }}</p>
+			</div>
 		</div>
-</div>
-<script src="Controller.js" defer></script>
+	</div>
+	<script src="Controller.js" defer></script>
 </body>
-<html>
+</html>
