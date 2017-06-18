@@ -17,14 +17,14 @@
 	.content{
 		position: absolute;
 		margin-top: 40px;
-		margin-left:100px;
+		margin-left:5px;
 	
 	}
 	
 	.frameContact{
 		float: right;
 		border-style:solid;
-		margin-left: 100px;
+		margin-left: 50px;
 		border-width: 2px;
 		border-color: #515151; 
 		width: 386px;
