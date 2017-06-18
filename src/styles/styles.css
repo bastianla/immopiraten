@@ -104,27 +104,26 @@ a {
 	color: orange;
 }
 
+ /* footer specific styles */
 .footer {
-	position: relative;
-	bottom: 0%;
-	width: 100%;
-	height: 3.5rem;
-	margin-top: 1rem;
-	background-color: rgba(81, 81, 81, 1);
+    background-color: rgba(81, 81, 81, 1);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    height: 10%;
+    width: 100%;
+    bottom:0px;
+    left:0px;
 }
 
 .labelFooter {
+	flex: 1 1 33.33%;
 	font-family: 'Arial Fett', 'Arial Standard', 'Arial';
 	font-weight: 700;
 	font-style: normal;
 	color: orange;
-	margin-left: 33%;
-}
-
-.footerWrapper {
-	width: 33%;
-	float: left;
-	padding: 0.5% 0 0 0;
+	text-align: center;
+	padding: 0.25rem 0;
 }
 
 /*---Extended Search specific styles---*/
