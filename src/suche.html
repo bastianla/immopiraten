@@ -4,180 +4,186 @@
 <title>ImmoPiraten | Suche</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link href="styles/reset.css" type="text/css" rel="stylesheet"/>
-<link href="styles/styles.css" type="text/css"
-	rel="stylesheet" />
+<link href="styles/reset.css" type="text/css" rel="stylesheet" />
+<link href="styles/styles.css" type="text/css" rel="stylesheet" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
 <body data-ng-app="ImmoPiratenApp" data-ng-controller="searchCtrl"
 	data-ng-init="getDetail()">
-	<div id="base" class="">
+	<div class="container">
+		<div class="header" data-ng-include="'header.html'"></div>
+		<div class="content">
+			<form class="formExtendedSearch" data-ng-submit="doSearch()">
+				<div class="frameSearchRow">
+					<!-- Real Estate Type (Drop List) -->
+					<div class="frameSearchColumn">
+						<select class="dropListSearch" name="realestatetype"
+							data-ng-model="realestatetype"
+							data-ng-options="id as option for (id, option) in realestatetypes">
+						</select>
+					</div>
 
-		<!-- User Panel -->
-		<div class="frameUserPanel">
-			<!-- User (Shape) -->
-			<img id="ImageUserShape" class="img "
-				src="images/startseite/User_Shape.png" />
-
-			<!-- Login (Rectangle) -->
-			<label>Mein Konto | Login</label>
-		</div>
-
-		<!-- Logo (Image) -->
-		<div class="frameLogo" data-label="Logo">
-		<a href="index.html">
-			<img class="logo" src="images/startseite/Logo.png" /></a>
-		</div>
-
-		<div id="frameExtendedSearch" class="extendedSearchFrame">
-			<form id="SearchForm" class="formSearch" data-ng-submit="doSearch()">
-
-				<!-- Real Estate Type (Droplist) -->
-				<select class="dropListSearch" name="realestatetype"
-					data-ng-model="realestatetype"
-					data-ng-options="id as option for (id, option) in realestatetypes">
-				</select>
-
-				<!-- Purchase Type (Droplist) -->
-				<select class="dropListSearch" name="purchasetype"
-					data-ng-model="purchasetype"
-					data-ng-options="id as option for (id, option) in purchasetypes">
-				</select>
-
-				<!-- Input (Text Field) -->
-				<input type="text" class="inputSearchCity" name="city"
-					data-ng-model="city" placeholder="Straße, PLZ, Ort" required />
-
-				<!-- Distance (Droplist) -->
-				<select class="dropListSearch" name="radius" data-ng-model="radius"	data-ng-options="x.label for x in radiuses" data-ng-init="radius=radiuses[3]">
-				</select>
-
-				<!-- Input (Submit button) -->
-				<input type="submit" class="submitSearch" value="Finden" />
-
-				<!-- Save Search (Link) -->
-				<a class="linkSearch">Suche speichern</a> <br />
-
+					<!-- Purchase Type (Drop List) -->
+					<div class="frameSearchColumn">
+						<select class="dropListSearch" name="purchasetype"
+							data-ng-model="purchasetype"
+							data-ng-options="id as option for (id, option) in purchasetypes">
+						</select>
+					</div>
+					<!-- Input (Text Field) -->
+					<div class="frameSearchColumn">
+						<input type="text" class="inputSearchCity" name="city"
+							data-ng-model="city" placeholder="Straße, PLZ, Ort" required />
+					</div>
+					<!-- Distance (Drop List) -->
+					<div class="frameSearchColumn">
+						<select class="dropListSearch" name="radius"
+							data-ng-model="radius"
+							data-ng-options="x.label for x in radiuses"
+							data-ng-init="radius=radiuses[1]">
+						</select>
+					</div>
+					<!-- Input (Submit Button) -->
+					<div class="frameSearchColumn">
+						<input type="submit" class="submitSearch" value="Finden" />
+					</div>
+					<!-- Save Search (Link) -->
+					<div class="frameSearchColumn">
+						<a class="linkSearch">Suche speichern</a> <br />
+					</div>
+				</div>
 				<div class="horizontalBar"></div>
 
-				<!-- price -->
+				<div class="frameSearchRow">
 
-				<div class="frameSearchRange">
-					<label class="labelSearch">Preis</label>
+					<!-- price -->
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Preis</label>
 
-					<!-- price from (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange"
-						name="pricefrom" placeholder="von" data-ng-model="pricefrom" />
+						<!-- price from (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							name="pricefrom" placeholder="von" data-ng-model="pricefrom" />
 
-					<!-- price till (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange"
-						name="pricetill" placeholder="bis" data-ng-model="pricetill" />
+						<!-- price till (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							name="pricetill" placeholder="bis" data-ng-model="pricetill" />
+					</div>
+
+					<!-- rooms -->
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Zimmer</label>
+
+						<!-- room from (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							placeholder="von" data-ng-model="roomfrom" />
+
+						<!-- room till (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							placeholder="bis" data-ng-model="roomtill" />
+					</div>
+
+					<!-- living area -->
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Wohnfläche</label>
+
+						<!-- living area from (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							placeholder="von" data-ng-model="livingareafrom" />
+
+						<!-- living area till (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							placeholder="bis" data-ng-model="livingareatill" />
+					</div>
+
+					<!-- plot area -->
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Grundstücksfläche</label>
+
+						<!-- construction year from (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							placeholder="von" data-ng-model="plotareafrom" />
+
+						<!-- construction year till (Text Field) -->
+						<input type="number" min=0 class="inputSearchRange"
+							placeholder="bis" data-ng-model="plotareatill" />
+					</div>
+
+					<div class="frameSearchColumn" style="flex: 1 2 100%;"></div>
+					<div class="frameSearchColumn" style="flex: 1 2 100%;"></div>
 				</div>
 
-				<!-- rooms -->
+				<div class="frameSearchRow frameSearchRowCheck">
 
-				<div class="frameSearchRange">
-					<label class="labelSearch">Zimmer</label>
+					<!-- Heating -->
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Heizung</label>
 
-					<!-- room from (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange" placeholder="von"
-						data-ng-model="roomfrom" />
+						<!-- fire type (Check Box) -->
+						<label><input type="checkbox" class="inputSearchCheck"
+							data-ng-model="heating1" disabled />Zentral</label><br /> <label><input
+							type="checkbox" class="inputSearchCheck" data-ng-model="heating2"
+							disabled />Gas</label><br /> <label><input type="checkbox"
+							class="inputSearchCheck" data-ng-model="heating3" disabled />Öl</label><br />
 
-					<!-- room till (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange" placeholder="bis"
-						data-ng-model="roomtill" />
-				</div>
+					</div>
 
-				<!-- living area -->
+					<!-- Other Options -->
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Filter</label>
 
-				<div class="frameSearchRange">
-					<label class="labelSearch">Wohnfläche</label>
+						<!-- Other Options (Check Box) -->
+						<label><input type="checkbox" class="inputSearchCheck"
+							data-ng-model="freeofcommission" data-ng-true-value="true"
+							data-ng-false-value="false"
+							data-ng-init="freeofcommission='false'" />Provisionsfrei</label><br />
+						<label><input type="checkbox" class="inputSearchCheck"
+							data-ng-model="garden" data-ng-true-value="true"
+							data-ng-false-value="false" data-ng-init="garden='false'" />Garten</label><br />
+						<label><input type="checkbox" class="inputSearchCheck"
+							data-ng-model="terrace" data-ng-true-value="true"
+							data-ng-false-value="false" data-ng-init="terrace='false'" />Terrasse</label><br />
+					</div>
 
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Filter</label>
 
-					<!-- living area from (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange" placeholder="von"
-						data-ng-model="livingareafrom" />
+						<!-- Other Options (Checkbox) -->
+						<label><input type="checkbox" class="inputSearchCheck"
+							data-ng-model="balcony" data-ng-true-value="true"
+							data-ng-false-value="false" data-ng-init="balcony='false'" />Balkon</label><br />
+						<label><input type="checkbox" class="inputSearchCheck"
+							data-ng-model="garage" data-ng-model="garage"
+							data-ng-true-value="true" data-ng-false-value="false"
+							data-ng-init="garage='false'" />Garage</label><br />
+					</div>
+					<div class="frameSearchColumn">
+						<label class="labelSearch">Portale</label>
 
-					<!-- living area till (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange" placeholder="bis"
-						data-ng-model="livingareatill" />
-				</div>
+						<!-- ImmoScout (Check Box) -->
 
-				<!-- plot area -->
+						<input type="checkbox" class="inputSearchCheck"
+							data-ng-click="toggleImageImmoScout()" data-ng-init="immoScout='1'" data-ng-model="immoScout" data-ng-true-value="'1'" data-ng-false-value="'0'"><img id="logo"
+							class="imgLogoPortals" src="images/suche/Logo_ImmoScout.png" /><br />
+						<br/>
+						<!-- Immonet (Check Box) -->
+						<input type="checkbox" class="inputSearchCheck"
+							data-ng-click="toggleImageImmoNet()" data-ng-init="immoNet='1'" data-ng-model="immoNet" data-ng-true-value="'1'" data-ng-false-value="'0'"><img id="logo"
+							class="imgLogoPortals" src="images/suche/Logo_ImmoNet.png" /><br />
 
-				<div class="frameSearchRange">
-					<label class="labelSearch">Grundstücksfläche</label>
-
-					<!-- construction year from (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange" placeholder="von"
-						data-ng-model="plotareafrom" />
-
-					<!-- construction year till (Text Field) -->
-					<input type="number" min=0 class="inputSearchRange" placeholder="bis"
-						data-ng-model="plotareatill" />
-				</div>
-
-				<!-- Heating -->
-				<div class="frameSearchCheck">
-					<label class="labelSearch">Heizung</label>
-
-					<!-- fire type (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck"
-						data-ng-model="heating1" disabled><label>Zentral</label><br /> 
-						<input type="checkbox" class="inputSearchCheck" data-ng-model="heating2"
-						disabled><label>Gas</label><br /> 
-					<input type="checkbox"
-						class="inputSearchCheck" data-ng-model="heating3" disabled>
-						<label>Öl</label><br />
-
-				</div>
-
-				<!-- Other Options -->
-				<div class="frameSearchCheck">
-					<label class="labelSearch">Filter</label>
-
-					<!-- Other Options (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" data-ng-model="freeofcommission" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="freeofcommission='false'"><label>Provisionsfrei</label><br />
-					<input type="checkbox" class="inputSearchCheck"	data-ng-model="garden" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="garden='false'"><label>Garten</label><br /> 
-					<input type="checkbox" class="inputSearchCheck" data-ng-model="terrace" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="terrace='false'">
-						<label>Terrasse</label><br />
-				</div>
-
-				<div class="frameSearchCheck">
-					<label class="labelSearch">Filter</label>
-
-					<!-- Other Options (Checkbox) -->
-					<input type="checkbox" class="inputSearchCheck" data-ng-model="balcony" data-ng-model="balcony" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="balcony='false'"><label>Balkon</label><br /> <input
-						type="checkbox" class="inputSearchCheck" data-ng-model="garage" data-ng-model="garage" data-ng-true-value="true" data-ng-false-value="false" data-ng-init="garage='false'">
-						<label>Garage</label><br />
-				</div>				
-				
-				<!-- Portals -->
-				<div class="frameSearchCheck">
-					<label class="labelSearch">Portale</label>
-
-					<!-- ImmoScout (Checkbox) -->
-					<a data-ng-click="toggleImageImmoScout()"><img id="followbuttonImmoScout" class="imgLogoPortalsCheckbox" data-ng-src="{{followBtnImgUrlImmoScout}}"  /></a>            
-					<input type="checkbox" name="immoScout" data-ng-init="immoScout='1'" data-ng-model="immoScout" data-ng-true-value="'1'" data-ng-false-value="'0'" style="display:none; visibility: hidden">
-				    <img id="logo" class="imgLogoPortals" src="images/suche/Logo_ImmoScout.png"/><br />
-					    
-					<!-- Immonet (Checkbox) -->
-					<a data-ng-click="toggleImageImmoNet()"><img id="followbuttonImmoNet" class="imgLogoPortalsCheckbox" data-ng-src="{{followBtnImgUrlImmoNet}}"  /></a>    
-					<input type="checkbox" name="immoNet" data-ng-init="immoNet='1'" data-ng-model="immoNet" data-ng-true-value="'1'" data-ng-false-value="'0'" style="display:none; visibility: hidden">
-					<img id="logo" class="imgLogoPortals" src="images/suche/Logo_ImmoNet.png"/><br />
-						
-					
-				</div>	<br/>
-		
-				<div class="searchbar" style="{{toggleSortingValue}}">
-					<select class="dropListSort" name="sorting" data-ng-model="sorting" data-ng-options="id as option for (id, option) in sortings" data-ng-change="doSearch()"  data-ng-init="sorting='0'" >
-								</select>
+					</div>
+					<div class="frameSearchColumn" style="display:none;flex: 1 2 100%;"></div>
+					<div class="frameSearchColumn" style="display:none;;flex: 1 2 100%;"></div>
 				</div>
 			</form>
-		</div>
-
-		<div class="frameResultList">
+			<div class="searchbar">
+							<select class="dropListSort" name="sorting"
+								data-ng-model="sorting"
+								data-ng-options="id as option for (id, option) in sortings"
+								data-ng-change="doSearch()" data-ng-init="sorting='0'">
+							</select>
+						</div>
+			 <div class="frameResultList">
 		
 			<div class="frameResultListEntry" data-ng-repeat="x in exposedata">
 				
@@ -201,7 +207,7 @@
 					</div>
 					<div class="frameResultListEntryInfo">
 						<div class="frameResultListEntryPrice">
-							<label class="labelResultListEntryInfoCaption">Kaltmiete</label>
+							<label class="labelResultListEntryInfoCaption">Preis</label>
 							<label class="labelResultListEntryInfoValue">{{ x.price }} €</label>
 						</div>
 						<div class="frameResultListEntryLivingArea">
@@ -222,9 +228,12 @@
 				
 			</div>
 		</div>
-		<div data-ng-include="'footer.html'" ></div>
+		
+		</div>
+		<div class="footer" data-ng-include="'footer.html'"></div>
+
+
 	</div>
-	
 	<script src="Controller.js" defer></script>
 </body>
 </html>

@@ -1,12 +1,22 @@
-body {
-	width: 100%;
-	height: 100%;
-	background-color: white;
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-#base {
-	width: 100%;
-	height: 100%;
+body {
+	margin: 0;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+/* Flex box Styles */
+.container {
+	display: flex;
+	flex-flow: row wrap;
 	font-family: 'Arial Standard', 'Arial';
 	font-weight: 400;
 	font-style: normal;
@@ -16,81 +26,103 @@ body {
 	line-height: normal;
 }
 
-a {
-	color: white;
-	text-decoration: none;
+.header {
+	order: 1;
+	height: 30%;
+	flex: 0 1 100%;
+	/* shorthand flex-grow:0; flex-shrink:1; flex-basis:100% */
 }
 
-.frameUserPanel {
-	margin-left: 85%;
-	height: 1.5rem;
-	text-align: left;
+.content {
+	order: 2;
+	min-height: 40%;
+	flex: 1; /* shorthand for flex-grow:1 */
 }
 
-.frameUserShape {
-	width: 1.25rem;
-	height: 1.25rem;
-	float: left;
+.footer {
+	order: 3;
+	height: 30%;
+	flex: 0 1 100%;
 }
 
-.frameLogo {
-	/*min-height: 82px;
-  min-width: 500px;
-  margin-top: 3%;*/
-	
+/* Header specific styles */
+.header {
+	/* flex container */
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+}
+
+.header>* {
+	flex: 1 auto;
+}
+
+.frameHeaderLeft, .frameHeaderRight {
+	text-align: center;
+	width: 1%;
+}
+
+.frameHeaderCenter {
+	flex: 3 0;
+	background-color: white;
+	text-align: center;
 }
 
 .logo {
-	display: block;
-	margin: 0 auto;
-	width: 40%;
+	margin: 2% auto;
+}
+
+/* footer specific styles */
+.footer {
+	background-color: rgba(81, 81, 81, 1);
+	/* flex container */
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+
+.labelFooter {
+	flex: 1 1 33.33%;
+	font-family: 'Arial Fett', 'Arial Standard', 'Arial';
+	font-weight: 700;
+	font-style: normal;
+	color: orange;
+	text-align: center;
+	padding: 0.25rem 0;
+}
+
+/* Home content specific styles */
+.frameBackgroundImage {
+	padding-top: 1rem;
 	height: auto;
 }
 
-.frameBackgroundImage {
-	/*min-height: 403px;
-	min-width: 1024px;*/
-	margin-top: 2%;
-}
-
 .backgroundImage {
-	display: block;
-	margin: 0 auto;
 	width: 100%;
 	height: auto;
 }
 
 .formSearch {
-	text-align: left;
-	margin-top: -5%;
-	margin-left: 20%;
-	padding-top: 1%;
+	margin: -5% auto 5% auto;
+}
+
+.dropListSearch {
+	background-color: white;
+	height: 2rem;
+	width: 6rem;
+	font-size: 1rem;
 }
 
 .inputSearchCity {
 	background-color: white;
 	height: 2rem;
-	width: 20rem;
-	font-size: 1rem;
-}
-
-.dropListSearch {
-	background-color: white;
-	height: 2.4rem;
-	width: 6rem;
-	font-size: 1rem;
-}
-
-.dropListSort {
-	background-color: white;
-	height: 2.4rem;
-	width: 18rem;
+	width: 16rem;
 	font-size: 1rem;
 }
 
 .submitSearch {
 	background-color: orange;
-	height: 2.4rem;
+	height: 2rem;
 	width: 6rem;
 	font-size: 1rem;
 	color: white;
@@ -104,63 +136,58 @@ a {
 	color: orange;
 }
 
- /* footer specific styles */
-.footer {
-    background-color: rgba(81, 81, 81, 1);
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    height: 10%;
+/* Extended search content specific styles */
+.formExtendedSearch {
+	color: orange;
+	margin: 0 auto;;
+	display: inline-block;
+	background: rgb(81,81,81);
     width: 100%;
-    bottom:0px;
-    left:0px;
 }
 
-.labelFooter {
-	flex: 1 1 33.33%;
-	font-family: 'Arial Fett', 'Arial Standard', 'Arial';
-	font-weight: 700;
-	font-style: normal;
-	color: orange;
-	text-align: center;
-	padding: 0.25rem 0;
+.horizontalBar {
+	width: 80%;
+	height: 0.1rem;
+	background-color: orange;
+	margin: 1rem auto;
 }
 
-/*---Extended Search specific styles---*/
-.extendedSearchFrame {
-	margin-top: 10%;
-	background-color: rgba(81, 81, 81, 1);
-	height: 17rem;
-	margin-bottom: 5rem;
+.frameSearchRow {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 70%;
+	margin: 1rem auto;
 }
-
-.frameSearchRange {
-	height: 2%;
-	width: 21%;
-	margin-top: 2%;
-	float: left;
-}
-
-.frameSearchCheck {
-	color: orange;
-	height: 2%;
-	width: 21%;
-	margin-top: 2%;
-	float: left;
-	font-size: 1rem;
+	
+.frameSearchColumn {
+	flex: 1 1 100%;
+	text-align: left;
+	align-self: baseline;
 }
 
 .labelSearch {
 	color: orange;
 	font-size: 1rem;
 	margin-right: 100%;
+	float: left;
 }
 
 .inputSearchRange {
 	background-color: white;
 	height: 2rem;
-	width: 5rem;
-	font-size: 1rem;
+	width: 5rem; 
+	font-size : 1rem;
+	margin-right: 2%;
+	float: left;
+	font-size: 1rem
+}
+
+.inputSearchRangeFrom {
+	float: left;
+}
+
+.inputSearchRangeTill {
+	float: left;
 }
 
 .inputSearchCheck {
@@ -168,25 +195,31 @@ a {
 	font-size: 1rem;
 }
 
-.horizontalBar {
-	width: 80%;
-	height: 0.1rem;
-	background-color: orange;
-	margin-top: 1rem;
+.imgLogoPortals {
+	height: 2.25rem;
+	vertical-align: middle;
 }
 
 .searchbar {
-	height: 6.25rem;
+	margin: 0.5rem 7.75rem;
+	height: 4.25rem;
 	font-size: 1rem;
-	width: 80%;
-	margin-top: 1rem;
-	float: left;
+	width: 100%;
+	float: right;
 	text-align: right;
 }
+.dropListSort {
+	background-color: white;
+	height: 2.4rem;
+	width: 18rem;
+	font-size: 1rem;
+}
 
+/* result list */
 .frameResultList {
 	width: 60%;
 	margin-left: 20%;
+	overflow-y:hidden;
 }
 
 .frameResultListEntry {
@@ -218,10 +251,6 @@ a {
 .frameResultListEntryOrigin {
 	color: #333333;
 	font-size: 1rem;
-	display: inline-block;
-}
-
-.frameImgResultListEntryOrigin {
 	display: inline-block;
 }
 
@@ -275,39 +304,66 @@ a {
 }
 
 /*---Detail specific styles---*/
-.frameDetailHeader {
-	position: relative;
-	width: 100%;
-	height: 2rem;
-	background-color: #515151;
-	margin-top: 1rem;
-	padding: 0.5rem;
-	height: auto;
+.frameDetailContainer {
+	display: flex;
+	flex-flow: column nowrap;
 }
 
-.frameDetailHeaderLeft {
-	width: 33.33%;
-	display: inline-block;
-	text-align: left;
+.frameDetailItem {
+	flex: 1;
 }
 
-.frameDetailHeaderCenter {
-	width: auto;
-	display: inline-block;
+.frameDetailItemContainer {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}
+
+.frameDetailItemContainerItem {
+	flex: 1;
+}
+
+.labelDetailBackToResults {
+	font-size: 1rem;
+	color: orange;
+}
+
+.frameDetailContact {
+	border-style: solid;
+	border-width: 2px;
+	border-color: #515151;
+	max-width: 50%;
 	text-align: center;
 }
 
-.frameDetailHeaderRight {
-	width: 33.33%;
-	display: inline-block;
-	text-align: right;
+.labelDetailContactCaption, .labelDetailSite {
+	font-size: 1.25rem;
+	color: black;
+	font-weight: 700;
 }
 
-.labelDetailHeader {
+.frameDetailOrigin {
+	color: #333333;
 	font-size: 1rem;
-	color: #FF9400;
+	display: inline-block;
+	float: left;
 }
 
+.imgDetailOrigin {
+	width: 6rem;
+	height: 3.125rem;
+}
+
+.frameDetailDescription {
+	background-color: #F2F2F2;
+	padding: 0.5rem;
+	text-align: left;
+}
+
+.labelDetailDescription {
+}
+
+/*---*/
 .frameDetailExpose {
 	position: relative;
 	width: 100%;
@@ -338,67 +394,6 @@ a {
 	height: 1rem;
 }
 
-/* Expose specific styles */
-/* You can add global styles to this file, and also import other style files */
-.header {
-	border-style: solid;
-	border-color: #515151;
-	text-align: center;
-	background-color: #515151;
-	width: 1355px;
-}
-
-.textorange {
-	font-family: 'Arial Fett', 'Arial Standard', 'Arial';
-	font-weight: 700;
-	font-style: normal;
-	color: #FF9400;
-	font-size: 24px;
-}
-
-.content {
-	position: absolute;
-	margin-top: 40px;
-	margin-left: 5px;
-}
-
-.frameContact {
-	float: right;
-	border-style: solid;
-	margin-left: 50px;
-	border-width: 2px;
-	border-color: #515151;
-	width: 386px;
-	height: 636px;
-	padding-left: 30px;
-}
-
-.boxgrau {
-	border-style: solid;
-	border-color: #515151;
-	background-color: #515151;
-	width: 780px;
-	height: 60px;
-	position: relative;
-}
-
-.textweissklein {
-	font-size: 13px;
-	color: #FFFFFF;
-}
-
-.textorangegross {
-	font-size: 25px;
-	color: #FF9400;
-	font-weight: 700;
-}
-
-.textschwarzgross {
-	font-size: 18px;
-	color: #333333;
-	font-weight: 700;
-}
-
 .lablePrice {
 	position: absolute;
 	left: 5px;
@@ -423,59 +418,6 @@ a {
 	margin: 5px;
 }
 
-.content2 {
-	position: relative;
-	margin-top: 20px;
-}
-
-.frameDescription {
-	background-color: #F2F2F2;
-	width: 780px;
-	min-height: 100px;
-	padding: 10px;
-}
-
-.content3 {
-	position: relative;
-	margin-top: 40px;
-	margin-bottom: 40px;
-	height: 250px;
-}
-
-.boxes {
-	background-color: #F2F2F2;
-	width: 380px;
-	min-height: 200px;
-	padding: 1
-}
-
-.box1 {
-	position: relative;
-	float: left;
-	margin-bottom: 40px;
-}
-
-.box2 {
-	position: relative;
-	top: 0px;
-	float: left;
-	margin-left: 40px;
-	margin-right: 40px;
-	margin-bottom: 40px;
-}
-
-.box3 {
-	position: relative;
-	top: 0px;
-	float: left;
-	margin-bottom: 40px;
-}
-
-.content4 {
-	margin-top: 40px;
-	position: relative;
-}
-
 .attribute {
 	font-family: 'Arial Fett', 'Arial Standard', 'Arial';
 	font-weight: 700;
@@ -492,4 +434,139 @@ a {
 	float: clear;
 	margin-top: 2px;
 	margin-left: 30px;
+}
+
+
+/* media queries */
+@media ( max-width : 980px) {
+
+	.dropListSearch, .submitSearch {
+		width: 5rem;
+	}
+	
+	.inputSearchCity {
+		width: 10rem;
+	}
+	
+	.inputSearchRange {
+		width: 4rem; 
+	}
+	
+	.dropListSort {
+		width: 12rem;
+	}
+	 
+}
+@media ( max-width : 800px) {
+	body {
+		font-size: 12px;
+	}
+	.labelLogin {
+		display: none;
+	}
+	.logo {
+		height: 60%;
+	}
+	.inputSearchCity {
+		width: 8rem;
+	}
+		.dropListSort {
+		width: 10rem;
+	}
+	.dropListSearch, .inputSearchCity, .submitSearch, .inputSearchRange, .dropListSort {
+		height: 1.5rem;
+		font-size: 0.75rem;
+	}
+	.linkSearch, .labelSearch, .inputSearchCheck {
+		font-size: 0.75rem;
+	}
+	.imgLogoPortals {
+		height: 1.75rem;
+	}
+
+}
+
+@media ( max-width : 768px) {
+	.inputSearchRange {
+		width: 2.75rem;
+	}
+}
+@media ( max-width : 600px) {
+	/* Home */
+	.formSearch {
+		width: 75%;
+		margin: -30% auto 30% auto;
+	}
+	.dropListSearch, .inputSearchCity, .submitSearch, .linkSearch {
+		margin-top: 0.25rem;
+		width: 100%;
+	}
+
+	/* Search */
+	.formExtendedSearch {
+		width: 100%;
+	}
+	.frameSearchRow {
+		flex-flow: column nowrap;
+		width: 75%;
+
+	}
+	.frameSearchColumn {
+		width: 100%;
+	}
+	.inputSearchRange {
+		width: 48%;
+	}
+	.inputSearchRangeFrom {
+		float: left;
+	}
+	.inputSearchRangeTill {
+		float: right;
+	}
+	.frameSearchRowCheck {
+		flex-flow: row nowrap;
+	}
+    .searchbar {
+    	margin: 0.5rem 5.75rem;
+    }
+    
+    /* ResultList */
+    .frameResultList *{
+
+    	font-size: 1rem;
+    }
+    
+    .frameResultListEntry {
+    	margin-top: 5rem;
+    }   
+    .frameResultListEntryInfo div {
+    	width: 20%;
+    }
+    .frameResultList label {
+    	    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	width: 100%;
+    }
+}
+
+@media ( max-width : 520px){
+.frameSearchRow {
+	margin: 1rem auto;
+}
+
+@media ( max-width : 480px){
+.logo {
+	height: 40%;
+}
+
+.formSearch {
+	width: 75%;
+	margin: -40% auto 40% auto;
+}
+
+}
+@media ( max-width : 320px) {
+	body {
+		font-size: 11px;
+	}
 }
