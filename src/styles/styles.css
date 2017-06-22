@@ -37,6 +37,7 @@ a {
 	order: 2;
 	min-height: 40%;
 	flex: 1; /* shorthand for flex-grow:1 */
+	padding: 0.5rem;
 }
 
 .footer {
@@ -141,8 +142,8 @@ a {
 	color: orange;
 	margin: 0 auto;;
 	display: inline-block;
-	background: rgb(81,81,81);
-    width: 100%;
+	background: rgb(81, 81, 81);
+	width: 100%;
 }
 
 .horizontalBar {
@@ -158,7 +159,7 @@ a {
 	width: 70%;
 	margin: 1rem auto;
 }
-	
+
 .frameSearchColumn {
 	flex: 1 1 100%;
 	text-align: left;
@@ -175,8 +176,8 @@ a {
 .inputSearchRange {
 	background-color: white;
 	height: 2rem;
-	width: 5rem; 
-	font-size : 1rem;
+	width: 5rem;
+	font-size: 1rem;
 	margin-right: 2%;
 	float: left;
 	font-size: 1rem
@@ -208,6 +209,7 @@ a {
 	float: right;
 	text-align: right;
 }
+
 .dropListSort {
 	background-color: white;
 	height: 2.4rem;
@@ -219,7 +221,7 @@ a {
 .frameResultList {
 	width: 60%;
 	margin-left: 20%;
-	overflow-y:hidden;
+	overflow-y: hidden;
 }
 
 .frameResultListEntry {
@@ -231,6 +233,7 @@ a {
 .frameResultListEntryTitle {
 	font-size: 1.25rem;
 	margin: 0.25rem 0 0.25rem 0;
+	text-align: left;
 }
 
 .resultListEntryTitle {
@@ -304,23 +307,23 @@ a {
 }
 
 /*---Detail specific styles---*/
-.frameDetailContainer {
+.frameDetailFlexContainerColumn {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.frameDetailFlexContainerRow {
 	display: flex;
 	flex-flow: column nowrap;
 }
 
-.frameDetailItem {
+.frameDetailFlexItem {
 	flex: 1;
+	margin-top: 0.25rem;
 }
 
-.frameDetailItemContainer {
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-}
-
-.frameDetailItemContainerItem {
-	flex: 1;
+.frameDetailBackToResults {
+	background-color: rgb(81,81,81);
 }
 
 .labelDetailBackToResults {
@@ -328,24 +331,25 @@ a {
 	color: orange;
 }
 
+.textAlignLeft {
+	text-align: left;
+}
+
+.fullHeight {
+	height: 100%;
+}
+
 .frameDetailContact {
-	border-style: solid;
-	border-width: 2px;
-	border-color: #515151;
-	max-width: 50%;
+	border: 1px solid #515151;
 	text-align: center;
 }
 
 .labelDetailContactCaption, .labelDetailSite {
-	font-size: 1.25rem;
-	color: black;
-	font-weight: 700;
+	font-size: 0.85rem;
+	font-weight: bold;
 }
 
 .frameDetailOrigin {
-	color: #333333;
-	font-size: 1rem;
-	display: inline-block;
 	float: left;
 }
 
@@ -354,109 +358,55 @@ a {
 	height: 3.125rem;
 }
 
+.frameDetailInfo {
+	height: 3rem;
+	margin-top: 0.25rem;
+	padding: 0.25rem;
+	background-color: #515151;
+    width: 52.125%;
+}
 .frameDetailDescription {
 	background-color: #F2F2F2;
 	padding: 0.5rem;
 	text-align: left;
 }
 
-.labelDetailDescription {
-}
-
-/*---*/
-.frameDetailExpose {
-	position: relative;
-	width: 100%;
-	text-align: left;
-	padding: 1% 6.75%;
-}
-
-.frameDetailExposeTitle {
-	font-size: 2rem;
-}
-
-.imgDetailExpose {
-	position: relative;
-	width: 46.25rem;
-	height: 35rem;
-}
-
-.frameDetailExposeContactInfo {
-	position: relative;
-}
-
-.imgLogoPortals {
-	height: 2.25rem;
-}
-
-.imgLogoPortalsCheckbox {
-	margin-bottom: 0.625rem;
-	height: 1rem;
-}
-
-.lablePrice {
-	position: absolute;
-	left: 5px;
-	top: 0px;
-	padding: 1px;
-	margin: 5px;
-}
-
-.labelArea {
-	position: absolute;
-	left: 175px;
-	top: 0px;
-	padding: 1px;
-	margin: 5px;
-}
-
-.lableRoom {
-	position: absolute;
-	left: 345px;
-	top: 0px;
-	padding: 1px;
-	margin: 5px;
+.frameDetailPropertiesContainer {
+	background-color: #F2F2F2; 
+	padding: 0.25rem
 }
 
 .attribute {
-	font-family: 'Arial Fett', 'Arial Standard', 'Arial';
-	font-weight: 700;
-	font-size: 13px;
+	font-weight: bold;
+	font-size: 0.85rem;
 	float: left;
-	width: 150px;
-	margin-top: 2px;
 }
 
 .attributevalue {
-	font-family: 'Arial Standard', 'Arial';
-	font-weight: 400;
-	font-size: 13px;
-	float: clear;
-	margin-top: 2px;
-	margin-left: 30px;
+	font-weight: normal;
+	font-size: 0.85rem;
+	float: left;
 }
 
+.labelDetailDescription {
+}
 
 /* media queries */
 @media ( max-width : 980px) {
-
 	.dropListSearch, .submitSearch {
 		width: 5rem;
 	}
-	
 	.inputSearchCity {
 		width: 10rem;
 	}
-	
 	.inputSearchRange {
-		width: 4rem; 
+		width: 4rem;
 	}
-	
 	.dropListSort {
 		width: 12rem;
 	}
-	 
 }
+
 @media ( max-width : 800px) {
 	body {
 		font-size: 12px;
@@ -470,10 +420,11 @@ a {
 	.inputSearchCity {
 		width: 8rem;
 	}
-		.dropListSort {
+	.dropListSort {
 		width: 10rem;
 	}
-	.dropListSearch, .inputSearchCity, .submitSearch, .inputSearchRange, .dropListSort {
+	.dropListSearch, .inputSearchCity, .submitSearch, .inputSearchRange,
+		.dropListSort {
 		height: 1.5rem;
 		font-size: 0.75rem;
 	}
@@ -483,7 +434,6 @@ a {
 	.imgLogoPortals {
 		height: 1.75rem;
 	}
-
 }
 
 @media ( max-width : 768px) {
@@ -491,6 +441,7 @@ a {
 		width: 2.75rem;
 	}
 }
+
 @media ( max-width : 600px) {
 	/* Home */
 	.formSearch {
@@ -509,7 +460,6 @@ a {
 	.frameSearchRow {
 		flex-flow: column nowrap;
 		width: 75%;
-
 	}
 	.frameSearchColumn {
 		width: 100%;
@@ -526,45 +476,43 @@ a {
 	.frameSearchRowCheck {
 		flex-flow: row nowrap;
 	}
-    .searchbar {
-    	margin: 0.5rem 5.75rem;
-    }
-    
-    /* ResultList */
-    .frameResultList *{
+	.searchbar {
+		margin: 0.5rem 5.75rem;
+	}
 
-    	font-size: 1rem;
-    }
-    
-    .frameResultListEntry {
-    	margin-top: 5rem;
-    }   
-    .frameResultListEntryInfo div {
-    	width: 20%;
-    }
-    .frameResultList label {
-    	    	overflow: hidden;
-    	text-overflow: ellipsis;
-    	width: 100%;
-    }
+	/* ResultList */
+	.frameResultList * {
+		font-size: 1rem;
+	}
+	.frameResultListEntry {
+		margin-top: 5rem;
+	}
+	.frameResultListEntryInfo div {
+		width: 20%;
+	}
+	.frameResultList label {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		width: 100%;
+	}
 }
 
-@media ( max-width : 520px){
-.frameSearchRow {
-	margin: 1rem auto;
+@media ( max-width : 520px) {
+	.frameSearchRow {
+		margin: 1rem auto;
+	}
 }
 
-@media ( max-width : 480px){
-.logo {
-	height: 40%;
+@media ( max-width : 480px) {
+	.logo {
+		height: 40%;
+	}
+	.formSearch {
+		width: 75%;
+		margin: -40% auto 40% auto;
+	}
 }
 
-.formSearch {
-	width: 75%;
-	margin: -40% auto 40% auto;
-}
-
-}
 @media ( max-width : 320px) {
 	body {
 		font-size: 11px;

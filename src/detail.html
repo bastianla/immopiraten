@@ -4,162 +4,196 @@
 <title>ImmoPiraten | Expose</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
+<link href="styles/reset.css" type="text/css" rel="stylesheet" />
 <link href="styles/styles.css" type="text/css" rel="stylesheet" />
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
 </head>
 <body data-ng-app="ImmoPiratenApp" data-ng-controller="exposeCtrl"
 	data-ng-init="getDetail()">
 	<div class="container">
 		<div class="header" data-ng-include="'header.html'"></div>
+
 		<div class="content">
-			<div class="frameDetailContainer">
-				<div class="frameDetailItem">
+			<div class="frameDetailFlexContainerRow">
+				<div class="frameDetailFlexItem frameDetailBackToResults">
 					<a href="javascript:history.back()"
 						class="labelDetailBackToResults">Zurück zur Trefferliste</a>
 				</div>
-				<div class="frameDetailItem">
-					<div class="frameResultListEntryTitle">{{exposedata.title }}
+				<div class="frameDetailFlexItem">
+					<div class="frameResultListEntryTitle">
+						<label class="resultListEntryTitle">{{exposedata.title}}</label>
 					</div>
 				</div>
-				<div class="frameDetailItem">
-					<div class="frameDetailItemContainer">
-						<div class="frameDetailItemContainerItem">
-							<img data-ng-src="{{ DEimage }}" />
-						</div>
-						<div class="frameDetailItemContainerItem">
-							<div class="frameDetailContact">
-								<label class="labelDetailContactCaption">Anbieter:</label> <label>{{exposedata.contact.company}}</label><br />
-								<label>{{exposedata.contact.firstName}}
-									{{exposedata.contact.lastName}}</label><br /> <label>{{exposedata.contact.site.street}}</label>
-								<label>{{exposedata.contact.site.houseNumber}}</label><br /> <label>{{exposedata.contact.site.postCode}}</label>
-								<label>{{exposedata.contact.site.city}}</label><br /> <br /> <label>{{exposedata.contact.telephone}}</label>
-								<label class="labelDetailSite">Lage:</label> <label>{{exposedata.site.street}}
-									{{exposedata.site.houseNumber}}</label><br /> <label>{{exposedata.site.postCode}}
-									{{exposedata.site.city}}</label>
-							</div>
-							<div class="frameDetailOrigin">
-								<a href="{{exposedata.link}}"
-									data-ng-if="exposedata.portal == 'ImmobilienScout24'"> <img
-									class="imgDetailOrigin"
-									data-ng-src="images/suche/Logo_ImmoScout.png" /></a> <a
-									href="{{exposedata.link}}"
-									data-ng-if="exposedata.portal == 'Immonet'"><img
-									class="imgDetailOrigin"
-									data-ng-src="images/suche/Logo_Immonet.png" /></a>
+				<div class="frameDetailFlexItem">
+					<div class="frameDetailFlexContainerColumn">
+						<div class="frameDetailFlexItem">
+							<div class="frameImgResultListEntry">
+								<img class="" data-ng-src="{{ DEimage }}" />
 							</div>
 						</div>
-					</div>
-				</div>
-
-				<div class="frameDetailItem">
-					<div class="frameDetailItemContainer">
-						<div class="frameDetailItemContainerItem">
-							<div class="frameResultListEntry">
-
-								<div class="frameResultListEntryExpose">
-
-
-									<div class="frameResultListEntryInfo">
-										<div class="frameResultListEntryPrice">
-											<label class="labelResultListEntryInfoCaption">Preis</label>
-											<label class="labelResultListEntryInfoValue">{{
-												exposedata.price }} €</label>
+						<div class="frameDetailFlexItem">
+							<div class="frameDetailFlexContainerRow fullHeight">
+								<div class="frameDetailFlexItem">
+									<div class="frameDetailOrigin">
+										<a href="{{exposedata.link}}"
+											data-ng-if="exposedata.portal == 'ImmobilienScout24'"> <img
+											class="imgDetailOrigin"
+											data-ng-src="images/suche/Logo_ImmoScout.png" /></a> <a
+											href="{{exposedata.link}}"
+											data-ng-if="exposedata.portal == 'Immonet'"><img
+											class="imgDetailOrigin"
+											data-ng-src="images/suche/Logo_Immonet.png" /></a>
+									</div>
+								</div>
+								<div class="frameDetailFlexItem">
+									<div
+										class="frameDetailFlexContainerColumn frameDetailPropertiesContainer">
+										<div class="frameDetailFlexItem">
+											<label class="attribute">Anbieter:</label>
 										</div>
-										<div class="frameResultListEntryLivingArea">
-											<label class="labelResultListEntryInfoCaption">Wohnfläche</label>
-											<label class="labelResultListEntryInfoValue">{{
-												exposedata.livingArea }} m²</label>
+										<div class="frameDetailFlexItem">
+											<label class="attributevalue">{{exposedata.contact.company}}</label><br />
+											<label class="attributevalue">{{exposedata.contact.firstName}}
+												{{exposedata.contact.lastName}}</label><br /> <label
+												class="attributevalue">{{exposedata.contact.site.street}}
+												{{exposedata.contact.site.houseNumber}}</label><br /> <label
+												class="attributevalue">{{exposedata.contact.site.postCode}}
+												{{exposedata.contact.site.city}}</label><br /> <label
+												class="attributevalue">{{exposedata.contact.telephone}}</label>
 										</div>
-										<div class="frameResultListEntryRooms">
-											<label class="labelResultListEntryInfoCaption">Zimmer</label>
-											<label class="labelResultListEntryInfoValue">{{
-												exposedata.room }}</label>
+									</div>
+									<div
+										class="frameDetailFlexContainerColumn frameDetailPropertiesContainer">
+										<div class="frameDetailFlexItem">
+											<label class="attribute">Lage:</label>
+										</div>
+										<div class="frameDetailFlexItem">
+											<label class="attributevalue">{{exposedata.site.street}}
+												{{exposedata.site.houseNumber}}</label><br /> <label
+												class="attributevalue">{{exposedata.site.postCode}}
+												{{exposedata.site.city}}</label>
 										</div>
 
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="frameDetailItemContainerItem"></div>
-					</div>
-				</div>
-				<div class="frameDetailItem">
-					<div class="frameDetailDescription">
-						<label class="labelDetailDescription">{{
-							exposedata.description }}</label>
-					</div>
-				</div>
-				<div class="frameDetailItem">
-					<div class="frameDetailItemContainer">
-						<div class="frameDetailItemContainerItem">
-							<div style="background-color: #F2F2F2; padding: 1rem">
-								<span class="attribute">Wohnungstyp</span> <span
-									class="attributevalue">{{ DEresidentialRealEstate }}</span> <br />
-								<span class="attribute">Etage</span> <span
-									class="attributevalue">{{DEfloor}}{{
-									exposedata.numberOfFloors }}</span> <br /> <span class="attribute">Wohnfläche
-									ca.</span> <span class="attributevalue"> {{
-									exposedata.livingArea }} m²</span> <br /> <span class="attribute">Zimmer</span>
-								<span class="attributevalue"> {{ exposedata.room }}</span> <br />
-								<span class="attribute">Schlafzimmer</span> <span
-									class="attributevalue"> {{ exposedata.numberOfBedRooms
-									}}</span> <br /> <span class="attribute">Badezimmer</span> <span
-									class="attributevalue"> {{ exposedata.numberOfBathRooms
-									}}</span> <br /> <span class="attribute">Balkon</span> <span
-									class="attributevalue">{{ DEbalcony }}</span> <br /> <span
-									class="attribute">Terrase</span> <span class="attributevalue">{{
-									DEterrace }}</span> <br /> <span class="attribute">Garten</span> <span
-									class="attributevalue">{{ DEgarden }}</span> <br />
-							</div>
-						</div>
-						<div class="frameDetailItemContainerItem">
-							<div style="background-color: #F2F2F2; padding: 1rem">
-								<span class="attribute">Objektzustand</span> <span
-									class="attributevalue">{{ DEobjectstate }}</span> <br /> <span
-									class="attribute">Ausstattung</span> <span
-									class="attributevalue">{{ DEinteriorQuality }}</span> <br /> <span
-									class="attribute">Heizungsart</span> <span
-									class="attributevalue"> {{ DEheating }}</span> <br /> <span
-									class="attribute">Energieträge</span> <span
-									class="attributevalue"> {{ DEfiring }}</span> <br /> <span
-									class="attribute">Energieausweis</span> <span
-									class="attributevalue">{{ DEenergyCertificate }}</span> <br />
-								<span class="attribute">Energieausweistyp</span> <span
-									class="attributevalue"> {{ DEBuildingEnergyRating }}</span> <br />
-								<span class="attribute">Verbrauchskennwert</span> <span
-									class="attributevalue"> {{
-									exposedata.thermalCharacteristic }} kWh/(m²*a)</span> <br />
-							</div>
-						</div>
-						<div class="frameDetailItemContainerItem">
-							<div style="background-color: #F2F2F2; padding: 1rem">
-								<span class="attribute">Kaution</span> <span
-									class="attributevalue">{{ DEcommission }}</span> <br /> <span
-									class="attribute">verfügbar ab</span> <span
-									class="attributevalue">{{ DEavailabilityDate }}</span> <br />
-								<span class="attribute">Zusatzkosten</span> <span
-									class="attributevalue"> {{ exposedata.additionalCosts }}
-									€</span> <br /> <span class="attribute">Baujahr</span> <span
-									class="attributevalue"> {{ exposedata.construction }}</span> <br />
-								<span class="attribute">Heizkosten</span> <span
-									class="attributevalue">{{ exposedata.heatingCosts }}</span> <br />
-								<span class="attribute">Energie Klasse</span> <span
-									class="attributevalue"> {{
-									exposedata.energyEfficiencyClass }}</span> <br /> <span
-									class="attribute">Grundstück</span> <span
-									class="attributevalue"> {{ exposedata.landArea }} m²</span> <br />
+								<div class="frameDetailFlexItem">
+									<div
+										class="frameDetailFlexContainerColumn frameDetailPropertiesContainer">
+										<div class="frameDetailFlexItem">
+											<label class="attribute">Wohnungstyp</label><br /> <label
+												class="attribute">Etage</label><br /> <label
+												class="attribute">Wohnfläche ca.</label><br /> <label
+												class="attribute">Zimmer</label><br /> <label
+												class="attribute">Schlafzimmer</label><br /> <label
+												class="attribute">Badezimmer</label><br /> <label
+												class="attribute">Balkon</label><br /> <label
+												class="attribute">Terrase</label><br /> <label
+												class="attribute">Garten</label>
+										</div>
+
+										<div class="frameDetailFlexItem">
+											<label class="attributevalue">{{DEresidentialRealEstate}}</label><br />
+											<label class="attributevalue">{{DEfloor}}{{exposedata.numberOfFloors}}</label><br />
+											<label class="attributevalue">{{exposedata.livingArea}}
+												m²</label><br /> <label class="attributevalue">{{exposedata.room}}</label><br />
+											<label class="attributevalue">{{exposedata.numberOfBedRooms}}</label><br />
+											<label class="attributevalue">{{exposedata.numberOfBathRooms}}</label><br />
+											<label class="attributevalue">{{DEbalcony}}</label><br /> <label
+												class="attributevalue">{{DEterrace}}</label><br /> <label
+												class="attributevalue">{{DEgarden}}</label><br />
+										</div>
+									</div>
+								</div>
+								<div class="frameDetailFlexItem">
+									<div
+										class="frameDetailFlexContainerColumn frameDetailPropertiesContainer">
+										<div class="frameDetailFlexItem">
+											<label class="attribute">Objektzustand</label><br /> <label
+												class="attribute">Ausstattung</label><br /> <label
+												class="attribute">Heizungsart</label> <label
+												class="attribute">Energieträge</label><br /> <label
+												class="attribute">Energieausweis</label><br /> <label
+												class="attribute">Energieausweistyp</label><br /> <label
+												class="attribute">Verbrauchskennwert</label>
+										</div>
+										<div class="frameDetailFlexItem">
+											<label class="attributevalue">{{DEobjectstate }}</label><br />
+											<label class="attributevalue">{{DEinteriorQuality }}</label><br />
+											<label class="attributevalue">{{DEheating}}</label><br /> <label
+												class="attributevalue">{{DEfiring}}</label><br /> <label
+												class="attributevalue">{{DEenergyCertificate}}</label><br />
+											<label class="attributevalue">{{DEBuildingEnergyRating}}</label><br />
+											<label class="attributevalue">{{exposedata.thermalCharacteristic}}
+												kWh/(m²*a)</label><br />
+										</div>
+									</div>
+									<div class="frameDetailFlexItem">
+										<div
+											class="frameDetailFlexContainerColumn frameDetailPropertiesContainer">
+											<div class="frameDetailFlexItem">
+												<label class="attribute">Kaution</label><br /> <label
+													class="attribute">verfügbar ab</label><br /> <label
+													class="attribute">Zusatzkosten</label><br /> <label
+													class="attribute">Baujahr</label> <br /> <label
+													class="attribute">Heizkosten</label> <br /> <label
+													class="attribute">Energie Klasse</label> <br /> <label
+													class="attribute">Grundstück</label> <br />
+											</div>
+											<div class="frameDetailFlexItem">
+												<label class="attributevalue">{{DEcommission}}</label><br />
+												<label class="attributevalue">{{DEavailabilityDate}}</label><br />
+												<label class="attributevalue">{{exposedata.additionalCosts}}
+													€</label><br /> <label class="attributevalue">{{exposedata.construction}}</label><br />
+												<label class="attributevalue">{{exposedata.heatingCosts}}</label><br />
+												<label class="attributevalue">{{exposedata.energyEfficiencyClass}}</label><br />
+												<label class="attributevalue">{{exposedata.landArea}}
+													m²</label><br />
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<div class="frameDetailFlexItem">
+				<div class="frameDetailFlexContainerColumn">
+					<div class="frameDetailFlexItem">
+						<div class="frameResultListEntryExpose">
+							<div class="frameDetailInfo">
+								<div class="frameResultListEntryPrice">
+									<label class="labelResultListEntryInfoCaption">Preis</label> <label
+										class="labelResultListEntryInfoValue">{{exposedata.price}}
+										€</label>
+								</div>
+								<div class="frameResultListEntryLivingArea">
+									<label class="labelResultListEntryInfoCaption">Wohnfläche</label>
+									<label class="labelResultListEntryInfoValue">{{exposedata.livingArea}}
+										m²</label>
+								</div>
+								<div class="frameResultListEntryRooms">
+									<label class="labelResultListEntryInfoCaption">Zimmer</label> <label
+										class="labelResultListEntryInfoValue">{{exposedata.room}}</label>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="frameDetailFlexItem">
+					<div class="frameDetailDescription">
+						<label class="labelDetailDescription">{{
+							exposedata.description }}</label>
+					</div>
+				</div>
+			</div>
 		</div>
+		<div class="footer" data-ng-include="'footer.html'"></div>
+
 	</div>
-	<div class="footer" data-ng-include="'footer.html'"></div>
 
 	<script src="Controller.js" defer></script>
 </body>
